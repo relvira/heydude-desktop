@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{31818FC3-898E-4B40-B663-DAB631664047}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>FormComponent.My.MyApplication</StartupObject>
+    <RootNamespace>FormComponent</RootNamespace>
+    <AssemblyName>FormComponent</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>FormComponent.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>FormComponent.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\common.vb" />
+    <Compile Include="CustomComponents\SimpleButton.Designer.vb">
+      <DependentUpon>SimpleButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\SimpleButton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomComponents\SimpleTextBox.Designer.vb">
+      <DependentUpon>SimpleTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\SimpleTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ui\FrmLogin.Designer.vb">
+      <DependentUpon>FrmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ui\FrmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\FrmRegister.Designer.vb">
+      <DependentUpon>FrmRegister.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ui\FrmRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\ClientData.vb" />
+    <Compile Include="CustomComponents\ChatBox.Designer.vb">
+      <DependentUpon>ChatBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\ChatBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomComponents\ChatList.Designer.vb">
+      <DependentUpon>ChatList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\ChatList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomComponents\TitleChatList.Designer.vb">
+      <DependentUpon>TitleChatList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\TitleChatList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Form Custom Scrollbar\CustomScrollBar.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form Custom Scrollbar\FrmCustomScrollbar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\FrmHeyDude.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ui\FrmHeyDude.Designer.vb">
+      <DependentUpon>FrmHeyDude.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="CustomComponents\TextBoxHD.Designer.vb">
+      <DependentUpon>TextBoxHD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\TextBoxHD.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomComponents\UserBox.Designer.vb">
+      <DependentUpon>UserBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\UserBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomComponents\UserList.Designer.vb">
+      <DependentUpon>UserList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\UserList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\MySQLManager.vb" />
+    <Compile Include="User\State.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomComponents\ChatBox.resx">
+      <DependentUpon>ChatBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\ChatList.resx">
+      <DependentUpon>ChatList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\SimpleButton.resx">
+      <DependentUpon>SimpleButton.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\SimpleTextBox.resx">
+      <DependentUpon>SimpleTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\TitleChatList.resx">
+      <DependentUpon>TitleChatList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\FrmHeyDude.resx">
+      <DependentUpon>FrmHeyDude.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\TextBoxHD.resx">
+      <DependentUpon>TextBoxHD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\UserBox.resx">
+      <DependentUpon>UserBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\UserList.resx">
+      <DependentUpon>UserList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\FrmLogin.resx">
+      <DependentUpon>FrmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
