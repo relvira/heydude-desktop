@@ -33,7 +33,7 @@
         ' Hide Login form
         FrmLogin.Hide()
 
-        UserList.AddUserBox(_mCurrentUser)
+        'UserList.AddUserBox(_mCurrentUser)
         For Each frnd In Friends
             Dim f = frnd.ToString.Split(",")
             _mUserSelected = New ClientData(f(2), f(4), State.Connected, f(3))

@@ -51,7 +51,7 @@
             Return _mImgStringSrc
         End Get
         Set(ByVal value As String)
-            _mImgStringSrc = value
+            _mImgStringSrc = Config.ProfileImagesPath & value
         End Set
     End Property
 

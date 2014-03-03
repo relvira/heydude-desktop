@@ -69,6 +69,23 @@ Public Class MySQLManager
         Return myTable
     End Function
 
+    Public Function ExecuteNoQuery(ByVal SqlStatement As String) As Boolean
+        Dim sqlCommand As New MySqlCommand()
+        sqlCommand.CommandText = SqlStatement
+        sqlCommand.Connection = connection
+
+        Try
+            sqlCommand.ExecuteNonQuery()
+        Catch ex As MySqlException
+            MsgBox(ex.Message.ToString)
+            Return False
+        Finally
+            connection.Close()
+        End Try
+        Return True
+    End Function
+
+
     Public Sub Close()
         connection.Close()
     End Sub

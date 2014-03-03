@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\common.vb" />
+    <Compile Include="Common\Config.vb" />
     <Compile Include="CustomComponents\SimpleButton.Designer.vb">
       <DependentUpon>SimpleButton.vb</DependentUpon>
     </Compile>
@@ -85,6 +86,11 @@
     </Compile>
     <Compile Include="CustomComponents\SimpleTextBox.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ui\FrmLogin.Designer.vb">
       <DependentUpon>FrmLogin.vb</DependentUpon>
@@ -135,11 +141,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -187,9 +188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomComponents\TextBoxHD.resx">
       <DependentUpon>TextBoxHD.vb</DependentUpon>
@@ -202,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ui\FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ui\FrmRegister.resx">
+      <DependentUpon>FrmRegister.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿Public Class SimpleButton
 
-    Public Event OnClick(ByVal sender As Object, ByVal e As System.EventArgs)
+    Public Event myClick(ByVal sender As Object, ByVal e As System.EventArgs)
 
     Property ButtonColor As Color
         Get
@@ -27,6 +27,6 @@
     End Sub
 
     Private Sub SimpleButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles Button1.Click
-        RaiseEvent OnClick(sender, e)
+        RaiseEvent myClick(sender, e)
     End Sub
 End Class

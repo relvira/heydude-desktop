@@ -28,8 +28,8 @@ Partial Class FrmLogin
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnRegister = New FormComponent.SimpleButton()
         Me.BtnLogin = New FormComponent.SimpleButton()
-        Me.TxtPasswd = New FormComponent.SimpleTextBox()
         Me.TxtUser = New FormComponent.SimpleTextBox()
+        Me.TxtPasswd = New FormComponent.SimpleTextBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -67,8 +67,10 @@ Partial Class FrmLogin
         'BtnRegister
         '
         Me.BtnRegister.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.BtnRegister.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer))
+        Me.BtnRegister.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(136, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(156, Byte), Integer))
         Me.BtnRegister.ButtonText = "Registrate"
+        Me.BtnRegister.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnRegister.ForeColor = System.Drawing.Color.White
         Me.BtnRegister.Location = New System.Drawing.Point(181, 220)
         Me.BtnRegister.Name = "BtnRegister"
         Me.BtnRegister.Size = New System.Drawing.Size(162, 40)
@@ -77,22 +79,14 @@ Partial Class FrmLogin
         'BtnLogin
         '
         Me.BtnLogin.BackColor = System.Drawing.Color.Red
-        Me.BtnLogin.ButtonColor = System.Drawing.Color.Blue
+        Me.BtnLogin.ButtonColor = System.Drawing.Color.FromArgb(CType(CType(53, Byte), Integer), CType(CType(122, Byte), Integer), CType(CType(232, Byte), Integer))
         Me.BtnLogin.ButtonText = "Iniciar Sesión"
+        Me.BtnLogin.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold)
         Me.BtnLogin.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.BtnLogin.Location = New System.Drawing.Point(13, 220)
         Me.BtnLogin.Name = "BtnLogin"
         Me.BtnLogin.Size = New System.Drawing.Size(162, 40)
         Me.BtnLogin.TabIndex = 3
-        '
-        'TxtPasswd
-        '
-        Me.TxtPasswd.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.TxtPasswd.Location = New System.Drawing.Point(13, 152)
-        Me.TxtPasswd.Message = ""
-        Me.TxtPasswd.Name = "TxtPasswd"
-        Me.TxtPasswd.Size = New System.Drawing.Size(331, 40)
-        Me.TxtPasswd.TabIndex = 2
         '
         'TxtUser
         '
@@ -103,18 +97,28 @@ Partial Class FrmLogin
         Me.TxtUser.Size = New System.Drawing.Size(331, 40)
         Me.TxtUser.TabIndex = 1
         '
+        'TxtPasswd
+        '
+        Me.TxtPasswd.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.TxtPasswd.Location = New System.Drawing.Point(13, 152)
+        Me.TxtPasswd.Message = ""
+        Me.TxtPasswd.Name = "TxtPasswd"
+        Me.TxtPasswd.PasswdEnabled = True
+        Me.TxtPasswd.Size = New System.Drawing.Size(331, 40)
+        Me.TxtPasswd.TabIndex = 9
+        '
         'FrmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(243, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(362, 305)
+        Me.Controls.Add(Me.TxtPasswd)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.LblLoginError)
         Me.Controls.Add(Me.BtnRegister)
         Me.Controls.Add(Me.BtnLogin)
-        Me.Controls.Add(Me.TxtPasswd)
         Me.Controls.Add(Me.TxtUser)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FrmLogin"
@@ -125,10 +129,10 @@ Partial Class FrmLogin
 
     End Sub
     Friend WithEvents TxtUser As FormComponent.SimpleTextBox
-    Friend WithEvents TxtPasswd As FormComponent.SimpleTextBox
     Friend WithEvents BtnLogin As FormComponent.SimpleButton
     Friend WithEvents BtnRegister As FormComponent.SimpleButton
     Friend WithEvents LblLoginError As System.Windows.Forms.Label
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents TxtPasswd As FormComponent.SimpleTextBox
 End Class

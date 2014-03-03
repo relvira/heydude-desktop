@@ -26,6 +26,7 @@ Public Class UserBox
 
     Public WriteOnly Property ImageUser As String
         Set(ByVal value As String)
+            value = Config.ProfileImagesPath & value
             ' Get the image from a web server
             Dim tClient As WebClient = New WebClient
             Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData(value)))

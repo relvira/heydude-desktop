@@ -8,6 +8,12 @@
         End Set
     End Property
 
+    Public WriteOnly Property PasswdEnabled As Boolean
+        Set(ByVal value As Boolean)
+            TxtMensaje.UseSystemPasswordChar = value
+        End Set
+    End Property
+
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
         MyBase.OnPaint(e)
 
@@ -21,6 +27,6 @@
     End Sub
 
     Private Sub SimpleTextBox_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.GotFocus
-        
+
     End Sub
 End Class

@@ -34,6 +34,7 @@ Partial Class SimpleTextBox
         Me.TxtMensaje.Margin = New System.Windows.Forms.Padding(5, 10, 5, 10)
         Me.TxtMensaje.Multiline = True
         Me.TxtMensaje.Name = "TxtMensaje"
+        Me.TxtMensaje.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.TxtMensaje.Size = New System.Drawing.Size(323, 20)
         Me.TxtMensaje.TabIndex = 0
         '
