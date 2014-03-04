@@ -4,6 +4,12 @@
 
     Public Event UserSelectedChanged(ByVal pUserBox As UserBox)
 
+    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
+        MyBase.OnPaintBackground(e)
+
+        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
+    End Sub
+
     Sub AddUserBox(clientData As ClientData)
         Dim userBox As New UserBox()
         userBox.UserName = clientData.Name

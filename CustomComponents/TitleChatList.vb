@@ -25,4 +25,10 @@
             End Select
         End Set
     End Property
+
+    Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+        MyBase.OnPaint(e)
+
+        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(0, 213, 213, 213), ButtonBorderStyle.Solid)
+    End Sub
 End Class

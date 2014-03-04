@@ -71,7 +71,8 @@ Partial Class FrmHeyDude
         '
         Me.UserList.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.UserList.AutoScroll = True
-        Me.UserList.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(243, Byte), Integer))
+        Me.UserList.BackColor = System.Drawing.Color.White
+        Me.UserList.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.UserList.Location = New System.Drawing.Point(0, 34)
         Me.UserList.Margin = New System.Windows.Forms.Padding(0)
         Me.UserList.Name = "UserList"

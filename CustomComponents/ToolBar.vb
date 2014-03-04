@@ -21,24 +21,14 @@
         'BtnClose.BackgroundImage = New Bitmap("assets\closebutton_unpressed.png")
     End Sub
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    Private Sub ToolBar_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
+    Private Sub ToolBar_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown
         _mParentPosition = New Point(Cursor.Position.X - Parent.Location.X, Cursor.Position.Y - Parent.Location.Y)
-=======
-    Private Sub ToolBar_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown
-        _mParentPosition = New Point(Cursor.Position.X, Cursor.Position.Y)
->>>>>>> 722e022ddc120d1dc7f42312e1ff0bbe832219b5
-=======
-    Private Sub ToolBar_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown
-        _mParentPosition = New Point(Cursor.Position.X, Cursor.Position.Y)
->>>>>>> 722e022ddc120d1dc7f42312e1ff0bbe832219b5
         _mMouseAction = True
     End Sub
 
     Private Sub ToolBar_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseMove
         If _mMouseAction = True Then
-            Parent.Location = New Point(Cursor.Position.X, Cursor.Position.Y)
+            Parent.Location = New Point(Cursor.Position.X - _mParentPosition.X, Cursor.Position.Y - _mParentPosition.Y)
         End If
     End Sub
 
