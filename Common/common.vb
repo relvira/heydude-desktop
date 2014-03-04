@@ -9,6 +9,10 @@ Module common
 
         Dim i As Integer = 0
         Dim UserItem As New ClientData
+        'If queryResult = False Then
+        '    UserItem.isLoggedIn = False
+        'End If
+
         For Each oDataRow In queryResult.Rows
 
             If queryResult.Rows(i)("uid") = User And queryResult.Rows(i)("password") = getSHA1Hash(Password) Then
@@ -21,8 +25,7 @@ Module common
                 UserItem.isLoggedIn = True
                 Exit For
             Else
-                UserItem.isLoggedIn = False
-                Exit For
+
             End If
             i = i + 1
         Next

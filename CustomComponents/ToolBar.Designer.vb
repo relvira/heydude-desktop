@@ -34,7 +34,7 @@ Partial Class ToolBar
         Me.BtnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.BtnClose.FlatAppearance.BorderSize = 0
         Me.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnClose.Location = New System.Drawing.Point(473, 0)
+        Me.BtnClose.Location = New System.Drawing.Point(473, 3)
         Me.BtnClose.Name = "BtnClose"
         Me.BtnClose.Size = New System.Drawing.Size(29, 26)
         Me.BtnClose.TabIndex = 0
@@ -49,7 +49,7 @@ Partial Class ToolBar
         Me.Controls.Add(Me.BtnClose)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ToolBar"
-        Me.Size = New System.Drawing.Size(502, 26)
+        Me.Size = New System.Drawing.Size(502, 40)
         Me.ResumeLayout(False)
 
     End Sub

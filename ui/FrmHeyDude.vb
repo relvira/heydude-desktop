@@ -60,20 +60,18 @@
     End Sub
 
     '---------------- MOVER FORMULARIO ----------------
-    Private Sub FrmLogin_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
-        formPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
-        mouseAction = True
-    End Sub
+    'Private Sub FrmLogin_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
+    '    formPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
+    '    mouseAction = True
+    'End Sub
 
-    Private Sub FrmLogin_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
-        If mouseAction = True Then
+    'Private Sub FrmLogin_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
+    '    If mouseAction = True Then
+    '        Location = New Point(Cursor.Position.X - formPosition.X, Cursor.Position.Y - formPosition.Y)
+    '    End If
+    'End Sub
 
-            Location = New Point(Cursor.Position.X - formPosition.X, Cursor.Position.Y - formPosition.Y)
-
-        End If
-    End Sub
-
-    Private Sub FrmLogin_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
-        mouseAction = False
-    End Sub
+    'Private Sub FrmLogin_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
+    '    mouseAction = False
+    'End Sub
 End Class
