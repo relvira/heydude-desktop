@@ -19,15 +19,14 @@ Module common
                 UserItem.ImageSource = queryResult.Rows(i)("profile_img")
                 UserItem.StateMessage = queryResult.Rows(i)("user_status")
                 UserItem.isLoggedIn = True
-                Return UserItem
+                Exit For
             Else
                 UserItem.isLoggedIn = False
-                FrmLogin.LblLoginError.Enabled = True
-
+                Exit For
             End If
             i = i + 1
         Next
-        Return True
+        Return UserItem
     End Function
 
     Function IsEmail(ByVal email As String) As Boolean

@@ -3,8 +3,8 @@
 Public Class FrmRegister
     Dim formPosition As Point
     Dim mouseAction As Boolean
-    Dim ProfileImagePath As String = ""
-
+    Dim ProfileImagePath As String = "profile-default.jpg"
+    Dim UploadClicked As Boolean = False
 
 
 
@@ -32,6 +32,7 @@ Public Class FrmRegister
         Dim fileDialog As New OpenFileDialog
         fileDialog.ShowDialog()
         ProfileImagePath = fileDialog.FileName
+        UploadClicked = True
     End Sub
 
 
@@ -62,31 +63,33 @@ Public Class FrmRegister
 
         If UserPasswd1 = UserPasswd2 Then
             UserPasswdFinal = common.getSHA1Hash(UserPasswd1)
-            MessageBox.Show("Hash: " & UserPasswdFinal)
         Else
-            MessageBox.Show("Nombre y apellidos no validos")
+            MessageBox.Show("Las contraseñas no coinciden")
             valid = False
         End If
 
-        If valid Then
-            '' register user!!!
-            'Upload image!
-            ServicePointManager.Expect100Continue = False
-            Dim UploadServer = Config.DynamicServer & "profileImageUpload.php?uid=" & TxtUsername.Message
+        If valid Then ' Valid form, let's register the user :)
+            Dim ProfileImgGenerated As String = ProfileImagePath
+            If UploadClicked Then
+                'Upload image!
+                ServicePointManager.Expect100Continue = False
+                Dim UploadServer = Config.DynamicServer & "profileImageUpload.php?uid=" & TxtUsername.Message
 
-            Dim webp As New System.Net.WebProxy("192.168.255.1", 3128)
-            webp.UseDefaultCredentials = True
+                Dim webp As New System.Net.WebProxy("192.168.255.1", 3128)
+                webp.UseDefaultCredentials = True
 
-            Dim webcl As New System.Net.WebClient()
-            webcl.Proxy = webp
-            webcl.UploadFile(UploadServer, ProfileImagePath)
+                Dim webcl As New System.Net.WebClient()
+                webcl.Proxy = webp
+                webcl.UploadFile(UploadServer, ProfileImagePath)
+                ProfileImgGenerated = TxtUsername.Message & ".png"
+            End If
 
+            ' Insert userdata in database 
             Dim RegisterUser As New MySQLManager
-            Dim ProfileImgGenerated As String = TxtUsername.Message & ".png"
             Dim StatementGenerated = "INSERT INTO user(uid, email, full_name, password, profile_img) VALUES('" & UserUid & "','" & UserEmail & "','" & UserFullName & "','" & UserPasswdFinal & "','" & ProfileImgGenerated & "');"
-            Console.WriteLine(StatementGenerated)
-            MessageBox.Show(StatementGenerated)
             Dim Result = RegisterUser.ExecuteNoQuery(StatementGenerated)
+
+            ' Close form
             Me.Close()
         End If
     End Sub
