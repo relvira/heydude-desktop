@@ -21,7 +21,7 @@
     End Sub
 
     Private Sub ToolBar_MouseDown(sender As Object, e As MouseEventArgs) Handles MyBase.MouseDown
-        _mParentPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
+        _mParentPosition = New Point(Cursor.Position.X - Parent.Location.X, Cursor.Position.Y - Parent.Location.Y)
         _mMouseAction = True
     End Sub
 
