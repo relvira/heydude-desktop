@@ -26,11 +26,7 @@ Public Class MySQLManager
         Me.Connect()
     End Sub
 
-    ''' <summary>
-    ''' Database connect method
-    ''' </summary>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
+    ' Database connect method
     Public Function Connect()
         Try
             connection.ConnectionString =
@@ -41,8 +37,6 @@ Public Class MySQLManager
                 "database=" & Database & ";"
 
             connection.Open()
-            'MessageBox.Show("Connected to database!")
-
         Catch ex As Exception
             MessageBox.Show("Error al conectar al servidor MySQL: " & ex.Message)
             Return False
@@ -51,24 +45,23 @@ Public Class MySQLManager
     End Function
 
 
-    ''' <summary>
-    ''' Function to query the database, returns an ArrayList if we 
-    ''' </summary>
-    ''' <param name="SqlStatement"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Public Function ExecuteQuery(ByVal SqlStatement As String, ByVal tableName As String) As DataTable
+    ' Function to query the database, returns an ArrayList if we 
+    Public Function ExecuteQuery(ByVal SqlStatement As String, ByVal tableName As String)
         Dim oDataAdapter As New MySqlDataAdapter(SqlStatement, connection)
         Dim oDataSet As New DataSet
+        Dim myTable As DataTable
         oDataAdapter.Fill(oDataSet, tableName)
 
-        Dim oDataRow As DataRow = oDataSet.Tables(tableName).Rows(0)
-        Dim myTable As DataTable
-        myTable = oDataRow.Table
-
-        Return myTable
+        If oDataSet.Tables(tableName).Rows.Count > 0 Then
+            Dim oDataRow As DataRow = oDataSet.Tables(tableName).Rows(0)
+            myTable = oDataRow.Table
+            Return myTable
+        Else
+            Return False
+        End If
     End Function
 
+    ' Method to execute commands that aren't a query (insert, update, delete,...)
     Public Function ExecuteNoQuery(ByVal SqlStatement As String) As Boolean
         Dim sqlCommand As New MySqlCommand()
         sqlCommand.CommandText = SqlStatement
@@ -85,7 +78,7 @@ Public Class MySQLManager
         Return True
     End Function
 
-
+    ' Database connection close method
     Public Sub Close()
         connection.Close()
     End Sub

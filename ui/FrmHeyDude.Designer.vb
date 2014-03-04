@@ -32,18 +32,18 @@ Partial Class FrmHeyDude
         'ToolBar
         '
         Me.ToolBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(168, Byte), Integer))
-        Me.ToolBar.Location = New System.Drawing.Point(0, 0)
+        Me.ToolBar.Location = New System.Drawing.Point(0, -5)
         Me.ToolBar.Margin = New System.Windows.Forms.Padding(0)
         Me.ToolBar.Name = "ToolBar"
-        Me.ToolBar.Size = New System.Drawing.Size(616, 26)
+        Me.ToolBar.Size = New System.Drawing.Size(616, 39)
         Me.ToolBar.TabIndex = 14
         '
         'TitleChatList
         '
         Me.TitleChatList.BackColor = System.Drawing.Color.White
-        Me.TitleChatList.Location = New System.Drawing.Point(200, 26)
+        Me.TitleChatList.Location = New System.Drawing.Point(200, 34)
         Me.TitleChatList.Name = "TitleChatList"
-        Me.TitleChatList.Size = New System.Drawing.Size(416, 84)
+        Me.TitleChatList.Size = New System.Drawing.Size(416, 68)
         Me.TitleChatList.TabIndex = 13
         Me.TitleChatList.UserName = "User Name"
         Me.TitleChatList.UserState = "Estado"
@@ -72,10 +72,10 @@ Partial Class FrmHeyDude
         Me.UserList.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.UserList.AutoScroll = True
         Me.UserList.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.UserList.Location = New System.Drawing.Point(0, 26)
+        Me.UserList.Location = New System.Drawing.Point(0, 34)
         Me.UserList.Margin = New System.Windows.Forms.Padding(0)
         Me.UserList.Name = "UserList"
-        Me.UserList.Size = New System.Drawing.Size(200, 468)
+        Me.UserList.Size = New System.Drawing.Size(200, 460)
         Me.UserList.TabIndex = 9
         '
         'FrmHeyDude
