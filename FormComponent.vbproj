@@ -87,6 +87,12 @@
     <Compile Include="CustomComponents\SimpleTextBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="CustomComponents\ToolBar.Designer.vb">
+      <DependentUpon>ToolBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CustomComponents\ToolBar.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -183,6 +189,9 @@
     <EmbeddedResource Include="CustomComponents\TitleChatList.resx">
       <DependentUpon>TitleChatList.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomComponents\ToolBar.resx">
+      <DependentUpon>ToolBar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ui\FrmHeyDude.resx">
       <DependentUpon>FrmHeyDude.vb</DependentUpon>
     </EmbeddedResource>
@@ -219,7 +228,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\closebutton_unpressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\assets\closebutton_unpressed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

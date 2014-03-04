@@ -22,16 +22,26 @@ Partial Class FrmHeyDude
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.ToolBar = New FormComponent.ToolBar()
         Me.TitleChatList = New FormComponent.TitleChatList()
         Me.ChatList = New FormComponent.ChatList()
         Me.TextBoxHD = New FormComponent.TextBoxHd()
         Me.UserList = New FormComponent.UserList()
         Me.SuspendLayout()
         '
+        'ToolBar
+        '
+        Me.ToolBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(168, Byte), Integer))
+        Me.ToolBar.Location = New System.Drawing.Point(0, 0)
+        Me.ToolBar.Margin = New System.Windows.Forms.Padding(0)
+        Me.ToolBar.Name = "ToolBar"
+        Me.ToolBar.Size = New System.Drawing.Size(616, 26)
+        Me.ToolBar.TabIndex = 14
+        '
         'TitleChatList
         '
         Me.TitleChatList.BackColor = System.Drawing.Color.White
-        Me.TitleChatList.Location = New System.Drawing.Point(200, 47)
+        Me.TitleChatList.Location = New System.Drawing.Point(200, 26)
         Me.TitleChatList.Name = "TitleChatList"
         Me.TitleChatList.Size = New System.Drawing.Size(416, 84)
         Me.TitleChatList.TabIndex = 13
@@ -59,13 +69,13 @@ Partial Class FrmHeyDude
         '
         'UserList
         '
+        Me.UserList.Anchor = System.Windows.Forms.AnchorStyles.Left
         Me.UserList.AutoScroll = True
         Me.UserList.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(243, Byte), Integer))
-        Me.UserList.Dock = System.Windows.Forms.DockStyle.Left
-        Me.UserList.Location = New System.Drawing.Point(0, 0)
+        Me.UserList.Location = New System.Drawing.Point(0, 26)
         Me.UserList.Margin = New System.Windows.Forms.Padding(0)
         Me.UserList.Name = "UserList"
-        Me.UserList.Size = New System.Drawing.Size(200, 494)
+        Me.UserList.Size = New System.Drawing.Size(200, 468)
         Me.UserList.TabIndex = 9
         '
         'FrmHeyDude
@@ -74,6 +84,7 @@ Partial Class FrmHeyDude
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Window
         Me.ClientSize = New System.Drawing.Size(616, 494)
+        Me.Controls.Add(Me.ToolBar)
         Me.Controls.Add(Me.TitleChatList)
         Me.Controls.Add(Me.ChatList)
         Me.Controls.Add(Me.TextBoxHD)
@@ -90,5 +101,6 @@ Partial Class FrmHeyDude
     Friend WithEvents TextBoxHD As FormComponent.TextBoxHd
     Friend WithEvents ChatList As FormComponent.ChatList
     Friend WithEvents TitleChatList As FormComponent.TitleChatList
+    Friend WithEvents ToolBar As FormComponent.ToolBar
 
 End Class

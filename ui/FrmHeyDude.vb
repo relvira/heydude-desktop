@@ -55,6 +55,10 @@
         TitleChatList.Connected = State.Connected
     End Sub
 
+    Private Sub ToolBar_OnCloseButtonClick(sender As Object, e As System.EventArgs) Handles ToolBar.OnCloseButtonClick
+        Close()
+    End Sub
+
     '---------------- MOVER FORMULARIO ----------------
     Private Sub FrmLogin_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
         formPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
