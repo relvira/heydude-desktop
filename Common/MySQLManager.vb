@@ -46,7 +46,7 @@ Public Class MySQLManager
 
 
     ' Function to query the database, returns an ArrayList if we 
-    Public Function ExecuteQuery(ByVal SqlStatement As String, ByVal tableName As String)
+    Public Function ExecuteQuery(ByVal SqlStatement As String, ByVal tableName As String) As DataTable
         Dim oDataAdapter As New MySqlDataAdapter(SqlStatement, connection)
         Dim oDataSet As New DataSet
         Dim myTable As DataTable
@@ -57,7 +57,7 @@ Public Class MySQLManager
             myTable = oDataRow.Table
             Return myTable
         Else
-            Return False
+            Return New DataTable
         End If
     End Function
 

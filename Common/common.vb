@@ -9,26 +9,27 @@ Module common
 
         Dim i As Integer = 0
         Dim UserItem As New ClientData
-        'If queryResult = False Then
-        '    UserItem.isLoggedIn = False
-        'End If
 
-        For Each oDataRow In queryResult.Rows
+        If queryResult.Rows.Count > 0 Then
+            For Each oDataRow In queryResult.Rows
 
-            If queryResult.Rows(i)("uid") = User And queryResult.Rows(i)("password") = getSHA1Hash(Password) Then
-                UserItem.Id = queryResult.Rows(i)("id")
-                UserItem.Name = queryResult.Rows(i)("uid")
-                UserItem.Email = queryResult.Rows(i)("email")
-                UserItem.FullName = queryResult.Rows(i)("full_name")
-                UserItem.ImageSource = queryResult.Rows(i)("profile_img")
-                UserItem.StateMessage = queryResult.Rows(i)("user_status")
-                UserItem.isLoggedIn = True
-                Exit For
-            Else
-
-            End If
-            i = i + 1
-        Next
+                If queryResult.Rows(i)("uid") = User And queryResult.Rows(i)("password") = getSHA1Hash(Password) Then
+                    UserItem.Id = queryResult.Rows(i)("id")
+                    UserItem.Name = queryResult.Rows(i)("uid")
+                    UserItem.Email = queryResult.Rows(i)("email")
+                    UserItem.FullName = queryResult.Rows(i)("full_name")
+                    UserItem.ImageSource = queryResult.Rows(i)("profile_img")
+                    UserItem.StateMessage = queryResult.Rows(i)("user_status")
+                    UserItem.isLoggedIn = True
+                    Exit For
+                Else
+                    UserItem.isLoggedIn = False
+                End If
+                i = i + 1
+            Next
+        Else
+            UserItem.isLoggedIn = False
+        End If
         Return UserItem
     End Function
 
