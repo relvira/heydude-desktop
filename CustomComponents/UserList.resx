@@ -118,14 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BtnCancelSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAC1SURBVDhPnZJNDoIwEIW79vKu
+        exwVN+oVcIUB095h7DdhmrYWFjT5YPrmvfQHnIhUjOP79Hi+5DbcFWq01ldNkvF8uQ4+IQ2eXunNBc2V
+        NmRovwrurNSSV9YzIViTsSzfbJ7nRTWbJzwZx+ELUUMM3lYTLj1k2GYlQohRA4w2BGS6wVgEQ4h/fQ0e
+        3mrvcqbpk02bl5O0Y5+DByCu9AKgffPnIOysvP3LGeyfw3NzQI1W+8T9AO/ldoLbcK+TAAAAAElFTkSu
+        QmCC
+</value>
+  </data>
   <data name="PictureBox1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDgAA
-        Cw4BQL7hQQAAAMBJREFUOE+dklsNwzAMRTcGgzAIhVAI+9y0n0Epk0IYhEAohEIYhMwnsisrD1mqJatt
-        kmPf+uaac76cjhH8fL0fkrtkdrnK+41mhevBcuBTQb7ARoEuLBt3B375ppMW/OneOoIXPbDXs/CKRjDd
-        kLn0Bmmqos6p03mO4OMAMq0AQ5JkWKhKo871pAGSpA0LeGpg9dZsqT1mnbW58ZlqrnrxUm1DCQ4UyOLo
-        3AOjK+th+x+e5fpFUcOAUwQ1sqlyJv9Pvh3pBQ1PywAAAABJRU5ErkJggg==
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALDAAA
+        CwwBP0AiyAAAAMFJREFUOE+dkdENgzAMRBkhI3SEjMAI/WzVH0ZhE0boCIzQERihI7h3qW2FgBUJSwfi
+        fC9B9iAil/V/nNTj+bpDGySVFiixH8IITBXQ6gOlUxiNWxV881t9HvhVf4ngWQObWl7w/I8imLcxMKu1
+        qx5sN69qecEbtRfCHoAmtekniMMqB0dwO2kCK2TDovIBhsndWqDdsXkjszsYZobs9LJLiGvjn3AOBbJy
+        GI0DqJmwathAvrsgq4WprL1uOXxNMvwAob1HvtoSwFcAAAAASUVORK5CYII=
 </value>
   </data>
 </root>
