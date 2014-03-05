@@ -47,18 +47,22 @@ Public Class MySQLManager
 
     ' Function to query the database, returns an ArrayList if we 
     Public Function ExecuteQuery(ByVal SqlStatement As String, ByVal tableName As String) As DataTable
-        Dim oDataAdapter As New MySqlDataAdapter(SqlStatement, connection)
-        Dim oDataSet As New DataSet
-        Dim myTable As DataTable
-        oDataAdapter.Fill(oDataSet, tableName)
+        Try
+            Dim oDataAdapter As New MySqlDataAdapter(SqlStatement, connection)
+            Dim oDataSet As New DataSet
+            Dim myTable As DataTable
+            oDataAdapter.Fill(oDataSet, tableName)
 
-        If oDataSet.Tables(tableName).Rows.Count > 0 Then
-            Dim oDataRow As DataRow = oDataSet.Tables(tableName).Rows(0)
-            myTable = oDataRow.Table
-            Return myTable
-        Else
+            If oDataSet.Tables(tableName).Rows.Count > 0 Then
+                Dim oDataRow As DataRow = oDataSet.Tables(tableName).Rows(0)
+                myTable = oDataRow.Table
+                Return myTable
+            Else
+                Return New DataTable
+            End If
+        Catch ex As MySqlException
             Return New DataTable
-        End If
+        End Try
     End Function
 
     ' Method to execute commands that aren't a query (insert, update, delete,...)

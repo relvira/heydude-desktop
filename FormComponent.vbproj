@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Common\common.vb" />
     <Compile Include="Common\Config.vb" />
+    <Compile Include="Common\SQLiteManager.vb" />
     <Compile Include="CustomComponents\SimpleButton.Designer.vb">
       <DependentUpon>SimpleButton.vb</DependentUpon>
     </Compile>
