@@ -24,13 +24,12 @@ Partial Class FrmLogin
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmLogin))
         Me.LblLoginError = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnClose = New System.Windows.Forms.Button()
+        Me.TxtPasswd = New FormComponent.SimpleTextBox()
         Me.BtnRegister = New FormComponent.SimpleButton()
         Me.BtnLogin = New FormComponent.SimpleButton()
         Me.TxtUser = New FormComponent.SimpleTextBox()
-        Me.TxtPasswd = New FormComponent.SimpleTextBox()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'LblLoginError
@@ -44,16 +43,6 @@ Partial Class FrmLogin
         Me.LblLoginError.Text = "Usuario/Contraseña incorrecto"
         Me.LblLoginError.Visible = False
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(332, 3)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(27, 25)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 7
-        Me.PictureBox2.TabStop = False
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -63,6 +52,30 @@ Partial Class FrmLogin
         Me.Label1.Size = New System.Drawing.Size(107, 13)
         Me.Label1.TabIndex = 8
         Me.Label1.Text = "HeyDude Messenger"
+        '
+        'BtnClose
+        '
+        Me.BtnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnClose.BackColor = System.Drawing.Color.Transparent
+        Me.BtnClose.BackgroundImage = CType(resources.GetObject("BtnClose.BackgroundImage"), System.Drawing.Image)
+        Me.BtnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.BtnClose.FlatAppearance.BorderSize = 0
+        Me.BtnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnClose.Location = New System.Drawing.Point(332, 0)
+        Me.BtnClose.Name = "BtnClose"
+        Me.BtnClose.Size = New System.Drawing.Size(29, 26)
+        Me.BtnClose.TabIndex = 10
+        Me.BtnClose.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.BtnClose.UseVisualStyleBackColor = False
+        '
+        'TxtPasswd
+        '
+        Me.TxtPasswd.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.TxtPasswd.Location = New System.Drawing.Point(13, 152)
+        Me.TxtPasswd.Message = ""
+        Me.TxtPasswd.Name = "TxtPasswd"
+        Me.TxtPasswd.Size = New System.Drawing.Size(331, 40)
+        Me.TxtPasswd.TabIndex = 9
         '
         'BtnRegister
         '
@@ -97,25 +110,15 @@ Partial Class FrmLogin
         Me.TxtUser.Size = New System.Drawing.Size(331, 40)
         Me.TxtUser.TabIndex = 1
         '
-        'TxtPasswd
-        '
-        Me.TxtPasswd.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.TxtPasswd.Location = New System.Drawing.Point(13, 152)
-        Me.TxtPasswd.Message = ""
-        Me.TxtPasswd.Name = "TxtPasswd"
-        Me.TxtPasswd.PasswdEnabled = True
-        Me.TxtPasswd.Size = New System.Drawing.Size(331, 40)
-        Me.TxtPasswd.TabIndex = 9
-        '
         'FrmLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(362, 305)
+        Me.Controls.Add(Me.BtnClose)
         Me.Controls.Add(Me.TxtPasswd)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.LblLoginError)
         Me.Controls.Add(Me.BtnRegister)
         Me.Controls.Add(Me.BtnLogin)
@@ -123,7 +126,6 @@ Partial Class FrmLogin
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FrmLogin"
         Me.Text = "FrmLogin"
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -132,7 +134,7 @@ Partial Class FrmLogin
     Friend WithEvents BtnLogin As FormComponent.SimpleButton
     Friend WithEvents BtnRegister As FormComponent.SimpleButton
     Friend WithEvents LblLoginError As System.Windows.Forms.Label
-    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents TxtPasswd As FormComponent.SimpleTextBox
+    Friend WithEvents BtnClose As System.Windows.Forms.Button
 End Class

@@ -64,4 +64,8 @@
 
         ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
     End Sub
+
+    Private Sub ChatList_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ChatList.Load
+
+    End Sub
 End Class

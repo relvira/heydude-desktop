@@ -6,9 +6,9 @@ Public Class FrmRegister
     Dim ProfileImagePath As String = "profile-default.jpg"
     Dim UploadClicked As Boolean = False
 
-
-
-
+    Private Sub FrmRegister_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        FrmLogin.Hide()
+    End Sub
 
     '---------------- MOVER FORMULARIO ----------------
     Private Sub FrmRegister_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MyBase.MouseDown
@@ -90,6 +90,7 @@ Public Class FrmRegister
             Dim Result = RegisterUser.ExecuteNoQuery(StatementGenerated)
 
             ' Close form
+            FrmLogin.Show()
             Me.Close()
         End If
     End Sub
