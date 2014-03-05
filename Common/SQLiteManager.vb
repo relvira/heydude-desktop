@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SQLite
+Imports System.IO
 Public Class SQLiteManager
     Dim connection As SQLiteConnection
     Public Sub New()
@@ -7,6 +8,11 @@ Public Class SQLiteManager
 
     Private Sub Connect()
         connection = New SQLiteConnection("Data Source=sqlite/heydude.db")
+        Try
+            connection.Open()
+        Catch ex As SQLiteException
+            MessageBox.Show("Fallo al conectar a sqlite: " & ex.Message)
+        End Try
     End Sub
 
     Public Function ExecuteNoQuery(ByVal SqlStatement As String)
