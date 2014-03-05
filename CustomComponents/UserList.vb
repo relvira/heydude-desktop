@@ -99,6 +99,12 @@
         End If
     End Sub
 
+    Private Sub TxtSearch_Leave(sender As Object, e As EventArgs) Handles TxtSearch.Leave
+        If TxtSearch.Text = "" Then
+            LblBuscar.Visible = True
+        End If
+    End Sub
+
     Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
         MyBase.OnPaintBackground(e)
 
@@ -115,13 +121,7 @@
     End Sub
 
     Private Sub BtnCancelSearch_Click(sender As Object, e As EventArgs) Handles BtnCancelSearch.Click
-        TxtSearch.Text = ""
         BtnCancelSearch.Visible = False
-    End Sub
-
-    Private Sub TxtSearch_Leave(sender As Object, e As EventArgs) Handles TxtSearch.Leave
-        If TxtSearch.Text = "" Then
-            LblBuscar.Visible = True
-        End If
+        TxtSearch.Text = ""
     End Sub
 End Class
