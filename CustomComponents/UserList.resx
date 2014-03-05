@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="BtnCancelSearch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="BtnCancelSearch.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
-        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAC1SURBVDhPnZJNDoIwEIW79vKu
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAC1SURBVDhPnZJNDoIwEIW79vKu
         exwVN+oVcIUB095h7DdhmrYWFjT5YPrmvfQHnIhUjOP79Hi+5DbcFWq01ldNkvF8uQ4+IQ2eXunNBc2V
         NmRovwrurNSSV9YzIViTsSzfbJ7nRTWbJzwZx+ELUUMM3lYTLj1k2GYlQohRA4w2BGS6wVgEQ4h/fQ0e
         3mrvcqbpk02bl5O0Y5+DByCu9AKgffPnIOysvP3LGeyfw3NzQI1W+8T9AO/ldoLbcK+TAAAAAElFTkSu

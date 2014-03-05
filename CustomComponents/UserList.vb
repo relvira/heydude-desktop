@@ -1,6 +1,7 @@
 ﻿Public Class UserList
     Private ReadOnly _mUserBoxlist As List(Of UserBox) = New List(Of UserBox)()
-    Private _mPosY As Integer = 51
+
+    Private Shared _mPosY As Integer = 51
 
     Private _mLastUserBoxSelected As UserBox
 
@@ -105,12 +106,12 @@
     End Sub
 
     Private Sub BtnCancelSearch_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnCancelSearch.MouseDown
-        BtnCancelSearch.Image = New Bitmap("assets\cancelsearchbutton_pressed.png")
+        BtnCancelSearch.BackgroundImage = New Bitmap("assets\cancelsearchbutton_pressed.png")
     End Sub
 
 
     Private Sub BtnCancelSearch_MouseUp(sender As Object, e As EventArgs) Handles BtnCancelSearch.MouseUp
-        BtnCancelSearch.Image = New Bitmap("assets\cancelsearchbutton_unpressed.png")
+        BtnCancelSearch.BackgroundImage = New Bitmap("assets\cancelsearchbutton_unpressed.png")
     End Sub
 
     Private Sub BtnCancelSearch_Click(sender As Object, e As EventArgs) Handles BtnCancelSearch.Click

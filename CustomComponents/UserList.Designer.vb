@@ -24,8 +24,8 @@ Partial Class UserList
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UserList))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.LblBuscar = New System.Windows.Forms.Label()
         Me.BtnCancelSearch = New System.Windows.Forms.Button()
+        Me.LblBuscar = New System.Windows.Forms.Label()
         Me.TxtSearch = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
@@ -35,8 +35,8 @@ Partial Class UserList
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(242, Byte), Integer), CType(CType(242, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.LblBuscar)
         Me.Panel1.Controls.Add(Me.BtnCancelSearch)
+        Me.Panel1.Controls.Add(Me.LblBuscar)
         Me.Panel1.Controls.Add(Me.TxtSearch)
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Location = New System.Drawing.Point(10, 10)
@@ -44,6 +44,20 @@ Partial Class UserList
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(180, 31)
         Me.Panel1.TabIndex = 0
+        '
+        'BtnCancelSearch
+        '
+        Me.BtnCancelSearch.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.BtnCancelSearch.BackgroundImage = CType(resources.GetObject("BtnCancelSearch.BackgroundImage"), System.Drawing.Image)
+        Me.BtnCancelSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.BtnCancelSearch.FlatAppearance.BorderSize = 0
+        Me.BtnCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnCancelSearch.Location = New System.Drawing.Point(156, 5)
+        Me.BtnCancelSearch.Name = "BtnCancelSearch"
+        Me.BtnCancelSearch.Size = New System.Drawing.Size(18, 20)
+        Me.BtnCancelSearch.TabIndex = 5
+        Me.BtnCancelSearch.UseVisualStyleBackColor = True
+        Me.BtnCancelSearch.Visible = False
         '
         'LblBuscar
         '
@@ -55,21 +69,6 @@ Partial Class UserList
         Me.LblBuscar.Size = New System.Drawing.Size(36, 15)
         Me.LblBuscar.TabIndex = 3
         Me.LblBuscar.Text = "Buscar"
-        '
-        'BtnCancelSearch
-        '
-        Me.BtnCancelSearch.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.BtnCancelSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.BtnCancelSearch.FlatAppearance.BorderSize = 0
-        Me.BtnCancelSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnCancelSearch.Image = CType(resources.GetObject("BtnCancelSearch.Image"), System.Drawing.Image)
-        Me.BtnCancelSearch.Location = New System.Drawing.Point(156, 5)
-        Me.BtnCancelSearch.Margin = New System.Windows.Forms.Padding(0)
-        Me.BtnCancelSearch.Name = "BtnCancelSearch"
-        Me.BtnCancelSearch.Size = New System.Drawing.Size(18, 20)
-        Me.BtnCancelSearch.TabIndex = 2
-        Me.BtnCancelSearch.UseVisualStyleBackColor = True
-        Me.BtnCancelSearch.Visible = False
         '
         'TxtSearch
         '
@@ -112,7 +111,7 @@ Partial Class UserList
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents TxtSearch As System.Windows.Forms.TextBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents BtnCancelSearch As System.Windows.Forms.Button
     Friend WithEvents LblBuscar As System.Windows.Forms.Label
+    Friend WithEvents BtnCancelSearch As System.Windows.Forms.Button
 
 End Class
