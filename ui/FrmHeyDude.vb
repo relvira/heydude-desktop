@@ -38,8 +38,8 @@
         Next
 
         ' No borrar, es para hacer pruebas de interfaz
-        UserList.AddUserBox("Manuel Mangas Zurita", ":)")
-        UserList.AddUserBox("Rafael De Elvira Tellez", ":)")
+        'UserList.AddUserBox("Manuel Mangas Zurita", ":)")
+        'UserList.AddUserBox("Rafael De Elvira Tellez", ":)")
 
     End Sub
 

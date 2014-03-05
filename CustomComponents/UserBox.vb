@@ -42,22 +42,26 @@ Public Class UserBox
         End Get
         Set(ByVal value As Boolean)
             Selected = value
+
+            If value = True Then
+                BackColor = MColor
+                LblUserName.ForeColor = Color.White
+                LblUserState.ForeColor = Color.White
+                RaiseEvent UserBoxSelected(Me)
+            Else
+                BackColor = Color.White
+                LblUserName.ForeColor = Color.Black
+                LblUserState.ForeColor = Color.FromArgb(197, 189, 193)
+            End If
         End Set
     End Property
-
+    
     Protected Overrides Sub OnClick(ByVal e As EventArgs)
         MyBase.OnClick(e)
-        If BackColor = MColor Then
-            Selected = False
-            BackColor = Color.White
-            LblUserName.ForeColor = Color.Black
-            LblUserState.ForeColor = Color.FromArgb(197, 189, 193)
+        If Selected Then
+            IsSelected = False
         Else
-            Selected = True
-            BackColor = MColor
-            LblUserName.ForeColor = Color.White
-            LblUserState.ForeColor = Color.White
-            RaiseEvent UserBoxSelected(Me)
+            IsSelected = True
         End If
     End Sub
 
