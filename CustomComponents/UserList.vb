@@ -2,15 +2,9 @@
 
 Public Class UserList
     Private ReadOnly _mUserBoxlist As List(Of UserBox) = New List(Of UserBox)()
-    Private _mPosY As Integer = 47
+    Private _mPosY As Integer = 51
 
     Public Event UserSelectedChanged(ByVal pUserBox As UserBox)
-
-    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
-        MyBase.OnPaintBackground(e)
-
-        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
-    End Sub
 
     Sub AddUserBox(clientData As ClientData)
         Dim userBox As New UserBox()
@@ -33,6 +27,9 @@ Public Class UserList
     ''' </summary>
     Sub AddUserBox(pName As String, pState As String)
         Dim userBox As New UserBox
+
+        Controls.Add(userBox)
+
         With userBox
             .UserName = pName
             .UserState = pState
@@ -41,8 +38,6 @@ Public Class UserList
 
         AddHandler userBox.UserBoxSelected, AddressOf UserBoxSelected
 
-        Controls.Add(userBox)
-
         _mPosY += userBox.Height
 
         _mUserBoxlist.Add(userBox)
@@ -50,6 +45,40 @@ Public Class UserList
 
     Private Sub UserBoxSelected(pUserBox As UserBox)
         RaiseEvent UserSelectedChanged(pUserBox)
+    End Sub
 
+    Private Sub TxtSearch_KeyPress(sender As System.Object, e As KeyPressEventArgs) Handles TxtSearch.KeyPress
+        Dim positionY As Integer = 51
+
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            TxtSearch.Text = ""
+        End If
+
+        For Each userBox As UserBox In _mUserBoxlist
+            userBox.Visible = True
+            userBox.Location = New Point(1, positionY)
+            positionY += userBox.Height
+        Next
+    End Sub
+
+
+    Private Sub TxtSearch_TextChanged(sender As System.Object, e As System.EventArgs) Handles TxtSearch.TextChanged
+        Dim positionY As Integer = 51
+
+        For Each userBox As UserBox In _mUserBoxlist
+            If Not userBox.UserName.ToLower().Contains(TxtSearch.Text.ToLower()) Then
+                userBox.Visible = False
+            Else
+                userBox.Visible = True
+                userBox.Location = New Point(1, positionY)
+                positionY += userBox.Height
+            End If
+        Next
+    End Sub
+
+    Protected Overrides Sub OnPaintBackground(ByVal e As PaintEventArgs)
+        MyBase.OnPaintBackground(e)
+
+        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
     End Sub
 End Class
