@@ -28,7 +28,7 @@ Partial Class ChatList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.White
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(223, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(232, Byte), Integer))
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ChatList"
         Me.Size = New System.Drawing.Size(416, 93)

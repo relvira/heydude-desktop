@@ -2,9 +2,11 @@
 Imports System.Net
 
 Public Class UserBox
-    Public Shared ReadOnly MColor As Color = Color.FromArgb(234, 239, 243)
+    Private Shared ReadOnly MColor As Color = Color.FromArgb(106, 145, 177)
 
-    Public Event UserBoxSelected(ByVal pUserBox As UserBox)
+    Public Selected As Boolean = False
+
+    Public Event UserBoxSelected(pUserBox As UserBox)
 
     Public Property UserName As String
         Get
@@ -34,12 +36,27 @@ Public Class UserBox
         End Set
     End Property
 
+    Public Property IsSelected() As Boolean
+        Get
+            Return Selected
+        End Get
+        Set(ByVal value As Boolean)
+            Selected = value
+        End Set
+    End Property
+
     Protected Overrides Sub OnClick(ByVal e As EventArgs)
         MyBase.OnClick(e)
-        If BackColor = Color.White Then
-            BackColor = MColor
-        Else
+        If BackColor = MColor Then
+            Selected = False
             BackColor = Color.White
+            LblUserName.ForeColor = Color.Black
+            LblUserState.ForeColor = Color.FromArgb(197, 189, 193)
+        Else
+            Selected = True
+            BackColor = MColor
+            LblUserName.ForeColor = Color.White
+            LblUserState.ForeColor = Color.White
             RaiseEvent UserBoxSelected(Me)
         End If
     End Sub

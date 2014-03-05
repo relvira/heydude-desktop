@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports FormComponent.CustomComponents
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmHeyDude
     Inherits System.Windows.Forms.Form
 
@@ -22,7 +24,7 @@ Partial Class FrmHeyDude
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ToolBar = New FormComponent.ToolBar()
+        Me.ToolBar = New FormComponent.CustomComponents.ToolBar()
         Me.TitleChatList = New FormComponent.TitleChatList()
         Me.ChatList = New FormComponent.ChatList()
         Me.TextBoxHD = New FormComponent.TextBoxHd()
@@ -42,8 +44,9 @@ Partial Class FrmHeyDude
         '
         Me.TitleChatList.BackColor = System.Drawing.Color.White
         Me.TitleChatList.Location = New System.Drawing.Point(200, 34)
+        Me.TitleChatList.Margin = New System.Windows.Forms.Padding(0)
         Me.TitleChatList.Name = "TitleChatList"
-        Me.TitleChatList.Size = New System.Drawing.Size(416, 68)
+        Me.TitleChatList.Size = New System.Drawing.Size(416, 52)
         Me.TitleChatList.TabIndex = 13
         Me.TitleChatList.UserName = "User Name"
         Me.TitleChatList.UserState = "Estado"
@@ -51,20 +54,21 @@ Partial Class FrmHeyDude
         'ChatList
         '
         Me.ChatList.AutoScroll = True
-        Me.ChatList.BackColor = System.Drawing.Color.White
-        Me.ChatList.Location = New System.Drawing.Point(200, 134)
+        Me.ChatList.BackColor = System.Drawing.Color.FromArgb(CType(CType(223, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(232, Byte), Integer))
+        Me.ChatList.Location = New System.Drawing.Point(200, 86)
         Me.ChatList.Margin = New System.Windows.Forms.Padding(0)
         Me.ChatList.Name = "ChatList"
-        Me.ChatList.Size = New System.Drawing.Size(407, 295)
+        Me.ChatList.Size = New System.Drawing.Size(416, 367)
         Me.ChatList.TabIndex = 12
         '
         'TextBoxHD
         '
-        Me.TextBoxHD.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.TextBoxHD.Location = New System.Drawing.Point(214, 442)
+        Me.TextBoxHD.BackColor = System.Drawing.Color.White
+        Me.TextBoxHD.Location = New System.Drawing.Point(200, 453)
+        Me.TextBoxHD.Margin = New System.Windows.Forms.Padding(0)
         Me.TextBoxHD.Message = ""
         Me.TextBoxHD.Name = "TextBoxHD"
-        Me.TextBoxHD.Size = New System.Drawing.Size(381, 40)
+        Me.TextBoxHD.Size = New System.Drawing.Size(416, 41)
         Me.TextBoxHD.TabIndex = 11
         '
         'UserList
@@ -102,6 +106,6 @@ Partial Class FrmHeyDude
     Friend WithEvents TextBoxHD As FormComponent.TextBoxHd
     Friend WithEvents ChatList As FormComponent.ChatList
     Friend WithEvents TitleChatList As FormComponent.TitleChatList
-    Friend WithEvents ToolBar As FormComponent.ToolBar
+    Friend WithEvents ToolBar As ToolBar
 
 End Class

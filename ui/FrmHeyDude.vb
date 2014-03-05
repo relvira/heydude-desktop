@@ -3,9 +3,6 @@
     Private _mUserSelected As ClientData
     Private Friends As New ArrayList
 
-    Dim formPosition As Point
-    Dim mouseAction As Boolean
-
     Public Sub New()
 
         ' Llamada necesaria para el diseñador.
@@ -40,6 +37,10 @@
             UserList.AddUserBox(_mUserSelected)
         Next
 
+        ' No borrar, es para hacer pruebas de interfaz
+        ' UserList.AddUserBox("Manuel Mangas Zurita", ":)")
+        ' UserList.AddUserBox("Manuel Mangas Zurita", ":)")
+
     End Sub
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
@@ -52,7 +53,6 @@
     Private Sub UserSelectedChanged(ByVal pUserBox As UserBox) Handles UserList.UserSelectedChanged
         TitleChatList.UserName = pUserBox.UserName
         TitleChatList.UserState = pUserBox.UserState
-        TitleChatList.Connected = State.Connected
     End Sub
 
     Private Sub ToolBar_OnCloseButtonClick(sender As Object, e As System.EventArgs) Handles ToolBar.OnCloseButtonClick

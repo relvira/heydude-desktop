@@ -17,18 +17,12 @@
         End Set
     End Property
 
-    WriteOnly Property Connected() As State
-        Set(value As State)
-            Select Case value
-                Case State.Connected
-                    ImgConnected.BackColor = Color.FromArgb(57, 144, 68)
-            End Select
-        End Set
-    End Property
-
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
         MyBase.OnPaint(e)
 
-        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(0, 213, 213, 213), ButtonBorderStyle.Solid)
+        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(0, 213, 213, 213), 0, ButtonBorderStyle.Solid, _
+                                Color.FromArgb(213, 213, 213), 1, ButtonBorderStyle.Solid, _
+                                Color.FromArgb(213, 213, 213), 1, ButtonBorderStyle.Solid, _
+                                Color.FromArgb(213, 213, 213), 1, ButtonBorderStyle.Solid)
     End Sub
 End Class

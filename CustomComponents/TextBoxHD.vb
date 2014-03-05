@@ -13,7 +13,10 @@
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
         MyBase.OnPaint(e)
 
-        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
+        ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(0, 213, 213, 213), 0, ButtonBorderStyle.Solid, _
+                                Color.FromArgb(213, 213, 213), 1, ButtonBorderStyle.Solid, _
+                                Color.FromArgb(213, 213, 213), 1, ButtonBorderStyle.Solid, _
+                                Color.FromArgb(213, 213, 213), 1, ButtonBorderStyle.Solid)
     End Sub
 
     Private Sub TxtMensaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtMensaje.KeyPress

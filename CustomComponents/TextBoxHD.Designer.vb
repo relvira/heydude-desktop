@@ -28,7 +28,7 @@ Partial Class TextBoxHd
         '
         'TxtMensaje
         '
-        Me.TxtMensaje.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.TxtMensaje.BackColor = System.Drawing.Color.White
         Me.TxtMensaje.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.TxtMensaje.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtMensaje.Location = New System.Drawing.Point(5, 10)
@@ -40,6 +40,8 @@ Partial Class TextBoxHd
         '
         'Button1
         '
+        Me.Button1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer), CType(CType(253, Byte), Integer))
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(213, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(213, Byte), Integer))
@@ -57,7 +59,7 @@ Partial Class TextBoxHd
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TxtMensaje)
         Me.Name = "TextBoxHd"

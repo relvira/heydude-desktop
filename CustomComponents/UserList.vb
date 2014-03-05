@@ -1,6 +1,8 @@
-﻿Public Class UserList
+﻿Imports Microsoft.VisualBasic.ApplicationServices
+
+Public Class UserList
     Private ReadOnly _mUserBoxlist As List(Of UserBox) = New List(Of UserBox)()
-    Private _mPosY As Integer = 0
+    Private _mPosY As Integer = 47
 
     Public Event UserSelectedChanged(ByVal pUserBox As UserBox)
 
@@ -15,7 +17,7 @@
         userBox.UserName = clientData.Name
         userBox.UserState = clientData.StateMessage
         userBox.ImageUser = clientData.ImageSource
-        userBox.Location = New Point(0, _mPosY)
+        userBox.Location = New Point(1, _mPosY)
         AddHandler userBox.UserBoxSelected, AddressOf UserBoxSelected
 
         Controls.Add(userBox)
@@ -25,7 +27,29 @@
         _mUserBoxlist.Add(userBox)
     End Sub
 
-    Private Sub UserBoxSelected(ByVal pUserBox As UserBox)
+
+    ''' <summary>
+    ''' Método para hacer pruebas sin necesitas conectarme a la base de datos.
+    ''' </summary>
+    Sub AddUserBox(pName As String, pState As String)
+        Dim userBox As New UserBox
+        With userBox
+            .UserName = pName
+            .UserState = pState
+            .Location = New Point(1, _mPosY)
+        End With
+
+        AddHandler userBox.UserBoxSelected, AddressOf UserBoxSelected
+
+        Controls.Add(userBox)
+
+        _mPosY += userBox.Height
+
+        _mUserBoxlist.Add(userBox)
+    End Sub
+
+    Private Sub UserBoxSelected(pUserBox As UserBox)
         RaiseEvent UserSelectedChanged(pUserBox)
+
     End Sub
 End Class

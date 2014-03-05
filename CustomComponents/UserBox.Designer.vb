@@ -40,10 +40,10 @@ Partial Class UserBox
         'LblUserName
         '
         Me.LblUserName.AutoSize = True
-        Me.LblUserName.Font = New System.Drawing.Font("Calibri", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUserName.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblUserName.Location = New System.Drawing.Point(57, 9)
         Me.LblUserName.Name = "LblUserName"
-        Me.LblUserName.Size = New System.Drawing.Size(112, 15)
+        Me.LblUserName.Size = New System.Drawing.Size(129, 16)
         Me.LblUserName.TabIndex = 1
         Me.LblUserName.Text = "Nombre de usuario"
         '
@@ -63,12 +63,13 @@ Partial Class UserBox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(234, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(243, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.White
         Me.Controls.Add(Me.LblUserState)
         Me.Controls.Add(Me.LblUserName)
         Me.Controls.Add(Me.ImgUser)
+        Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "UserBox"
-        Me.Size = New System.Drawing.Size(200, 55)
+        Me.Size = New System.Drawing.Size(198, 55)
         CType(Me.ImgUser, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
