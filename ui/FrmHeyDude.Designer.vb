@@ -64,6 +64,7 @@ Partial Class FrmHeyDude
         'TextBoxHD
         '
         Me.TextBoxHD.BackColor = System.Drawing.Color.White
+        Me.TextBoxHD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.TextBoxHD.Location = New System.Drawing.Point(200, 453)
         Me.TextBoxHD.Margin = New System.Windows.Forms.Padding(0)
         Me.TextBoxHD.Message = ""

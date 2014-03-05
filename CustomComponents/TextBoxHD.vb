@@ -9,7 +9,7 @@
             TxtMensaje.Text = value
         End Set
     End Property
-
+    
     Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
         MyBase.OnPaint(e)
 

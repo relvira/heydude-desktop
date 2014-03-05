@@ -45,7 +45,7 @@
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message <> "" Then
-            ChatList.AddChatBox(_mCurrentUser.FullName, TextBoxHD.Message, _mCurrentUser.ImageSource)
+            ChatList.AddChatBox(TextBoxHD.Message)
 
             ' Save this shit in SQLite
             Dim SaveMessage As New SQLiteManager
