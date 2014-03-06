@@ -69,7 +69,7 @@ Public Class FrmRegister
         End If
 
         If valid Then ' Valid form, let's register the user :)
-            Dim ProfileImgGenerated As String = ProfileImagePath
+            Dim profileImgGenerated As String = ProfileImagePath
             If UploadClicked Then
                 'Upload image!
                 ServicePointManager.Expect100Continue = False
@@ -81,7 +81,7 @@ Public Class FrmRegister
                 Dim webcl As New System.Net.WebClient()
                 webcl.Proxy = webp
                 webcl.UploadFile(UploadServer, ProfileImagePath)
-                ProfileImgGenerated = TxtUsername.Message & ".png"
+                profileImgGenerated = TxtUsername.Message & ".png"
             End If
 
             ' Insert userdata in database 
