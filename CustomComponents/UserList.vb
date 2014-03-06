@@ -16,6 +16,7 @@
 
     Sub AddUserBox(clientData As ClientData)
         Dim userBox As New UserBox()
+        userBox.Id = clientData.Id
         userBox.UserName = clientData.Name
         userBox.UserState = clientData.StateMessage
         userBox.ImageUser = clientData.ImageSource

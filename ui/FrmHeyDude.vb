@@ -1,6 +1,6 @@
 ﻿Public Class FrmHeyDude
     Private _mCurrentUser As ClientData
-    Private _mUserSelected As ClientData
+    'Private _mUserSelected As ClientData
     Private Friends As New ArrayList
 
     Public Sub New()
@@ -33,8 +33,7 @@
         'UserList.AddUserBox(_mCurrentUser)
         For Each frnd In Friends
             Dim f = frnd.ToString.Split(",")
-            _mUserSelected = New ClientData(f(2), f(4), State.Connected, f(3))
-            UserList.AddUserBox(_mUserSelected)
+            UserList.AddUserBox(New ClientData(f(0), f(2), f(4), State.Connected, f(3)))
         Next
 
         ' No borrar, es para hacer pruebas de interfaz
@@ -50,7 +49,7 @@
             ' Save this shit in SQLite
             Try
                 Dim SaveMessage As New SQLiteManager
-                Dim MessageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & 4 & " ,'" & TextBoxHD.Message & "');"
+                Dim MessageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
                 Dim Result = SaveMessage.ExecuteNoQuery(MessageStatement)
             Catch ex As Exception
                 MessageBox.Show("DB error: " & ex.Message)
@@ -61,7 +60,9 @@
     End Sub
 
     Private Sub UserSelectedChanged(ByVal pUserBox As UserBox) Handles UserList.UserSelectedChanged
+        MessageBox.Show("Id: " & pUserBox.Id.ToString)
         TitleChatList.UserName = pUserBox.UserName
+        TitleChatList.Id = pUserBox.Id
         TitleChatList.UserState = pUserBox.UserState
     End Sub
 

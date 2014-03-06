@@ -1,10 +1,20 @@
 ﻿Public Class TitleChatList
+    Private mId As Integer
     Property UserName() As String
         Get
             Return LblUserName.Text
         End Get
-        Set(value As String)
+        Set(ByVal value As String)
             LblUserName.Text = value
+        End Set
+    End Property
+
+    Property Id() As Integer
+        Get
+            Return mId
+        End Get
+        Set(ByVal value As Integer)
+            mId = value
         End Set
     End Property
 
@@ -12,7 +22,7 @@
         Get
             Return LblUserState.Text
         End Get
-        Set(value As String)
+        Set(ByVal value As String)
             LblUserState.Text = value
         End Set
     End Property

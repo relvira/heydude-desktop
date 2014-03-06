@@ -2,11 +2,12 @@
 Imports System.Net
 
 Public Class UserBox
+    Private userId As Integer
     Private Shared ReadOnly MColor As Color = Color.FromArgb(106, 145, 177)
 
     Public Selected As Boolean = False
 
-    Public Event UserBoxSelected(pUserBox As UserBox)
+    Public Event UserBoxSelected(ByVal pUserBox As UserBox)
 
     Public Property UserName As String
         Get
@@ -14,6 +15,15 @@ Public Class UserBox
         End Get
         Set(ByVal value As String)
             LblUserName.Text = value
+        End Set
+    End Property
+
+    Public Property Id As Integer
+        Get
+            Return userId
+        End Get
+        Set(ByVal value As Integer)
+            userId = value
         End Set
     End Property
 
@@ -55,7 +65,7 @@ Public Class UserBox
             End If
         End Set
     End Property
-    
+
     Protected Overrides Sub OnClick(ByVal e As EventArgs)
         MyBase.OnClick(e)
         If Selected Then

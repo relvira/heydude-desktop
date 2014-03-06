@@ -12,7 +12,8 @@
 
     End Sub
 
-    Public Sub New(ByVal pName As String, ByVal pStateMsg As String, ByVal pState As State, ByVal pImgSrc As String)
+    Public Sub New(ByVal pId As Integer, ByVal pName As String, ByVal pStateMsg As String, ByVal pState As State, ByVal pImgSrc As String)
+        _mId = pId
         _mName = pName
         _mStateMessage = pStateMsg
         _mConnectionState = pState
