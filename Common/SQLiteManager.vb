@@ -1,14 +1,20 @@
 ﻿Imports System.Data.SQLite
+Imports System.Data.Linq
 Imports System.IO
+
 Public Class SQLiteManager
     Dim connection As SQLiteConnection
     Public Sub New()
-        Me.Connect()
+        Try
+            Me.Connect()
+        Catch ex As FileLoadException
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 
     Private Sub Connect()
-        connection = New SQLiteConnection("Data Source=sqlite/heydude.db")
         Try
+            connection = New SQLiteConnection("Data Source=/heydude.db")
             connection.Open()
         Catch ex As SQLiteException
             MessageBox.Show("Fallo al conectar a sqlite: " & ex.Message)

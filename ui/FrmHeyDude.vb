@@ -48,9 +48,13 @@
             ChatList.AddChatBox(TextBoxHD.Message)
 
             ' Save this shit in SQLite
-            Dim SaveMessage As New SQLiteManager
-            Dim MessageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & 4 & " ,'" & TextBoxHD.Message & "');"
-            Dim Result = SaveMessage.ExecuteNoQuery(MessageStatement)
+            Try
+                Dim SaveMessage As New SQLiteManager
+                Dim MessageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & 4 & " ,'" & TextBoxHD.Message & "');"
+                Dim Result = SaveMessage.ExecuteNoQuery(MessageStatement)
+            Catch ex As Exception
+                MessageBox.Show("DB error: " & ex.Message)
+            End Try
 
             TextBoxHD.Message = ""
         End If
