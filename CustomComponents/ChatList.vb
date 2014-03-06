@@ -28,4 +28,15 @@
 
         _mChatBoxLeftList.Add(chatBoxLeft)
     End Sub
+
+    Public Sub Clean()
+        ' Clean lists
+        _mChatBoxList.Clear()
+        _mChatBoxLeftList.Clear()
+
+        ' Clear messages already displayed
+        Controls.Clear()
+
+        _mPosY = 0
+    End Sub
 End Class

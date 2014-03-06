@@ -35,6 +35,10 @@
 
     End Sub
 
+    Private Sub RecieveMessage(ByVal MessageArgs As Object)
+
+    End Sub
+
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message <> "" And TitleChatList.Id <> 0 Then
             ChatList.AddChatBox(TextBoxHD.Message)
@@ -56,6 +60,7 @@
 
     Private Sub UserSelectedChanged(ByVal pUserBox As UserBox) Handles UserList.UserSelectedChanged
         ' @TODO: Clean messages zone!!!!!
+        ChatList.Clean()
         TitleChatList.UserName = pUserBox.UserName
         TitleChatList.Id = pUserBox.Id
 
@@ -83,7 +88,7 @@
         End Try
     End Sub
 
-    Private Sub ToolBar_OnCloseButtonClick(sender As Object, e As System.EventArgs) Handles ToolBar.OnCloseButtonClick
+    Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles ToolBar.OnCloseButtonClick
         Close()
     End Sub
 
