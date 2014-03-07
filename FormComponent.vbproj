@@ -99,6 +99,7 @@
     <Compile Include="Common\common.vb" />
     <Compile Include="Common\Config.vb" />
     <Compile Include="Common\SQLiteManager.vb" />
+    <Compile Include="CustomComponents\AlignedTo.vb" />
     <Compile Include="CustomComponents\ChatBoxLeft.Designer.vb">
       <DependentUpon>ChatBoxLeft.vb</DependentUpon>
     </Compile>

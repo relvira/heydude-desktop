@@ -41,7 +41,7 @@
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message <> "" And TitleChatList.Id <> 0 Then
-            ChatList.AddChatBox(TextBoxHD.Message)
+            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Left)
 
             ' Save this shit in SQLite
             Try
@@ -73,10 +73,10 @@
                 For Each oDataRow In queryResult.Rows
                     If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
                         ' From other messages
-                        ChatList.AddChatBoxLeft(queryResult.Rows(i)("message"))
+                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left)
                     ElseIf queryResult.Rows(i)("from_id") = _mCurrentUser.Id Then
                         ' Messages from me to others
-                        ChatList.AddChatBox(queryResult.Rows(i)("message"))
+                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right)
                     End If
                     i = i + 1
                 Next

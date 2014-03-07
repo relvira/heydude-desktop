@@ -57,11 +57,11 @@ Partial Class ChatBox
         '
         Me.LblHora.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblHora.AutoSize = True
-        Me.LblHora.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblHora.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LblHora.ForeColor = System.Drawing.Color.FromArgb(CType(CType(159, Byte), Integer), CType(CType(202, Byte), Integer), CType(CType(108, Byte), Integer))
-        Me.LblHora.Location = New System.Drawing.Point(79, 6)
+        Me.LblHora.Location = New System.Drawing.Point(84, 6)
         Me.LblHora.Name = "LblHora"
-        Me.LblHora.Size = New System.Drawing.Size(39, 13)
+        Me.LblHora.Size = New System.Drawing.Size(34, 13)
         Me.LblHora.TabIndex = 4
         Me.LblHora.Text = "00:00"
         '

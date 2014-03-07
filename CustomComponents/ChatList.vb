@@ -3,13 +3,14 @@
     Private ReadOnly _mChatBoxLeftList As List(Of ChatBoxLeft) = New List(Of ChatBoxLeft)()
     Private _mPosY As Integer = 0
 
-    Public Sub AddChatBox(ByVal pMessage As String)
+    Public Sub AddChatBox(ByVal pMessage As String, ByVal pAlignTo As AlignedTo)
         Dim chatBox As New ChatBox
 
         Controls.Add(chatBox)
 
+        chatBox.AlignTo = pAlignTo
         chatBox.Mensaje = pMessage
-        chatBox.Location = New Point(Width - chatBox.Width - 5, _mPosY)
+        chatBox.Location = New Point(chatBox.Location.X, _mPosY)
 
         _mPosY += chatBox.Height + 5
 
