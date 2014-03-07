@@ -1,20 +1,19 @@
 ﻿Public Class FrmHeyDude
     Private _mCurrentUser As ClientData
-    'Private _mUserSelected As ClientData
-    Private Friends As New ArrayList
+    Private ReadOnly _friends As New ArrayList
 
     Public Sub New()
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
     End Sub
 
-    Public Sub New(ByVal UserItem As ClientData)
+    Public Sub New(ByVal userItem As ClientData)
         ' Llamada necesaria para el diseñador.
         InitializeComponent()
 
         ' Other calls
-        _mCurrentUser = UserItem
-        Friends = _mCurrentUser.GetUserAllFriends(_mCurrentUser.Id)
+        _mCurrentUser = userItem
+        _friends = _mCurrentUser.GetUserAllFriends(_mCurrentUser.Id)
 
     End Sub
 
@@ -24,23 +23,18 @@
         ' Hide Login form
         FrmLogin.Hide()
 
-        For Each frnd In Friends
+        For Each frnd In _friends
             Dim f = frnd.ToString.Split(",")
             UserList.AddUserBox(New ClientData(f(0), f(2), f(4), State.Connected, f(3)))
         Next
-
-        ' No borrar, es para hacer pruebas de interfaz
-        'UserList.AddUserBox("Manuel Mangas Zurita", ":)")
-        'UserList.AddUserBox("Rafael De Elvira Tellez", ":)")
-
     End Sub
 
     Private Sub RecieveMessage(ByVal messageArgs As Object)
-
+        
     End Sub
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
-        If TextBoxHD.Message <> "" And TitleChatList.Id <> 0 Then
+        If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
             ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
 
             ' Save this shit in SQLite
