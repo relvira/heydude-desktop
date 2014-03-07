@@ -1,4 +1,4 @@
-﻿Imports FormComponent.CustomComponents
+﻿Imports chat_client_interface.CustomComponents
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmHeyDude
@@ -24,11 +24,11 @@ Partial Class FrmHeyDude
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ToolBar = New FormComponent.CustomComponents.ToolBar()
-        Me.TitleChatList = New FormComponent.TitleChatList()
-        Me.ChatList = New FormComponent.ChatList()
-        Me.TextBoxHD = New FormComponent.TextBoxHd()
-        Me.UserList = New FormComponent.UserList()
+        Me.ToolBar = New chat_client_interface.CustomComponents.ToolBar()
+        Me.TitleChatList = New chat_client_interface.TitleChatList()
+        Me.ChatList = New chat_client_interface.ChatList()
+        Me.TextBoxHD = New chat_client_interface.TextBoxHd()
+        Me.UserList = New chat_client_interface.UserList()
         Me.SuspendLayout()
         '
         'ToolBar
@@ -103,10 +103,10 @@ Partial Class FrmHeyDude
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents UserList As FormComponent.UserList
-    Friend WithEvents TextBoxHD As FormComponent.TextBoxHd
-    Friend WithEvents ChatList As FormComponent.ChatList
-    Friend WithEvents TitleChatList As FormComponent.TitleChatList
+    Friend WithEvents UserList As chat_client_interface.UserList
+    Friend WithEvents TextBoxHD As chat_client_interface.TextBoxHd
+    Friend WithEvents ChatList As chat_client_interface.ChatList
+    Friend WithEvents TitleChatList As chat_client_interface.TitleChatList
     Friend WithEvents ToolBar As ToolBar
 
 End Class

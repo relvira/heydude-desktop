@@ -26,10 +26,10 @@ Partial Class FrmLogin
         Me.LblLoginError = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BtnClose = New System.Windows.Forms.Button()
-        Me.TxtPasswd = New FormComponent.SimpleTextBox()
-        Me.BtnRegister = New FormComponent.SimpleButton()
-        Me.BtnLogin = New FormComponent.SimpleButton()
-        Me.TxtUser = New FormComponent.SimpleTextBox()
+        Me.TxtPasswd = New chat_client_interface.SimpleTextBox()
+        Me.BtnRegister = New chat_client_interface.SimpleButton()
+        Me.BtnLogin = New chat_client_interface.SimpleButton()
+        Me.TxtUser = New chat_client_interface.SimpleTextBox()
         Me.SuspendLayout()
         '
         'LblLoginError
@@ -130,11 +130,11 @@ Partial Class FrmLogin
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TxtUser As FormComponent.SimpleTextBox
-    Friend WithEvents BtnLogin As FormComponent.SimpleButton
-    Friend WithEvents BtnRegister As FormComponent.SimpleButton
+    Friend WithEvents TxtUser As chat_client_interface.SimpleTextBox
+    Friend WithEvents BtnLogin As chat_client_interface.SimpleButton
+    Friend WithEvents BtnRegister As chat_client_interface.SimpleButton
     Friend WithEvents LblLoginError As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TxtPasswd As FormComponent.SimpleTextBox
+    Friend WithEvents TxtPasswd As chat_client_interface.SimpleTextBox
     Friend WithEvents BtnClose As System.Windows.Forms.Button
 End Class

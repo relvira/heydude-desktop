@@ -27,13 +27,13 @@ Partial Class FrmRegister
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.BtnUploadImage = New FormComponent.SimpleButton()
-        Me.TxtPasswd2 = New FormComponent.SimpleTextBox()
-        Me.TxtPasswd1 = New FormComponent.SimpleTextBox()
-        Me.BtnRegister = New FormComponent.SimpleButton()
-        Me.TxtEmail = New FormComponent.SimpleTextBox()
-        Me.TxtFullName = New FormComponent.SimpleTextBox()
-        Me.TxtUsername = New FormComponent.SimpleTextBox()
+        Me.BtnUploadImage = New chat_client_interface.SimpleButton()
+        Me.TxtPasswd2 = New chat_client_interface.SimpleTextBox()
+        Me.TxtPasswd1 = New chat_client_interface.SimpleTextBox()
+        Me.BtnRegister = New chat_client_interface.SimpleButton()
+        Me.TxtEmail = New chat_client_interface.SimpleTextBox()
+        Me.TxtFullName = New chat_client_interface.SimpleTextBox()
+        Me.TxtUsername = New chat_client_interface.SimpleTextBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -176,16 +176,16 @@ Partial Class FrmRegister
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents TxtUsername As FormComponent.SimpleTextBox
-    Friend WithEvents TxtFullName As FormComponent.SimpleTextBox
-    Friend WithEvents TxtEmail As FormComponent.SimpleTextBox
+    Friend WithEvents TxtUsername As chat_client_interface.SimpleTextBox
+    Friend WithEvents TxtFullName As chat_client_interface.SimpleTextBox
+    Friend WithEvents TxtEmail As chat_client_interface.SimpleTextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents BtnRegister As FormComponent.SimpleButton
-    Friend WithEvents TxtPasswd1 As FormComponent.SimpleTextBox
-    Friend WithEvents TxtPasswd2 As FormComponent.SimpleTextBox
-    Friend WithEvents BtnUploadImage As FormComponent.SimpleButton
+    Friend WithEvents BtnRegister As chat_client_interface.SimpleButton
+    Friend WithEvents TxtPasswd1 As chat_client_interface.SimpleTextBox
+    Friend WithEvents TxtPasswd2 As chat_client_interface.SimpleTextBox
+    Friend WithEvents BtnUploadImage As chat_client_interface.SimpleButton
 End Class
