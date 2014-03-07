@@ -35,7 +35,7 @@
 
     End Sub
 
-    Private Sub RecieveMessage(ByVal MessageArgs As Object)
+    Private Sub RecieveMessage(ByVal messageArgs As Object)
 
     End Sub
 
@@ -45,9 +45,9 @@
 
             ' Save this shit in SQLite
             Try
-                Dim SaveMessage As New SQLiteManager
-                Dim MessageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
-                Dim Result = SaveMessage.ExecuteNoQuery(MessageStatement)
+                Dim saveMessage As New SQLiteManager
+                Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
+                Dim result = saveMessage.ExecuteNoQuery(messageStatement)
             Catch ex As Exception
                 MessageBox.Show("DB error: " & ex.Message)
             End Try
@@ -67,8 +67,8 @@
         ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
         Dim i As Integer = 0
         Try
-            Dim OldMessages As New SQLiteManager
-            Dim queryResult = OldMessages.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
+            Dim oldMessages As New SQLiteManager
+            Dim queryResult = oldMessages.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
             If queryResult.Rows.Count > 0 Then
                 For Each oDataRow In queryResult.Rows
                     If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
