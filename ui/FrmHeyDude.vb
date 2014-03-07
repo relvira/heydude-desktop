@@ -73,10 +73,10 @@
                 For Each oDataRow In queryResult.Rows
                     If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
                         ' From other messages
-                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left)
+                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
                     ElseIf queryResult.Rows(i)("from_id") = _mCurrentUser.Id Then
                         ' Messages from me to others
-                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right)
+                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
                     End If
                     i = i + 1
                 Next

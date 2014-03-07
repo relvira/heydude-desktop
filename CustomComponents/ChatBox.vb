@@ -9,10 +9,18 @@
         End Get
         Set(ByVal value As String)
             LblMensaje.Text = value
-            LblHora.Text = Now.ToString("HH:mm")
-
+            'LblHora.Text = Now.ToString("HH:mm")
             ResizeControl()
             ChangeAlign()
+        End Set
+    End Property
+
+    Public Property Hora As Date
+        Get
+            Return LblMensaje.Text
+        End Get
+        Set(ByVal value As Date)
+            LblHora.Text = value.ToString("HH:mm")
         End Set
     End Property
 
