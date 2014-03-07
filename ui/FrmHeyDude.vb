@@ -41,7 +41,7 @@
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message <> "" And TitleChatList.Id <> 0 Then
-            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Left)
+            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
 
             ' Save this shit in SQLite
             Try
