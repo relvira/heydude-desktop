@@ -5,7 +5,7 @@
         Private _mParentPosition As Point
         Private _mMouseAction As Boolean
 
-        Private Sub BtnClose_MouseClick(sender As Object, e As Windows.Forms.MouseEventArgs) Handles BtnClose.MouseClick
+        Private Sub BtnClose_MouseClick(sender As Object, e As MouseEventArgs) Handles BtnClose.MouseClick
             RaiseEvent OnCloseButtonClick(sender, e)
         End Sub
 
@@ -17,7 +17,7 @@
             BtnClose.BackgroundImage = New Bitmap("assets\closebutton_over.png")
         End Sub
 
-        Private Sub BtnClose_MouseLeave(sender As System.Object, e As EventArgs) Handles BtnClose.MouseLeave
+        Private Sub BtnClose_MouseLeave(sender As Object, e As EventArgs) Handles BtnClose.MouseLeave
             BtnClose.BackgroundImage = New Bitmap("assets\closebutton_unpressed.png")
         End Sub
 

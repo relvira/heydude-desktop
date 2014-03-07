@@ -8,9 +8,9 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{31818FC3-898E-4B40-B663-DAB631664047}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>FormComponent.My.MyApplication</StartupObject>
-    <RootNamespace>FormComponent</RootNamespace>
-    <AssemblyName>FormComponent</AssemblyName>
+    <StartupObject>ChatClient.My.MyApplication</StartupObject>
+    <RootNamespace>ChatClient</RootNamespace>
+    <AssemblyName>ChatClient</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -38,7 +38,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>FormComponent.xml</DocumentationFile>
+    <DocumentationFile>ChatClient.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -48,7 +48,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>FormComponent.xml</DocumentationFile>
+    <DocumentationFile>ChatClient.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -100,12 +100,6 @@
     <Compile Include="Common\Config.vb" />
     <Compile Include="Common\SQLiteManager.vb" />
     <Compile Include="CustomComponents\AlignedTo.vb" />
-    <Compile Include="CustomComponents\ChatBoxLeft.Designer.vb">
-      <DependentUpon>ChatBoxLeft.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CustomComponents\ChatBoxLeft.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="CustomComponents\SimpleButton.Designer.vb">
       <DependentUpon>SimpleButton.vb</DependentUpon>
     </Compile>
@@ -129,16 +123,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ui\FrmLogin.Designer.vb">
+    <Compile Include="UI\FrmLogin.Designer.vb">
       <DependentUpon>FrmLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="ui\FrmLogin.vb">
+    <Compile Include="UI\FrmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\FrmRegister.Designer.vb">
+    <Compile Include="UI\FrmRegister.Designer.vb">
       <DependentUpon>FrmRegister.vb</DependentUpon>
     </Compile>
-    <Compile Include="ui\FrmRegister.vb">
+    <Compile Include="UI\FrmRegister.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="User\ClientData.vb" />
@@ -166,10 +160,10 @@
     <Compile Include="Form Custom Scrollbar\FrmCustomScrollbar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\FrmHeyDude.vb">
+    <Compile Include="UI\FrmHeyDude.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ui\FrmHeyDude.Designer.vb">
+    <Compile Include="UI\FrmHeyDude.Designer.vb">
       <DependentUpon>FrmHeyDude.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -211,9 +205,6 @@
     <EmbeddedResource Include="CustomComponents\ChatList.resx">
       <DependentUpon>ChatList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomComponents\ChatBoxLeft.resx">
-      <DependentUpon>ChatBoxLeft.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CustomComponents\SimpleButton.resx">
       <DependentUpon>SimpleButton.vb</DependentUpon>
     </EmbeddedResource>
@@ -226,7 +217,7 @@
     <EmbeddedResource Include="CustomComponents\ToolBar.resx">
       <DependentUpon>ToolBar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ui\FrmHeyDude.resx">
+    <EmbeddedResource Include="UI\FrmHeyDude.resx">
       <DependentUpon>FrmHeyDude.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -244,10 +235,10 @@
     <EmbeddedResource Include="CustomComponents\UserList.resx">
       <DependentUpon>UserList.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ui\FrmLogin.resx">
+    <EmbeddedResource Include="UI\FrmLogin.resx">
       <DependentUpon>FrmLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ui\FrmRegister.resx">
+    <EmbeddedResource Include="UI\FrmRegister.resx">
       <DependentUpon>FrmRegister.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

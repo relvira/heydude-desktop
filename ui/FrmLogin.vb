@@ -1,52 +1,54 @@
-﻿Public Class FrmLogin
-    Dim formPosition As Point
-    Dim mouseAction As Boolean
-    Private Sub BtnLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnLogin.myClick
-        Dim result = common.UserLogin(TxtUser.Message, TxtPasswd.Message)
-        If result.isLoggedIn Then
-            Dim HeyDudeFrm As New FrmHeyDude(result)
-            HeyDudeFrm.Show()
-        Else
-            LblLoginError.Visible = True
-        End If
-    End Sub
+﻿Namespace UI
+    Public Class FrmLogin
+        Dim formPosition As Point
+        Dim mouseAction As Boolean
+        Private Sub BtnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnLogin.myClick
+            Dim result = Common.Common.UserLogin(TxtUser.Message, TxtPasswd.Message)
+            If result.isLoggedIn Then
+                Dim HeyDudeFrm As New FrmHeyDude(result)
+                HeyDudeFrm.Show()
+            Else
+                LblLoginError.Visible = True
+            End If
+        End Sub
 
-    Private Sub FrmLogin_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Private Sub FrmLogin_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
-    End Sub
+        End Sub
 
-    '---------------- MOVER FORMULARIO ----------------
-    Private Sub FrmLogin_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseDown
-        formPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
-        mouseAction = True
-    End Sub
+        '---------------- MOVER FORMULARIO ----------------
+        Private Sub FrmLogin_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseDown
+            formPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
+            mouseAction = True
+        End Sub
 
-    Private Sub FrmLogin_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseMove
-        If mouseAction = True Then
+        Private Sub FrmLogin_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseMove
+            If mouseAction = True Then
 
-            Location = New Point(Cursor.Position.X - formPosition.X, Cursor.Position.Y - formPosition.Y)
+                Location = New Point(Cursor.Position.X - formPosition.X, Cursor.Position.Y - formPosition.Y)
 
-        End If
-    End Sub
+            End If
+        End Sub
 
-    Private Sub FrmLogin_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseUp
-        mouseAction = False
-    End Sub
+        Private Sub FrmLogin_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseUp
+            mouseAction = False
+        End Sub
 
-    Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Close()
-    End Sub
+        Private Sub PictureBox2_Click(ByVal sender As Object, ByVal e As EventArgs)
+            Me.Close()
+        End Sub
 
-    Private Sub Label1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label1.Click
+        Private Sub Label1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Label1.Click
 
-    End Sub
+        End Sub
 
-    Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles BtnRegister.myClick
-        Dim FrmRegister As New FrmRegister()
-        FrmRegister.Show()
-    End Sub
+        Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.myClick
+            Dim FrmRegister As New FrmRegister()
+            FrmRegister.Show()
+        End Sub
 
-    Private Sub BtnClose_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnClose.Click
-        Me.Close()
-    End Sub
-End Class
+        Private Sub BtnClose_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnClose.Click
+            Me.Close()
+        End Sub
+    End Class
+End Namespace

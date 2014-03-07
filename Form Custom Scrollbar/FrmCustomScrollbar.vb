@@ -1,4 +1,6 @@
-﻿Public Class FrmCustomScrollbar
+﻿Imports ChatClient.ui
+
+Public Class FrmCustomScrollbar
     Inherits Form
 
     Public Sub New()
