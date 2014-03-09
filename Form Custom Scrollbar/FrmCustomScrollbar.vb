@@ -2,6 +2,7 @@
 
 Public Class FrmCustomScrollbar
     Inherits Form
+    Friend WithEvents HdScrollBar1 As ChatClient.HdScrollBar
 
     Public Sub New()
         Me.Size = New Size(500, 500)
@@ -20,5 +21,31 @@ Public Class FrmCustomScrollbar
         ' are enabled by the operating system, IsSupported is true.
         Application.EnableVisualStyles()
         Application.Run(New FrmHeyDude())
+    End Sub
+
+    Private Sub InitializeComponent()
+        Me.HdScrollBar1 = New ChatClient.HdScrollBar()
+        Me.SuspendLayout()
+        '
+        'HdScrollBar1
+        '
+        Me.HdScrollBar1.ChannelColorProperty = System.Drawing.Color.Empty
+        Me.HdScrollBar1.LargeChangeProperty = 10
+        Me.HdScrollBar1.Location = New System.Drawing.Point(58, 12)
+        Me.HdScrollBar1.MaximumProperty = 10
+        Me.HdScrollBar1.MinimumProperty = 10
+        Me.HdScrollBar1.Name = "HdScrollBar1"
+        Me.HdScrollBar1.Size = New System.Drawing.Size(19, 315)
+        Me.HdScrollBar1.SmallChangeProperty = 10
+        Me.HdScrollBar1.TabIndex = 0
+        Me.HdScrollBar1.ValueProperty = 10
+        '
+        'FrmCustomScrollbar
+        '
+        Me.ClientSize = New System.Drawing.Size(179, 339)
+        Me.Controls.Add(Me.HdScrollBar1)
+        Me.Name = "FrmCustomScrollbar"
+        Me.ResumeLayout(False)
+
     End Sub
 End Class

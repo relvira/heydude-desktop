@@ -8,18 +8,16 @@ Namespace User
         Private _mFullName As String
         Private _mLoggedIn As Boolean
         Private _mStateMessage As String
-        Private _mConnectionState As State
         Private _mImgStringSrc As String
 
         Public Sub New()
 
         End Sub
 
-        Public Sub New(ByVal pId As Integer, ByVal pName As String, ByVal pStateMsg As String, ByVal pState As State, ByVal pImgSrc As String)
+        Public Sub New(ByVal pId As Integer, ByVal pName As String, ByVal pStateMsg As String, ByVal pImgSrc As String)
             _mId = pId
             _mName = pName
             _mStateMessage = pStateMsg
-            _mConnectionState = pState
             _mImgStringSrc = pImgSrc
         End Sub
 
@@ -38,15 +36,6 @@ Namespace User
             End Get
             Set(ByVal value As String)
                 _mStateMessage = value
-            End Set
-        End Property
-
-        Public Property ConnectionState() As State
-            Get
-                Return _mConnectionState
-            End Get
-            Set(ByVal value As State)
-                _mConnectionState = value
             End Set
         End Property
 

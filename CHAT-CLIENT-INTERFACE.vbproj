@@ -65,23 +65,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.6.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.91.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Archivos de programa\System.Data.SQLite\2010\bin\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite">
+      <HintPath>packages\System.Data.SQLite.1.0.77.0\lib\net40\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.Linq, Version=1.0.91.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.77.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Archivos de programa\System.Data.SQLite\2010\bin\System.Data.SQLite.Linq.dll</HintPath>
+      <HintPath>packages\System.Data.SQLite.1.0.77.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -118,6 +118,18 @@
     <Compile Include="CustomComponents\ToolBar.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Form Custom Scrollbar\FrmScrollBarHD.Designer.vb">
+      <DependentUpon>FrmScrollBarHD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form Custom Scrollbar\FrmScrollBarHD.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form Custom Scrollbar\HDScrollBar.Designer.vb">
+      <DependentUpon>HDScrollBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form Custom Scrollbar\HDScrollBar.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +147,7 @@
     <Compile Include="UI\FrmRegister.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="User\ClientBuffer.vb" />
     <Compile Include="User\ClientData.vb" />
     <Compile Include="CustomComponents\ChatBox.Designer.vb">
       <DependentUpon>ChatBox.vb</DependentUpon>
@@ -196,6 +209,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Common\MySQLManager.vb" />
+    <Compile Include="User\ClientRequest.vb" />
+    <Compile Include="User\Protocol.vb" />
+    <Compile Include="User\Protocol_no_usar.vb" />
     <Compile Include="User\State.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +232,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomComponents\ToolBar.resx">
       <DependentUpon>ToolBar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form Custom Scrollbar\FrmCustomScrollbar.resx">
+      <DependentUpon>FrmCustomScrollbar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form Custom Scrollbar\FrmScrollBarHD.resx">
+      <DependentUpon>FrmScrollBarHD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form Custom Scrollbar\HDScrollBar.resx">
+      <DependentUpon>HDScrollBar.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmHeyDude.resx">
       <DependentUpon>FrmHeyDude.vb</DependentUpon>
@@ -254,6 +279,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\closebutton_unpressed.png" />
   </ItemGroup>
   <ItemGroup>

@@ -4,8 +4,9 @@ Imports ChatClient.Common
 
 Namespace UI
     Public Class FrmHeyDude
-        Private _mCurrentUser As ClientData
-        Private ReadOnly _friends As New ArrayList
+        Private ReadOnly _mCurrentUser As ClientData
+        Private ReadOnly _mCurrentUserBuffer As New ClientBuffer
+        Private ReadOnly _mFriends As New ArrayList
 
         Public Sub New()
             ' Llamada necesaria para el diseñador.
@@ -18,7 +19,7 @@ Namespace UI
 
             ' Other calls
             _mCurrentUser = userItem
-            _friends = _mCurrentUser.GetUserAllFriends(_mCurrentUser.Id)
+            _mFriends = _mCurrentUser.GetUserAllFriends(_mCurrentUser.Id)
 
         End Sub
 
@@ -28,10 +29,12 @@ Namespace UI
             ' Hide Login form
             FrmLogin.Hide()
 
-            For Each frnd In _friends
+            For Each frnd In _mFriends
                 Dim f = frnd.ToString.Split(",")
-                UserList.AddUserBox(New ClientData(f(0), f(2), f(4), State.Connected, f(3)))
+                UserList.AddUserBox(New ClientData(f(0), f(2), f(4), f(3)))
             Next
+
+            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
         End Sub
 
         Private Sub RecieveMessage(ByVal messageArgs As Object)
@@ -40,18 +43,19 @@ Namespace UI
 
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
             'If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
-            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Left)
+            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
 
-            '    ' Save this shit in SQLite
-            '    Try
-            '        Dim saveMessage As New SQLiteManager
-            '        Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
-            '        Dim result = saveMessage.ExecuteNoQuery(messageStatement)
-            '    Catch ex As Exception
-            '        MessageBox.Show("DB error: " & ex.Message)
-            '    End Try
+            ' Save this shit in SQLite
+            Try
+                Dim saveMessage As New SQLiteManager
+                Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
+                Dim result = saveMessage.ExecuteNoQuery(messageStatement)
+            Catch ex As Exception
+                MessageBox.Show("DB error: " & ex.Message)
+            End Try
 
-            '    ' WORK REAL SEND MESSAGE TO SERVER HERE
+            ' WORK REAL SEND MESSAGE TO SERVER HERE
+            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.SendMessage, _mCurrentUser.Id, TextBoxHD.Message))
 
             TextBoxHD.Message = ""
             'End If
