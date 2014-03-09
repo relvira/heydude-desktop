@@ -22,8 +22,8 @@
 
         Private Sub TxtMensaje_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtMensaje.KeyPress
             If e.KeyChar = Convert.ToChar(Keys.Enter) Then
-                RaiseEvent OnIntroPressed(e)
                 e.Handled = True
+                RaiseEvent OnIntroPressed(e)
             End If
         End Sub
     End Class

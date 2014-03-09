@@ -210,8 +210,8 @@
     </Compile>
     <Compile Include="Common\MySQLManager.vb" />
     <Compile Include="User\ClientRequest.vb" />
+    <Compile Include="User\Protocol_no.vb" />
     <Compile Include="User\Protocol.vb" />
-    <Compile Include="User\Protocol_no_usar.vb" />
     <Compile Include="User\State.vb" />
   </ItemGroup>
   <ItemGroup>

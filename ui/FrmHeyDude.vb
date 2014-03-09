@@ -5,9 +5,15 @@ Imports ChatClient.Common
 Namespace UI
     Public Class FrmHeyDude
         Private ReadOnly _mCurrentUser As ClientData
-        Private ReadOnly _mCurrentUserBuffer As New ClientBuffer
+        Private _mCurrentUserBuffer As New ClientBuffer
         Private ReadOnly _mFriends As New ArrayList
 
+        Public ReadOnly Property Instance() As FrmHeyDude
+            Get
+                Return Me
+            End Get
+        End Property
+        
         Public Sub New()
             ' Llamada necesaria para el diseñador.
             InitializeComponent()
@@ -35,10 +41,12 @@ Namespace UI
             Next
 
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
+            AddHandler _mCurrentUserBuffer.OnMessageRecived, AddressOf OnMessageReceived
         End Sub
 
-        Private Sub RecieveMessage(ByVal messageArgs As Object)
-
+        Private Sub OnMessageReceived(ByVal pRequest As ClientRequest)
+            Console.WriteLine("evento on msgrecieved")
+            ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
         End Sub
 
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed

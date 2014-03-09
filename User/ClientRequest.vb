@@ -3,8 +3,8 @@ Imports Newtonsoft.Json
 
 Namespace User
     Public Class ClientRequest
-        Private ReadOnly _mProtocol As Protocol
-        Private ReadOnly _mFromId As Integer
+        Private _mProtocol As Protocol
+        Private _mFromId As Integer
         Private _mToId As Integer
         Private _mMessage As String
 
@@ -15,16 +15,22 @@ Namespace User
             _mMessage = pMsg
         End Sub
 
-        Public ReadOnly Property FromId() As Integer
+        Public Property FromId() As Integer
             Get
                 Return _mFromId
             End Get
+            Set(ByVal value As Integer)
+                _mFromId = value
+            End Set
         End Property
 
-        Public ReadOnly Property Protocol() As Protocol
+        Public Property Protocol() As Protocol
             Get
                 Return _mProtocol
             End Get
+            Set(ByVal value As Protocol)
+                _mProtocol = value
+            End Set
         End Property
 
         Public Property ToId() As Integer

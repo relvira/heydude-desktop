@@ -17,7 +17,7 @@ Namespace User
         Private _mOutput As StreamWriter
         Private _mThReciveRequest As Thread
 
-        Delegate Sub GetRequestCallback(txt As String)
+        Delegate Sub GetRequestCallback(pRequest As ClientRequest)
 
         Public Event OnMessageRecived(ByVal pRequest As ClientRequest)
 
@@ -34,18 +34,24 @@ Namespace User
         Private Sub InitBuffers()
             _mInput = New StreamReader(_mNetworkStream)
             _mOutput = New StreamWriter(_mNetworkStream)
-
-            _mThReciveRequest = New Thread(AddressOf RecieveRequest)
+            
+            _mThReciveRequest = New Thread(New ThreadStart(AddressOf RecieveRequest))
+            _mThReciveRequest.Name = "Recieve request thread"
             _mThReciveRequest.Start()
         End Sub
 
         Private Sub RecieveRequest()
             Dim request As ClientRequest
             While True
+                request = ReadRequest()
                 Try
-                    request = ReadRequest()
-                    RaiseEvent OnMessageRecived(request)
-                    SetMessage(request.Message)
+                    Select Case request.Protocol
+                        Case Protocol.Connect
+                        Case Protocol.SendMessage
+                        Case Protocol.ReceiveMessage
+                            RaiseRequest(request)
+                        Case Protocol.Disconnect
+                    End Select
                 Catch ex As Exception
                     MessageBox.Show(ex.Message)
                     Finalize()
@@ -53,17 +59,21 @@ Namespace User
             End While
         End Sub
 
-        Private Sub SetMessage(ByVal pMsg As String)
+        Private Sub RaiseRequest(ByVal pRequest As ClientRequest)
             If FrmHeyDude.ChatList.InvokeRequired Then
-                Dim d As New GetRequestCallback(AddressOf SetMessage)
-                FrmHeyDude.Invoke(d, New Object() {pMsg})
+                Dim d As New GetRequestCallback(AddressOf RaiseRequest)
+                FrmHeyDude.Invoke(d, New Object() {pRequest})
             Else
-                FrmHeyDude.ChatList.AddChatBox(pMsg, AlignedTo.Left)
+                SyncLock FrmHeyDude.Instance.ChatList
+                    FrmHeyDude.Instance.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
+                End SyncLock
             End If
         End Sub
 
         Private Function ReadRequest() As ClientRequest
-            Return CType(JsonConvert.DeserializeObject(_mInput.ReadLine()), ClientRequest)
+            Dim js As String = _mInput.ReadLine()
+            Console.WriteLine(js)
+            Return JsonConvert.DeserializeObject(Of ClientRequest)(js)
         End Function
 
         Public Sub SendRequest(ByVal pRequest As ClientRequest)
