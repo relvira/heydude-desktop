@@ -56,6 +56,9 @@ Namespace Common
             End Try
         End Function
 
+        Public Sub Close()
+            connection.Close()
+        End Sub
 
     End Class
 End Namespace

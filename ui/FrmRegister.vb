@@ -82,7 +82,7 @@ Namespace UI
                     webp.UseDefaultCredentials = True
 
                     Dim webcl As New WebClient()
-                    webcl.Proxy = webp
+                    'webcl.Proxy = webp
                     webcl.UploadFile(uploadServer, _profileImagePath)
                     profileImgGenerated = TxtUsername.Message & ".png"
                 End If

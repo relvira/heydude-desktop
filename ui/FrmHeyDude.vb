@@ -7,6 +7,7 @@ Namespace UI
         Private ReadOnly _mCurrentUser As ClientData
         Private _mCurrentUserBuffer As New ClientBuffer
         Private ReadOnly _mFriends As New ArrayList
+        Private sqliteManager As SQLiteManager
 
         Public ReadOnly Property Instance() As FrmHeyDude
             Get
@@ -41,7 +42,14 @@ Namespace UI
             Next
 
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
+<<<<<<< HEAD
             AddHandler _mCurrentUserBuffer.OnMessageRecived, AddressOf OnMessageReceived
+=======
+
+            ' Download Local User data
+            Common.downloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
+            sqliteManager = New SQLiteManager
+>>>>>>> Upload and download client sqlite's
         End Sub
 
         Private Sub OnMessageReceived(ByVal pRequest As ClientRequest)
@@ -55,9 +63,8 @@ Namespace UI
 
             ' Save this shit in SQLite
             Try
-                Dim saveMessage As New SQLiteManager
                 Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
-                Dim result = saveMessage.ExecuteNoQuery(messageStatement)
+                Dim result = sqliteManager.ExecuteNoQuery(messageStatement)
             Catch ex As Exception
                 MessageBox.Show("DB error: " & ex.Message)
             End Try
@@ -78,8 +85,7 @@ Namespace UI
             ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
             Dim i As Integer = 0
             Try
-                Dim oldMessages As New SQLiteManager
-                Dim queryResult = oldMessages.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
+                Dim queryResult = sqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
                 If queryResult.Rows.Count > 0 Then
                     For Each oDataRow In queryResult.Rows
                         If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
@@ -111,6 +117,13 @@ Namespace UI
 
         Private Sub ChatList_Load(ByVal sender As Object, ByVal e As EventArgs) Handles ChatList.Load
 
+        End Sub
+
+
+        Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+            sqliteManager.Close()
+            Common.uploadUserLocalData(_mCurrentUser.Id)
+            FrmLogin.Close()
         End Sub
     End Class
 End Namespace

@@ -2,6 +2,8 @@
 Imports ChatClient.User
 Imports System.Security.Cryptography
 Imports System.Text
+Imports System.Net
+Imports System.IO
 
 Namespace Common
 
@@ -18,6 +20,7 @@ Namespace Common
 
                     If queryResult.Rows(i)("uid") = User And queryResult.Rows(i)("password") = getSHA1Hash(Password) Then
                         UserItem.Id = queryResult.Rows(i)("id")
+                        UserItem.Passwd = queryResult.Rows(i)("password")
                         UserItem.Name = queryResult.Rows(i)("uid")
                         UserItem.Email = queryResult.Rows(i)("email")
                         UserItem.FullName = queryResult.Rows(i)("full_name")
@@ -58,5 +61,66 @@ Namespace Common
             Return strResult
 
         End Function
+
+        Function uploadUserLocalData(ByVal Uid As String)
+            Dim SQLitePath = "sqlite/heydude.db"
+            Try
+
+                'Upload image!
+                ServicePointManager.Expect100Continue = False
+                Dim uploadServer = DynamicServer & "sqliteUpload.php?uid=" & Uid
+
+                Dim webp As New WebProxy("192.168.255.1", 3128)
+                webp.UseDefaultCredentials = True
+
+                Dim webcl As New WebClient()
+                'webcl.Proxy = webp
+                webcl.UploadFile(uploadServer, SQLitePath)
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Function
+
+        ' This is not very secure.... :S
+        Function downloadUserLocalFromServer(ByVal id As Integer, Optional ByVal Passwd As String = "")
+            Dim SQLitePath = "sqlite/heydude2.db"
+            Try
+                'params
+
+                Dim reqparm As New Specialized.NameValueCollection
+                reqparm.Add("id", id)
+                reqparm.Add("passwd", Passwd)
+
+                'Upload image!
+                ServicePointManager.Expect100Continue = False
+                Dim downloadServer = DynamicServer & "downloadSqlite.php"
+
+                Dim webcl As New WebClient()
+                Dim webp As New WebProxy("192.168.255.1", 3128)
+                webp.UseDefaultCredentials = True
+                'webcl.Proxy = webp
+
+
+                Dim responsebytes = webcl.UploadValues(downloadServer, "POST", reqparm)
+                Dim responsebody = (New UTF8Encoding).GetString(responsebytes)
+
+                Try
+                    Dim oBin As New BinaryWriter(New FileStream(SQLitePath, FileMode.CreateNew))
+                    oBin.Write(responsebytes)
+                    oBin.Close()
+                    oBin = Nothing
+                Catch ex As Exception
+
+                End Try
+                
+                'webcl.DownloadFile(downloadServer, SQLitePath)
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Function
+
     End Module
 End Namespace

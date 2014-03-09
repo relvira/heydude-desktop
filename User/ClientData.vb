@@ -7,6 +7,7 @@ Namespace User
         Private _mEmail As String
         Private _mFullName As String
         Private _mLoggedIn As Boolean
+        Private _mPasswd As String
         Private _mStateMessage As String
         Private _mImgStringSrc As String
 
@@ -27,6 +28,15 @@ Namespace User
             End Get
             Set(ByVal value As String)
                 _mName = value
+            End Set
+        End Property
+
+        Public Property Passwd() As String
+            Get
+                Return _mPasswd
+            End Get
+            Set(ByVal value As String)
+                _mPasswd = value
             End Set
         End Property
 
