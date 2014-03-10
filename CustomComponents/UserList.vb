@@ -14,6 +14,7 @@ Namespace CustomComponents
         Protected Overrides Sub OnLoad(ByVal e As EventArgs)
             MyBase.OnLoad(e)
 
+            MessageBox.Show("UserList instanciado")
             BtnCancelSearch.FlatAppearance.MouseOverBackColor = Color.Transparent
             BtnCancelSearch.FlatAppearance.MouseDownBackColor = Color.Transparent
         End Sub

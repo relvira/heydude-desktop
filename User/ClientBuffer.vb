@@ -8,7 +8,7 @@ Imports Newtonsoft.Json
 Namespace User
     Public Class ClientBuffer
         Private Const Port As Integer = 8000
-        Private Const IpAddress As String = "192.168.255.23"
+        Private Const IpAddress As String = "192.168.255.25"
 
         Private ReadOnly _mClientSocket As TcpClient
         Private ReadOnly _mNetworkStream As NetworkStream
@@ -26,6 +26,7 @@ Namespace User
                 _mClientSocket = New TcpClient(IpAddress, Port)
                 _mNetworkStream = _mClientSocket.GetStream()
                 InitBuffers()
+
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
@@ -35,12 +36,12 @@ Namespace User
             _mInput = New StreamReader(_mNetworkStream)
             _mOutput = New StreamWriter(_mNetworkStream)
             
-            _mThReciveRequest = New Thread(New ThreadStart(AddressOf RecieveRequest))
-            _mThReciveRequest.Name = "Recieve request thread"
-            _mThReciveRequest.Start()
+            '_mThReciveRequest = New Thread(New ThreadStart(AddressOf RecieveRequest))
+            '_mThReciveRequest.Name = "Recieve request thread"
+            '_mThReciveRequest.Start()
         End Sub
 
-        Private Sub RecieveRequest()
+        Public Sub RecieveRequest()
             Dim request As ClientRequest
             While True
                 request = ReadRequest()
@@ -49,7 +50,9 @@ Namespace User
                         Case Protocol.Connect
                         Case Protocol.SendMessage
                         Case Protocol.ReceiveMessage
-                            RaiseRequest(request)
+
+                            FrmHeyDude.Instance.AsyncTask.ReportProgress(100, request.Message)
+                            'RaiseRequest(request)
                         Case Protocol.Disconnect
                     End Select
                 Catch ex As Exception
@@ -64,14 +67,16 @@ Namespace User
                 Dim d As New GetRequestCallback(AddressOf RaiseRequest)
                 FrmHeyDude.Invoke(d, New Object() {pRequest})
             Else
-                MessageBox.Show(pRequest.Message)
+                FrmHeyDude.Instance.AsyncTask.ReportProgress(100, pRequest.Message)
+                MessageBox.Show(FrmHeyDude.Instance.AsyncTask.ToString())
+                'MessageBox.Show(pRequest.Message)
                 'rmHeyDude.Instance.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
                 'FrmHeyDude.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
-                RaiseEvent OnMessageRecived(pRequest.Message)
+                'RaiseEvent OnMessageRecived(pRequest.Message)
             End If
         End Sub
 
-        Private Function ReadRequest() As ClientRequest
+        Public Function ReadRequest() As ClientRequest
             Dim js As String = _mInput.ReadLine()
             Console.WriteLine(js)
             Return JsonConvert.DeserializeObject(Of ClientRequest)(js)
@@ -95,7 +100,7 @@ Namespace User
                 _mNetworkStream.Close()
                 _mInput.Close()
                 _mOutput.Close()
-                _mThReciveRequest.Abort()
+                '_mThReciveRequest.Abort()
             End If
         End Sub
     End Class

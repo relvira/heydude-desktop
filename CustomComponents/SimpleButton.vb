@@ -21,11 +21,11 @@
             End Set
         End Property
 
-        Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
-            MyBase.OnPaint(e)
+        'Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+        '    MyBase.OnPaint(e)
 
-            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
-        End Sub
+        '    ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
+        'End Sub
 
         Private Sub SimpleButton_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
             RaiseEvent myClick(sender, e)

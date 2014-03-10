@@ -18,11 +18,11 @@
             End Set
         End Property
 
-        Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
-            MyBase.OnPaint(e)
+        'Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
+        '    MyBase.OnPaint(e)
 
-            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
-        End Sub
+        '    ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
+        'End Sub
 
         Private Sub TxtMensaje_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles TxtMensaje.KeyPress
             If e.KeyChar = Convert.ToChar(Keys.Enter) Then

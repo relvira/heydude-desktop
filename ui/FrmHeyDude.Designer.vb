@@ -25,12 +25,17 @@ Namespace UI
         'No lo modifique con el editor de código.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
+            Me.AsyncTask = New System.ComponentModel.BackgroundWorker()
             Me.ToolBar = New ChatClient.CustomComponents.ToolBar()
-            Me.TitleChatList = New TitleChatList()
-            Me.ChatList = New ChatList()
-            Me.TextBoxHD = New TextBoxHd()
-            Me.UserList = New UserList()
+            Me.TitleChatList = New ChatClient.CustomComponents.TitleChatList()
+            Me.ChatList = New ChatClient.CustomComponents.ChatList()
+            Me.TextBoxHD = New ChatClient.CustomComponents.TextBoxHd()
+            Me.UserList = New ChatClient.CustomComponents.UserList()
             Me.SuspendLayout()
+            '
+            'AsyncTask
+            '
+            Me.AsyncTask.WorkerReportsProgress = True
             '
             'ToolBar
             '
@@ -44,6 +49,7 @@ Namespace UI
             'TitleChatList
             '
             Me.TitleChatList.BackColor = System.Drawing.Color.White
+            Me.TitleChatList.Id = 0
             Me.TitleChatList.Location = New System.Drawing.Point(200, 34)
             Me.TitleChatList.Margin = New System.Windows.Forms.Padding(0)
             Me.TitleChatList.Name = "TitleChatList"
@@ -102,13 +108,14 @@ Namespace UI
             Me.Name = "FrmHeyDude"
             Me.Text = "HeyDude!"
             Me.ResumeLayout(False)
-            
+
         End Sub
         Friend WithEvents UserList As UserList
         Friend WithEvents TextBoxHD As TextBoxHd
         Friend WithEvents ChatList As ChatList
         Friend WithEvents TitleChatList As TitleChatList
         Friend WithEvents ToolBar As ToolBar
+        Friend WithEvents AsyncTask As System.ComponentModel.BackgroundWorker
 
     End Class
 End Namespace

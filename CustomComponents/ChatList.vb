@@ -3,25 +3,29 @@
         Private ReadOnly _mChatBoxList As List(Of ChatBox) = New List(Of ChatBox)()
         Private _mPosY As Integer = 0
 
+        Protected Overrides Sub OnLoad(ByVal e As EventArgs)
+            MyBase.OnLoad(e)
+
+            MessageBox.Show("Chatlist instanciado")
+        End Sub
+
         Public Sub AddChatBox(ByVal pMessage As String, ByVal pAlignTo As AlignedTo, Optional ByVal pHourSent As Date = Nothing)
-            SyncLock Me
-                Dim chatBox As New ChatBox
+            Dim chatBox As New ChatBox
 
-                If pHourSent = Nothing Then
-                    pHourSent = Now()
-                End If
+            If pHourSent = Nothing Then
+                pHourSent = Now()
+            End If
+            MessageBox.Show("Añadiendo chatbox.")
+            Controls.Add(chatBox)
 
-                Controls.Add(chatBox)
+            chatBox.AlignTo = pAlignTo
+            chatBox.Mensaje = pMessage
+            chatBox.Location = New Point(chatBox.Location.X, _mPosY)
+            chatBox.Hora = pHourSent
 
-                chatBox.AlignTo = pAlignTo
-                chatBox.Mensaje = pMessage
-                chatBox.Location = New Point(chatBox.Location.X, _mPosY)
-                chatBox.Hora = pHourSent
+            _mPosY += chatBox.Height + 5
 
-                _mPosY += chatBox.Height + 5
-
-                _mChatBoxList.Add(chatBox)
-            End SyncLock
+            _mChatBoxList.Add(chatBox)
         End Sub
 
         Public Sub Clean()

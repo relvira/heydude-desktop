@@ -43,10 +43,11 @@ Namespace UI
 
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
             AddHandler _mCurrentUserBuffer.OnMessageRecived, AddressOf OnMessageReceived
+            AsyncTask.RunWorkerAsync()
 
             ' Download Local User data
-            Common.downloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
-            sqliteManager = New SQLiteManager
+            'Common.downloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
+            'sqliteManager = New SQLiteManager
         End Sub
 
         Private Sub OnMessageReceived(ByVal pRequest As String)
@@ -63,15 +64,17 @@ Namespace UI
             ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
 
             ' Save this shit in SQLite
-            Try
-                Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
-                Dim result = sqliteManager.ExecuteNoQuery(messageStatement)
-            Catch ex As Exception
-                MessageBox.Show("DB error: " & ex.Message)
-            End Try
+            'Try
+            '    Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
+            '    Dim result = sqliteManager.ExecuteNoQuery(messageStatement)
+            'Catch ex As Exception
+            '    MessageBox.Show("DB error: " & ex.Message)
+            'End Try
 
             ' WORK REAL SEND MESSAGE TO SERVER HERE
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.SendMessage, _mCurrentUser.Id, TextBoxHD.Message))
+
+            'AsyncTask.ReportProgress(100, TextBoxHD.Message)
 
             TextBoxHD.Message = ""
             'End If
@@ -85,25 +88,25 @@ Namespace UI
 
             ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
             Dim i As Integer = 0
-            Try
-                Dim queryResult = sqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
-                If queryResult.Rows.Count > 0 Then
-                    For Each oDataRow In queryResult.Rows
-                        If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
-                            ' From other messages
-                            ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
-                        ElseIf queryResult.Rows(i)("from_id") = _mCurrentUser.Id Then
-                            ' Messages from me to others
-                            ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
-                        End If
-                        i = i + 1
-                    Next
-                Else
-                    ' NO ROWS RETURNED
-                End If
-            Catch ex As Exception
-                MessageBox.Show("Read exception" & ex.Message)
-            End Try
+            'Try
+            '    Dim queryResult = sqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
+            '    If queryResult.Rows.Count > 0 Then
+            '        For Each oDataRow In queryResult.Rows
+            '            If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
+            '                ' From other messages
+            '                ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
+            '            ElseIf queryResult.Rows(i)("from_id") = _mCurrentUser.Id Then
+            '                ' Messages from me to others
+            '                ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
+            '            End If
+            '            i = i + 1
+            '        Next
+            '    Else
+            '        ' NO ROWS RETURNED
+            '    End If
+            'Catch ex As Exception
+            '    MessageBox.Show("Read exception" & ex.Message)
+            'End Try
         End Sub
 
         Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles ToolBar.OnCloseButtonClick
@@ -122,7 +125,7 @@ Namespace UI
 
 
         Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-            sqliteManager.Close()
+            'sqliteManager.Close()
             Common.uploadUserLocalData(_mCurrentUser.Id)
             FrmLogin.Close()
         End Sub
@@ -130,6 +133,36 @@ Namespace UI
         Public Sub MessageRecievedRequest(ByVal clientRequest As ClientRequest)
             OnMessageReceived(clientRequest.Message)
             ' ChatList.AddChatBox(clientRequest.Message, AlignedTo.Left)
+        End Sub
+
+        Private Sub AsyncTask_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles AsyncTask.ProgressChanged
+            MessageBox.Show("Progress updated. Mensaje: " & e.UserState.ToString())
+            ChatList.AddChatBox(e.UserState.ToString(), AlignedTo.Left)
+            TitleChatList.UserName = e.UserState.ToString()
+
+            For Each c As ChatBox In ChatList.Controls
+                Console.WriteLine(c.Mensaje)
+            Next
+        End Sub
+
+        Private Sub AsyncTask_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles AsyncTask.DoWork
+            Dim request As ClientRequest
+            While True
+                request = _mCurrentUserBuffer.ReadRequest()
+                Try
+                    Select Case request.Protocol
+                        Case Protocol.Connect
+                        Case Protocol.SendMessage
+                        Case Protocol.ReceiveMessage
+                            AsyncTask.ReportProgress(100, request.Message)
+                            'RaiseRequest(request)
+                        Case Protocol.Disconnect
+                    End Select
+                Catch ex As Exception
+                    MessageBox.Show(ex.Message)
+                    Finalize()
+                End Try
+            End While
         End Sub
     End Class
 End Namespace

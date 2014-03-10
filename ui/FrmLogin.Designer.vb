@@ -76,7 +76,7 @@ Namespace UI
             '
             Me.TxtPasswd.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
             Me.TxtPasswd.Location = New System.Drawing.Point(12, 152)
-            Me.TxtPasswd.Message = ""
+            Me.TxtPasswd.Message = "rafa"
             Me.TxtPasswd.Name = "TxtPasswd"
             Me.TxtPasswd.PasswdChar = Global.Microsoft.VisualBasic.ChrW(42)
             Me.TxtPasswd.Size = New System.Drawing.Size(331, 40)
@@ -110,7 +110,7 @@ Namespace UI
             '
             Me.TxtUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
             Me.TxtUser.Location = New System.Drawing.Point(13, 106)
-            Me.TxtUser.Message = ""
+            Me.TxtUser.Message = "manu"
             Me.TxtUser.Name = "TxtUser"
             Me.TxtUser.PasswdChar = Global.Microsoft.VisualBasic.ChrW(0)
             Me.TxtUser.Size = New System.Drawing.Size(331, 40)

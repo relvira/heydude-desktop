@@ -27,12 +27,15 @@
         ''' Dependiendo de hacia donde esté alieado modificará su aspecto y los elementos a mostrar.
         ''' </summary>
         ''' <value>Mensaje que va a mostrar el componente.</value>
-        Public WriteOnly Property Mensaje As String
+        Public Property Mensaje As String
             Set(ByVal value As String)
                 LblMensaje.Text = value
                 ChangeHeight()
                 ChangeWidth()
             End Set
+            Get
+                Return LblMensaje.Text
+            End Get
         End Property
 
         ''' <summary>
