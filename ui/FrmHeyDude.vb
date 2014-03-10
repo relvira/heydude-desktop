@@ -5,7 +5,7 @@ Imports ChatClient.Common
 Namespace UI
     Public Class FrmHeyDude
         Private ReadOnly _mCurrentUser As ClientData
-        Private _mCurrentUserBuffer As New ClientBuffer
+        Private ReadOnly _mCurrentUserBuffer As New ClientBuffer(Me)
         Private ReadOnly _mFriends As New ArrayList
         Private sqliteManager As SQLiteManager
 
@@ -136,33 +136,28 @@ Namespace UI
         End Sub
 
         Private Sub AsyncTask_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles AsyncTask.ProgressChanged
-            MessageBox.Show("Progress updated. Mensaje: " & e.UserState.ToString())
             ChatList.AddChatBox(e.UserState.ToString(), AlignedTo.Left)
-            TitleChatList.UserName = e.UserState.ToString()
-
-            For Each c As ChatBox In ChatList.Controls
-                Console.WriteLine(c.Mensaje)
-            Next
         End Sub
 
         Private Sub AsyncTask_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles AsyncTask.DoWork
-            Dim request As ClientRequest
-            While True
-                request = _mCurrentUserBuffer.ReadRequest()
-                Try
-                    Select Case request.Protocol
-                        Case Protocol.Connect
-                        Case Protocol.SendMessage
-                        Case Protocol.ReceiveMessage
-                            AsyncTask.ReportProgress(100, request.Message)
-                            'RaiseRequest(request)
-                        Case Protocol.Disconnect
-                    End Select
-                Catch ex As Exception
-                    MessageBox.Show(ex.Message)
-                    Finalize()
-                End Try
-            End While
+            _mCurrentUserBuffer.RecieveRequest()
+            'Dim request As ClientRequest
+            'While True
+            '    request = _mCurrentUserBuffer.ReadRequest()
+            '    Try
+            '        Select Case request.Protocol
+            '            Case Protocol.Connect
+            '            Case Protocol.SendMessage
+            '            Case Protocol.ReceiveMessage
+            '                AsyncTask.ReportProgress(100, request.Message)
+            '                'RaiseRequest(request)
+            '            Case Protocol.Disconnect
+            '        End Select
+            '    Catch ex As Exception
+            '        MessageBox.Show(ex.Message)
+            '        Finalize()
+            '    End Try
+            'End While
         End Sub
     End Class
 End Namespace

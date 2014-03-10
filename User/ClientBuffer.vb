@@ -16,17 +16,18 @@ Namespace User
         Private _mInput As StreamReader
         Private _mOutput As StreamWriter
         Private _mThReciveRequest As Thread
+        Private _mContext As FrmHeyDude
 
         Delegate Sub GetRequestCallback(pRequest As ClientRequest)
 
         Public Event OnMessageRecived(ByVal pRequest As String)
 
-        Public Sub New()
+        Public Sub New(ByVal pContext As FrmHeyDude)
+            _mContext = pContext
             Try
                 _mClientSocket = New TcpClient(IpAddress, Port)
                 _mNetworkStream = _mClientSocket.GetStream()
                 InitBuffers()
-
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
@@ -50,9 +51,7 @@ Namespace User
                         Case Protocol.Connect
                         Case Protocol.SendMessage
                         Case Protocol.ReceiveMessage
-
-                            FrmHeyDude.Instance.AsyncTask.ReportProgress(100, request.Message)
-                            'RaiseRequest(request)
+                            _mContext.AsyncTask.ReportProgress(100, request.Message)
                         Case Protocol.Disconnect
                     End Select
                 Catch ex As Exception
@@ -67,16 +66,11 @@ Namespace User
                 Dim d As New GetRequestCallback(AddressOf RaiseRequest)
                 FrmHeyDude.Invoke(d, New Object() {pRequest})
             Else
-                FrmHeyDude.Instance.AsyncTask.ReportProgress(100, pRequest.Message)
-                MessageBox.Show(FrmHeyDude.Instance.AsyncTask.ToString())
-                'MessageBox.Show(pRequest.Message)
-                'rmHeyDude.Instance.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
-                'FrmHeyDude.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
-                'RaiseEvent OnMessageRecived(pRequest.Message)
+                _mContext.AsyncTask.ReportProgress(100, pRequest.Message)
             End If
         End Sub
 
-        Public Function ReadRequest() As ClientRequest
+        Private Function ReadRequest() As ClientRequest
             Dim js As String = _mInput.ReadLine()
             Console.WriteLine(js)
             Return JsonConvert.DeserializeObject(Of ClientRequest)(js)
