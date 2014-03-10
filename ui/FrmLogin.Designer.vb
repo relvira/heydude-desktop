@@ -30,10 +30,10 @@ Namespace UI
             Me.LblLoginError = New System.Windows.Forms.Label()
             Me.Label1 = New System.Windows.Forms.Label()
             Me.BtnClose = New System.Windows.Forms.Button()
-            Me.TxtPasswd = New SimpleTextBox()
-            Me.BtnRegister = New SimpleButton()
-            Me.BtnLogin = New SimpleButton()
-            Me.TxtUser = New SimpleTextBox()
+            Me.TxtPasswd = New ChatClient.CustomComponents.SimpleTextBox()
+            Me.BtnRegister = New ChatClient.CustomComponents.SimpleButton()
+            Me.BtnLogin = New ChatClient.CustomComponents.SimpleButton()
+            Me.TxtUser = New ChatClient.CustomComponents.SimpleTextBox()
             Me.SuspendLayout()
             '
             'LblLoginError
@@ -75,9 +75,10 @@ Namespace UI
             'TxtPasswd
             '
             Me.TxtPasswd.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(235, Byte), Integer))
-            Me.TxtPasswd.Location = New System.Drawing.Point(13, 152)
+            Me.TxtPasswd.Location = New System.Drawing.Point(12, 152)
             Me.TxtPasswd.Message = ""
             Me.TxtPasswd.Name = "TxtPasswd"
+            Me.TxtPasswd.PasswdChar = Global.Microsoft.VisualBasic.ChrW(42)
             Me.TxtPasswd.Size = New System.Drawing.Size(331, 40)
             Me.TxtPasswd.TabIndex = 9
             '
@@ -111,6 +112,7 @@ Namespace UI
             Me.TxtUser.Location = New System.Drawing.Point(13, 106)
             Me.TxtUser.Message = ""
             Me.TxtUser.Name = "TxtUser"
+            Me.TxtUser.PasswdChar = Global.Microsoft.VisualBasic.ChrW(0)
             Me.TxtUser.Size = New System.Drawing.Size(331, 40)
             Me.TxtUser.TabIndex = 1
             '

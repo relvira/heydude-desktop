@@ -9,9 +9,12 @@
             End Set
         End Property
 
-        Public WriteOnly Property PasswdEnabled As Boolean
-            Set(ByVal value As Boolean)
-                TxtMensaje.UseSystemPasswordChar = value
+        Public Property PasswdChar As Char
+            Get
+                Return TxtMensaje.PasswordChar
+            End Get
+            Set(ByVal value As Char)
+                TxtMensaje.PasswordChar = value
             End Set
         End Property
 

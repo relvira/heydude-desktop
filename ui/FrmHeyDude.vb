@@ -42,19 +42,20 @@ Namespace UI
             Next
 
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
-<<<<<<< HEAD
             AddHandler _mCurrentUserBuffer.OnMessageRecived, AddressOf OnMessageReceived
-=======
 
             ' Download Local User data
             Common.downloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
             sqliteManager = New SQLiteManager
->>>>>>> Upload and download client sqlite's
         End Sub
 
-        Private Sub OnMessageReceived(ByVal pRequest As ClientRequest)
-            Console.WriteLine("evento on msgrecieved")
-            ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
+        Private Sub OnMessageReceived(ByVal pRequest As String)
+            CheckForIllegalCrossThreadCalls = False
+            SyncLock Me
+                MessageBox.Show(pRequest)
+                Console.WriteLine("evento on msgrecieved")
+                ChatList.AddChatBox(pRequest, AlignedTo.Left)
+            End SyncLock
         End Sub
 
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
@@ -124,6 +125,11 @@ Namespace UI
             sqliteManager.Close()
             Common.uploadUserLocalData(_mCurrentUser.Id)
             FrmLogin.Close()
+        End Sub
+
+        Public Sub MessageRecievedRequest(ByVal clientRequest As ClientRequest)
+            OnMessageReceived(clientRequest.Message)
+            ' ChatList.AddChatBox(clientRequest.Message, AlignedTo.Left)
         End Sub
     End Class
 End Namespace

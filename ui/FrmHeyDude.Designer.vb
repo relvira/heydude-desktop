@@ -102,7 +102,7 @@ Namespace UI
             Me.Name = "FrmHeyDude"
             Me.Text = "HeyDude!"
             Me.ResumeLayout(False)
-
+            
         End Sub
         Friend WithEvents UserList As UserList
         Friend WithEvents TextBoxHD As TextBoxHd

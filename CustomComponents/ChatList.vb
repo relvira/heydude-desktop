@@ -4,23 +4,24 @@
         Private _mPosY As Integer = 0
 
         Public Sub AddChatBox(ByVal pMessage As String, ByVal pAlignTo As AlignedTo, Optional ByVal pHourSent As Date = Nothing)
-            Dim chatBox As New ChatBox
+            SyncLock Me
+                Dim chatBox As New ChatBox
 
-            If pHourSent = Nothing Then
-                pHourSent = Now()
-            End If
+                If pHourSent = Nothing Then
+                    pHourSent = Now()
+                End If
 
-            Controls.Add(chatBox)
+                Controls.Add(chatBox)
 
-            chatBox.AlignTo = pAlignTo
-            chatBox.Mensaje = pMessage
-            chatBox.Location = New Point(chatBox.Location.X, _mPosY)
-            chatBox.Hora = pHourSent
+                chatBox.AlignTo = pAlignTo
+                chatBox.Mensaje = pMessage
+                chatBox.Location = New Point(chatBox.Location.X, _mPosY)
+                chatBox.Hora = pHourSent
 
-            _mPosY += chatBox.Height + 5
+                _mPosY += chatBox.Height + 5
 
-            _mChatBoxList.Add(chatBox)
-
+                _mChatBoxList.Add(chatBox)
+            End SyncLock
         End Sub
 
         Public Sub Clean()

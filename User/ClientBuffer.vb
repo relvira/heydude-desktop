@@ -8,7 +8,7 @@ Imports Newtonsoft.Json
 Namespace User
     Public Class ClientBuffer
         Private Const Port As Integer = 8000
-        Private Const IpAddress As String = "localhost"
+        Private Const IpAddress As String = "192.168.255.23"
 
         Private ReadOnly _mClientSocket As TcpClient
         Private ReadOnly _mNetworkStream As NetworkStream
@@ -19,7 +19,7 @@ Namespace User
 
         Delegate Sub GetRequestCallback(pRequest As ClientRequest)
 
-        Public Event OnMessageRecived(ByVal pRequest As ClientRequest)
+        Public Event OnMessageRecived(ByVal pRequest As String)
 
         Public Sub New()
             Try
@@ -64,9 +64,10 @@ Namespace User
                 Dim d As New GetRequestCallback(AddressOf RaiseRequest)
                 FrmHeyDude.Invoke(d, New Object() {pRequest})
             Else
-                SyncLock FrmHeyDude.Instance.ChatList
-                    FrmHeyDude.Instance.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
-                End SyncLock
+                MessageBox.Show(pRequest.Message)
+                'rmHeyDude.Instance.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
+                'FrmHeyDude.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
+                RaiseEvent OnMessageRecived(pRequest.Message)
             End If
         End Sub
 
