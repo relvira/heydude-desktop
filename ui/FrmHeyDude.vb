@@ -7,26 +7,25 @@ Namespace UI
         Private ReadOnly _mCurrentUser As ClientData
         Private ReadOnly _mCurrentUserBuffer As New ClientBuffer(Me)
         Private ReadOnly _mFriends As New ArrayList
-        Private sqliteManager As SQLiteManager
+        Private _mSqliteManager As SQLiteManager
+        Private _mClientRequest As ClientRequest
 
         Public Sub New()
             ' Llamada necesaria para el diseñador.
             InitializeComponent()
         End Sub
 
-        Public Sub New(ByVal userItem As ClientData)
+        Public Sub New(ByVal pCurrentUser As ClientData)
             ' Llamada necesaria para el diseñador.
             InitializeComponent()
 
             ' Other calls
-            _mCurrentUser = userItem
-            _mFriends = _mCurrentUser.GetUserAllFriends(_mCurrentUser.Id)
-
+            _mCurrentUser = pCurrentUser
+            _mFriends = pCurrentUser.GetUserAllFriends(pCurrentUser.Id)
+            _mCurrentUserBuffer.SendRequest(New ClientRequest(pCurrentUser.Id, Protocol.Connect))
         End Sub
 
-        Protected Overrides Sub OnLoad(ByVal e As EventArgs)
-            MyBase.OnLoad(e)
-
+        Private Sub FrmHeyDude_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
             ' Hide Login form
             FrmLogin.Hide()
 
@@ -35,12 +34,9 @@ Namespace UI
                 UserList.AddUserBox(New ClientData(f(0), f(2), f(4), f(3)))
             Next
 
-            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
-
-
             ' Download Local User data
             'Common.DownloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
-            sqliteManager = New SQLiteManager
+            _mSqliteManager = New SQLiteManager
         End Sub
 
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
@@ -57,8 +53,6 @@ Namespace UI
 
             ' WORK REAL SEND MESSAGE TO SERVER HERE
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.SendMessage, TitleChatList.Id, TextBoxHD.Message))
-
-            'AsyncTask.ReportProgress(100, TextBoxHD.Message)
 
             TextBoxHD.Message = ""
             'End If
@@ -103,13 +97,8 @@ Namespace UI
             ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
         End Sub
 
-        Private Sub ChatList_Load(ByVal sender As Object, ByVal e As EventArgs) Handles ChatList.Load
-
-        End Sub
-
-
         Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-            sqliteManager.Close()
+            _mSqliteManager.Close()
             'Common.UploadUserLocalData(_mCurrentUser.Id)
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Disconnect))
             FrmLogin.Close()
