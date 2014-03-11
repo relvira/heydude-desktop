@@ -92,11 +92,7 @@ Namespace Common
                 MessageBox.Show(ServicePointManager.Expect100Continue)
                 Dim downloadServer = DynamicServer & "downloadSqlite.php"
 
-                Dim webp As New WebProxy("192.168.255.1", 3128)
-                webp.UseDefaultCredentials = True
-
                 Dim webcl As New WebClient()
-                webcl.Proxy = webp
 
                 'params
                 Dim reqparm As New Specialized.NameValueCollection

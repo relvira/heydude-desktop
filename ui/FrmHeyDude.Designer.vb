@@ -25,17 +25,12 @@ Namespace UI
         'No lo modifique con el editor de código.
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
-            Me.AsyncTask = New System.ComponentModel.BackgroundWorker()
             Me.ToolBar = New ChatClient.CustomComponents.ToolBar()
             Me.TitleChatList = New ChatClient.CustomComponents.TitleChatList()
             Me.ChatList = New ChatClient.CustomComponents.ChatList()
             Me.TextBoxHD = New ChatClient.CustomComponents.TextBoxHd()
             Me.UserList = New ChatClient.CustomComponents.UserList()
             Me.SuspendLayout()
-            '
-            'AsyncTask
-            '
-            Me.AsyncTask.WorkerReportsProgress = True
             '
             'ToolBar
             '
@@ -115,7 +110,6 @@ Namespace UI
         Friend WithEvents ChatList As ChatList
         Friend WithEvents TitleChatList As TitleChatList
         Friend WithEvents ToolBar As ToolBar
-        Friend WithEvents AsyncTask As System.ComponentModel.BackgroundWorker
 
     End Class
 End Namespace

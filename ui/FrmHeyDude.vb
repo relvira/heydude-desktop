@@ -9,12 +9,6 @@ Namespace UI
         Private ReadOnly _mFriends As New ArrayList
         Private sqliteManager As SQLiteManager
 
-        Public ReadOnly Property Instance() As FrmHeyDude
-            Get
-                Return Me
-            End Get
-        End Property
-        
         Public Sub New()
             ' Llamada necesaria para el diseñador.
             InitializeComponent()
@@ -42,21 +36,11 @@ Namespace UI
             Next
 
             _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Connect))
-            AddHandler _mCurrentUserBuffer.OnMessageRecived, AddressOf OnMessageReceived
-            AsyncTask.RunWorkerAsync()
+
 
             ' Download Local User data
-            'Common.downloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
-            'sqliteManager = New SQLiteManager
-        End Sub
-
-        Private Sub OnMessageReceived(ByVal pRequest As String)
-            CheckForIllegalCrossThreadCalls = False
-            SyncLock Me
-                MessageBox.Show(pRequest)
-                Console.WriteLine("evento on msgrecieved")
-                ChatList.AddChatBox(pRequest, AlignedTo.Left)
-            End SyncLock
+            'Common.DownloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
+            sqliteManager = New SQLiteManager
         End Sub
 
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
@@ -72,7 +56,7 @@ Namespace UI
             'End Try
 
             ' WORK REAL SEND MESSAGE TO SERVER HERE
-            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.SendMessage, _mCurrentUser.Id, TextBoxHD.Message))
+            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.SendMessage, TitleChatList.Id, TextBoxHD.Message))
 
             'AsyncTask.ReportProgress(100, TextBoxHD.Message)
 
@@ -81,7 +65,7 @@ Namespace UI
         End Sub
 
         Private Sub UserSelectedChanged(ByVal pUserBox As UserBox) Handles UserList.UserSelectedChanged
-            ' @TODO: Clean messages zone!!!!!
+            ' TODO: Clean messages zone!!!!!
             ChatList.Clean()
             TitleChatList.UserName = pUserBox.UserName
             TitleChatList.Id = pUserBox.Id
@@ -125,39 +109,10 @@ Namespace UI
 
 
         Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-            'sqliteManager.Close()
-            Common.uploadUserLocalData(_mCurrentUser.Id)
+            sqliteManager.Close()
+            'Common.UploadUserLocalData(_mCurrentUser.Id)
+            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Disconnect))
             FrmLogin.Close()
-        End Sub
-
-        Public Sub MessageRecievedRequest(ByVal clientRequest As ClientRequest)
-            OnMessageReceived(clientRequest.Message)
-            ' ChatList.AddChatBox(clientRequest.Message, AlignedTo.Left)
-        End Sub
-
-        Private Sub AsyncTask_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles AsyncTask.ProgressChanged
-            ChatList.AddChatBox(e.UserState.ToString(), AlignedTo.Left)
-        End Sub
-
-        Private Sub AsyncTask_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles AsyncTask.DoWork
-            _mCurrentUserBuffer.RecieveRequest()
-            'Dim request As ClientRequest
-            'While True
-            '    request = _mCurrentUserBuffer.ReadRequest()
-            '    Try
-            '        Select Case request.Protocol
-            '            Case Protocol.Connect
-            '            Case Protocol.SendMessage
-            '            Case Protocol.ReceiveMessage
-            '                AsyncTask.ReportProgress(100, request.Message)
-            '                'RaiseRequest(request)
-            '            Case Protocol.Disconnect
-            '        End Select
-            '    Catch ex As Exception
-            '        MessageBox.Show(ex.Message)
-            '        Finalize()
-            '    End Try
-            'End While
         End Sub
     End Class
 End Namespace
