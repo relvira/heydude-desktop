@@ -12,10 +12,6 @@
             End If
         End Sub
 
-        Private Sub FrmLogin_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-
-        End Sub
-
         '---------------- MOVER FORMULARIO ----------------
         Private Sub FrmLogin_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles Me.MouseDown
             formPosition = New Point(Cursor.Position.X - Location.X, Cursor.Position.Y - Location.Y)
@@ -36,10 +32,6 @@
 
         Private Sub PictureBox2_Click(ByVal sender As Object, ByVal e As EventArgs)
             Me.Close()
-        End Sub
-
-        Private Sub Label1_Click(ByVal sender As Object, ByVal e As EventArgs) Handles Label1.Click
-
         End Sub
 
         Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.myClick

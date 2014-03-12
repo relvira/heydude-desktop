@@ -4,68 +4,102 @@ Imports ChatClient.Common
 
 Namespace UI
     Public Class FrmHeyDude
-        Private ReadOnly _mCurrentUser As ClientData
-        Private ReadOnly _mCurrentUserBuffer As New ClientBuffer(Me)
+        Private ReadOnly _mUser As ClientData
+        Private ReadOnly _mUserBuffer As New ClientBuffer(Me)
+        Private ReadOnly _mRequest As ClientRequest
         Private ReadOnly _mFriends As New ArrayList
-        Private _mSqliteManager As SQLiteManager
-        Private _mClientRequest As ClientRequest
+        Private ReadOnly _mSqliteManager As New SQLiteManager
+
 
         Public Sub New()
             ' Llamada necesaria para el diseñador.
             InitializeComponent()
         End Sub
 
-        Public Sub New(ByVal pCurrentUser As ClientData)
+        Public Sub New(ByVal pUser As ClientData)
             ' Llamada necesaria para el diseñador.
             InitializeComponent()
 
             ' Other calls
-            _mCurrentUser = pCurrentUser
-            _mFriends = pCurrentUser.GetUserAllFriends(pCurrentUser.Id)
-            _mCurrentUserBuffer.SendRequest(New ClientRequest(pCurrentUser.Id, Protocol.Connect))
+            _mUser = pUser
+            _mFriends = pUser.GetUserAllFriends(pUser.Id)
+            _mRequest = New ClientRequest(pUser.Id, Protocol.Connect)
+            _mUserBuffer.SendRequest(_mRequest)
         End Sub
 
-        Private Sub FrmHeyDude_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Private Sub FrmHeyDude_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
             ' Hide Login form
             FrmLogin.Hide()
 
-            For Each frnd In _mFriends
-                Dim f = frnd.ToString.Split(",")
+            For Each frnd As String In _mFriends
+                Dim f As String() = frnd.ToString.Split(",")
                 UserList.AddUserBox(New ClientData(f(0), f(2), f(4), f(3)))
             Next
 
             ' Download Local User data
-            'Common.DownloadUserLocalFromServer(_mCurrentUser.Id, _mCurrentUser.Passwd)
-            _mSqliteManager = New SQLiteManager
+            DownloadUserLocalFromServer(_mUser.Id, _mUser.Passwd)
+        End Sub
+
+        Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+            _mRequest.FromId = _mUser.Id
+            _mRequest.Protocol = Protocol.Disconnect
+            _mUserBuffer.SendRequest(_mRequest)
+
+            _mSqliteManager.Close()
+            UploadUserLocalData(_mUser.Id)
+
+            FrmLogin.Close()
+        End Sub
+
+        Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles ToolBar.OnCloseButtonClick
+            Close()
+        End Sub
+
+        Private Sub FrmHeyDude_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
         End Sub
 
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
-            'If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
-            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
-
-            ' Save this shit in SQLite
-            'Try
-            '    Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mCurrentUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
-            '    Dim result = sqliteManager.ExecuteNoQuery(messageStatement)
-            'Catch ex As Exception
-            '    MessageBox.Show("DB error: " & ex.Message)
-            'End Try
-
-            ' WORK REAL SEND MESSAGE TO SERVER HERE
-            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.SendMessage, TitleChatList.Id, TextBoxHD.Message))
+            If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
+                ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
+                SaveMessage()
+                SendMessage()
+            End If
 
             TextBoxHD.Message = ""
-            'End If
         End Sub
 
         Private Sub UserSelectedChanged(ByVal pUserBox As UserBox) Handles UserList.UserSelectedChanged
-            ' TODO: Clean messages zone!!!!!
             ChatList.Clean()
             TitleChatList.UserName = pUserBox.UserName
             TitleChatList.Id = pUserBox.Id
 
+            RefreshMessageHistory()
+        End Sub
+
+        Private Sub SaveMessage()
+            ' Save this shit in SQLite
+            'Try
+            '    Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
+            '    Dim result = sqliteManager.ExecuteNoQuery(messageStatement)
+            'Catch ex As Exception
+            '    MessageBox.Show("DB error: " & ex.Message)
+            'End Try
+        End Sub
+
+        Private Sub SendMessage()
+            _mRequest.FromId = _mUser.Id
+            _mRequest.Protocol = Protocol.SendMessage
+            _mRequest.ToId = _mUser.Id
+            '_mRequest.ToId = TitleChatList.Id
+            _mRequest.Message = TextBoxHD.Message
+
+            _mUserBuffer.SendRequest(_mRequest)
+        End Sub
+
+        Private Sub RefreshMessageHistory()
             ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
-            Dim i As Integer = 0
+            'Dim i As Integer = 0
             'Try
             '    Dim queryResult = sqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
             '    If queryResult.Rows.Count > 0 Then
@@ -73,7 +107,7 @@ Namespace UI
             '            If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
             '                ' From other messages
             '                ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
-            '            ElseIf queryResult.Rows(i)("from_id") = _mCurrentUser.Id Then
+            '            ElseIf queryResult.Rows(i)("from_id") = _mUser.Id Then
             '                ' Messages from me to others
             '                ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
             '            End If
@@ -85,23 +119,6 @@ Namespace UI
             'Catch ex As Exception
             '    MessageBox.Show("Read exception" & ex.Message)
             'End Try
-        End Sub
-
-        Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles ToolBar.OnCloseButtonClick
-            Close()
-        End Sub
-
-        Protected Overrides Sub OnPaint(ByVal e As PaintEventArgs)
-            MyBase.OnPaint(e)
-
-            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
-        End Sub
-
-        Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-            _mSqliteManager.Close()
-            'Common.UploadUserLocalData(_mCurrentUser.Id)
-            _mCurrentUserBuffer.SendRequest(New ClientRequest(_mCurrentUser.Id, Protocol.Disconnect))
-            FrmLogin.Close()
         End Sub
     End Class
 End Namespace

@@ -6,7 +6,6 @@ Imports System.Net
 Imports System.IO
 
 Namespace Common
-
     Module Common
         Public Function UserLogin(ByVal user As String, ByVal password As String)
             Dim sqlManager As New MySQLManager
@@ -89,7 +88,6 @@ Namespace Common
             Try
                 ServicePointManager.Expect100Continue = False
                 System.Net.ServicePointManager.Expect100Continue = False
-                MessageBox.Show(ServicePointManager.Expect100Continue)
                 Dim downloadServer = DynamicServer & "downloadSqlite.php"
 
                 Dim webcl As New WebClient()
