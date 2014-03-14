@@ -15,6 +15,8 @@ Namespace Common
         Private Sub Connect()
             Try
                 connection = New SQLiteConnection("Data Source=sqlite/heydude.db")
+                ' Set sqlite password sha-1 generated + our own salt (more secure) :)
+                'connection.SetPassword(GetSha1Hash("H3yDud3R0ckZzZDud3") & "sT1llRoCksNiGGa")
                 connection.Open()
             Catch ex As SQLiteException
                 MessageBox.Show("Fallo al conectar a sqlite: " & ex.Message)
@@ -31,8 +33,6 @@ Namespace Common
             Catch ex As SQLiteException
                 MsgBox(ex.Message.ToString)
                 Return False
-            Finally
-                connection.Close()
             End Try
             Return True
         End Function

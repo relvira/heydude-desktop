@@ -8,7 +8,6 @@ Namespace UI
         Private ReadOnly _mUserBuffer As New ClientBuffer(Me)
         Private ReadOnly _mRequest As ClientRequest
         Private ReadOnly _mFriends As New ArrayList
-        Private ReadOnly _mSqliteManager As New SQLiteManager
 
 
         Public Sub New()
@@ -31,13 +30,14 @@ Namespace UI
             ' Hide Login form
             FrmLogin.Hide()
 
+            ' Load User friends
             For Each frnd As String In _mFriends
                 Dim f As String() = frnd.ToString.Split(",")
                 UserList.AddUserBox(New ClientData(f(0), f(2), f(4), f(3)))
             Next
 
-            ' Download Local User data
-            DownloadUserLocalFromServer(_mUser.Id, _mUser.Passwd)
+            ' Before loading form, get all user local data
+            getUserLocalData()
         End Sub
 
         Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
@@ -45,7 +45,6 @@ Namespace UI
             _mRequest.Protocol = Protocol.Disconnect
             _mUserBuffer.SendRequest(_mRequest)
 
-            _mSqliteManager.Close()
             UploadUserLocalData(_mUser.Id)
 
             FrmLogin.Close()
@@ -62,7 +61,7 @@ Namespace UI
         Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
             If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
                 ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
-                SaveMessage()
+                SaveMessage(_mUser.Id, TitleChatList.Id, TextBoxHD.Message)
                 SendMessage()
             End If
 
@@ -77,16 +76,6 @@ Namespace UI
             RefreshMessageHistory()
         End Sub
 
-        Private Sub SaveMessage()
-            ' Save this shit in SQLite
-            'Try
-            '    Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _mUser.Id & ", " & TitleChatList.Id & " ,'" & TextBoxHD.Message & "');"
-            '    Dim result = sqliteManager.ExecuteNoQuery(messageStatement)
-            'Catch ex As Exception
-            '    MessageBox.Show("DB error: " & ex.Message)
-            'End Try
-        End Sub
-
         Private Sub SendMessage()
             _mRequest.FromId = _mUser.Id
             _mRequest.Protocol = Protocol.SendMessage
@@ -99,26 +88,33 @@ Namespace UI
 
         Private Sub RefreshMessageHistory()
             ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
-            'Dim i As Integer = 0
-            'Try
-            '    Dim queryResult = sqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
-            '    If queryResult.Rows.Count > 0 Then
-            '        For Each oDataRow In queryResult.Rows
-            '            If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
-            '                ' From other messages
-            '                ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
-            '            ElseIf queryResult.Rows(i)("from_id") = _mUser.Id Then
-            '                ' Messages from me to others
-            '                ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
-            '            End If
-            '            i = i + 1
-            '        Next
-            '    Else
-            '        ' NO ROWS RETURNED
-            '    End If
-            'Catch ex As Exception
-            '    MessageBox.Show("Read exception" & ex.Message)
-            'End Try
+            Dim i As Integer = 0
+            Try
+                Dim queryResult = _mSqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
+                If queryResult.Rows.Count > 0 Then
+                    For Each oDataRow In queryResult.Rows
+                        If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
+                            ' From other messages
+                            ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
+                        ElseIf queryResult.Rows(i)("from_id") = _mUser.Id Then
+                            ' Messages from me to others
+                            ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
+                        End If
+                        i = i + 1
+                    Next
+                Else
+                    ' NO ROWS RETURNED
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Read exception: " & ex.Message)
+            End Try
+        End Sub
+
+        Private Sub getUserLocalData()
+            ' Download Local User data
+            DownloadUserLocalFromServer(_mUser.Id, _mUser.Passwd)
+            ' After download create MySQL Instance
+            _mSqliteManager = New SQLiteManager
         End Sub
     End Class
 End Namespace

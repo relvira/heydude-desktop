@@ -65,6 +65,7 @@ Namespace User
                 Dim d As New GetRequestCallback(AddressOf RaiseRequest)
                 _mContext.ChatList.Invoke(d, New Object() {pRequest})
             Else
+                SaveMessage(pRequest.FromId, pRequest.ToId, pRequest.Message)
                 _mContext.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
             End If
         End Sub

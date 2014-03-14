@@ -7,9 +7,11 @@ Imports System.IO
 
 Namespace Common
     Module Common
+        Public _mSqliteManager As SQLiteManager
+
         Public Function UserLogin(ByVal user As String, ByVal password As String)
             Dim sqlManager As New MySQLManager
-            Dim queryResult = sqlManager.ExecuteQuery("SELECT id, uid, password, email, full_name, profile_img, user_status FROM user where uid='" & User & "'", "user")
+            Dim queryResult = sqlManager.ExecuteQuery("SELECT id, uid, password, email, full_name, profile_img, user_status FROM user where uid='" & user & "'", "user")
 
             Dim i As Integer = 0
             Dim userItem As New ClientData
@@ -62,6 +64,7 @@ Namespace Common
         End Function
 
         Function UploadUserLocalData(ByVal uid As String)
+            _mSqliteManager.Close()
             Dim SQLitePath = "sqlite/heydude.db"
             Try
 
@@ -73,7 +76,7 @@ Namespace Common
                 webp.UseDefaultCredentials = True
 
                 Dim webcl As New WebClient()
-                webcl.Proxy = webp
+                'webcl.Proxy = webp
                 webcl.UploadFile(uploadServer, SQLitePath)
 
                 Return True
@@ -82,7 +85,6 @@ Namespace Common
             End Try
         End Function
 
-        ' This is not very secure.... :S
         Function DownloadUserLocalFromServer(ByVal id As Integer, Optional ByVal passwd As String = "")
             Dim SQLitePath = "sqlite/heydude.db"
             Try
@@ -100,7 +102,7 @@ Namespace Common
                 Dim responsebytes = webcl.UploadValues(downloadServer, "POST", reqparm)
 
                 Try
-                    Dim oBin As New BinaryWriter(New FileStream(SQLitePath, FileMode.CreateNew))
+                    Dim oBin As New BinaryWriter(New FileStream(SQLitePath, FileMode.OpenOrCreate))
                     oBin.Write(responsebytes)
                     oBin.Close()
                     oBin = Nothing
@@ -113,6 +115,16 @@ Namespace Common
                 Return False
             End Try
         End Function
+
+        Public Sub SaveMessage(ByVal _pFrom As Integer, ByVal _pTo As Integer, ByVal _pMessage As String)
+            ' Save this shit in SQLite
+            Try
+                Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _pFrom & ", " & _pTo & " ,'" & _pMessage & "');"
+                Dim result = _mSqliteManager.ExecuteNoQuery(messageStatement)
+            Catch ex As Exception
+                MessageBox.Show("DB error: " & ex.Message)
+            End Try
+        End Sub
 
     End Module
 End Namespace

@@ -3,10 +3,10 @@
 Namespace Common
     Public Class MySQLManager
         Private connection As New MySqlConnection
-        Dim Server As String = "192.168.255.23"
+        Dim Server As String = MySQLServer
         Dim Port As String = "3306"
-        Dim DBUser As String = "root"
-        Dim DBPasswd As String = "joyfe"
+        Dim DBUser As String = "project_user"
+        Dim DBPasswd As String = "$$JoYf3FTWNiGGa$$"
         Dim Database As String = "chat_project"
 
         Public Sub New(ByVal Server As String, ByVal Port As String, ByVal DBUser As String, ByVal DBPasswd As String, ByVal Database As String)
