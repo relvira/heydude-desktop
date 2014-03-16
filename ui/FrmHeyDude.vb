@@ -79,8 +79,8 @@ Namespace UI
         Private Sub SendMessage()
             _mRequest.FromId = _mUser.Id
             _mRequest.Protocol = Protocol.SendMessage
-            _mRequest.ToId = _mUser.Id
-            '_mRequest.ToId = TitleChatList.Id
+            '_mRequest.ToId = _mUser.Id
+            _mRequest.ToId = TitleChatList.Id
             _mRequest.Message = TextBoxHD.Message
 
             _mUserBuffer.SendRequest(_mRequest)
