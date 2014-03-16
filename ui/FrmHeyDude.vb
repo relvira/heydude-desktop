@@ -112,7 +112,7 @@ Namespace UI
 
         Private Sub getUserLocalData()
             ' Download Local User data
-            DownloadUserLocalFromServer(_mUser.Id, _mUser.Passwd)
+            LocalDataInitCheck(_mUser.Id, _mUser.Passwd)
             ' After download create MySQL Instance
             _mSqliteManager = New SQLiteManager
         End Sub

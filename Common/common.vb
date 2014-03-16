@@ -110,6 +110,13 @@ Namespace Common
 
                 End Try
 
+                Dim _mFileInfo As New FileInfo(SQLitePath)
+                ' If file recieved is 1kb
+                If _mFileInfo.Length < 62 Then
+                    File.Delete(SQLitePath)
+                    Return False
+                End If
+
                 Return True
             Catch ex As Exception
                 Return False
@@ -126,5 +133,38 @@ Namespace Common
             End Try
         End Sub
 
+        Public Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
+            If File.Exists("sqlite/heydude.db") Then
+                ' Este cliente ya tiene sqlite local, descargamos la ultima version del servidor
+                DownloadUserLocalFromServer(id, passwd)
+            Else
+                Dim _mHasVersion As Boolean = DownloadUserLocalFromServer(id, passwd)
+                ' El usuario no tiene sqlite local, tiene alguno en el servidor?
+                If _mHasVersion Then
+                    ' No tiene version en local de sqlite per si en el servidor, la descargamos
+                    DownloadUserLocalFromServer(id, passwd)
+                Else
+                    ' Si no tiene en el servidor tampoco descargamos el de por defecto
+                    DownloadDefaultUserLocalSqlite(id, passwd)
+                End If
+            End If
+        End Sub
+
+        Function DownloadDefaultUserLocalSqlite(ByVal id As Integer, Optional ByVal passwd As String = "")
+            Dim SQLiteSavePath = "sqlite/heydude.db"
+            Try
+
+                ' Descargar base de datos por defecto (vacia)
+                ServicePointManager.Expect100Continue = False
+                Dim _mDownloadServer = StaticServer & "default.db"
+
+                Dim webcl As New WebClient()
+                webcl.DownloadFile(_mDownloadServer, SQLiteSavePath)
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Function
     End Module
 End Namespace
