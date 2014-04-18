@@ -17,7 +17,8 @@ Namespace Common
             Dim userItem As New ClientData
 
             If queryResult.Rows.Count > 0 Then
-                For Each oDataRow as DataRow In queryResult.Rows
+                For Each oDataRow In queryResult.Rows
+
                     If queryResult.Rows(i)("uid") = user And queryResult.Rows(i)("password") = GetSha1Hash(password) Then
                         userItem.Id = queryResult.Rows(i)("id")
                         userItem.Passwd = queryResult.Rows(i)("password")

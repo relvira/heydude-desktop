@@ -92,7 +92,7 @@ Namespace UI
             Try
                 Dim queryResult = _mSqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
                 If queryResult.Rows.Count > 0 Then
-                    For Each oDataRow as DataRow In queryResult.Rows
+                    For Each oDataRow In queryResult.Rows
                         If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
                             ' From other messages
                             ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))

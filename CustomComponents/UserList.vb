@@ -121,7 +121,7 @@ Namespace CustomComponents
         End Sub
 
 
-        Private Sub BtnCancelSearch_MouseUp(sender As Object, e As MouseEventArgs) Handles BtnCancelSearch.MouseUp
+        Private Sub BtnCancelSearch_MouseUp(sender As Object, e As EventArgs) Handles BtnCancelSearch.MouseUp
             BtnCancelSearch.BackgroundImage = New Bitmap("assets\cancelsearchbutton_unpressed.png")
         End Sub
 
