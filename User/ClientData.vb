@@ -101,10 +101,10 @@ Namespace User
 
             Dim J = 0
             Dim Result As New ArrayList
-            For Each oDataRow In queryResult.Rows
+            For Each oDataRow as DataRow In queryResult.Rows
                 Dim Idfriend = queryResult.Rows(J)("friend_to")
                 Dim frnd = sqlManager.ExecuteQuery("SELECT id, uid, full_name, profile_img, user_status FROM user where id='" & Idfriend & "'", "user")
-                For Each f In frnd.Rows
+                For Each f as DataRow In frnd.Rows
                     Result.Add(frnd.Rows(0)("id") & "," & frnd.Rows(0)("uid") & "," & frnd.Rows(0)("full_name") & "," & frnd.Rows(0)("profile_img") & "," & frnd.Rows(0)("user_status"))
                 Next
                 J = J + 1

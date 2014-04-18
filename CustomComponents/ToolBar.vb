@@ -9,7 +9,7 @@
             RaiseEvent OnCloseButtonClick(sender, e)
         End Sub
 
-        Private Sub BtnClose_MouseDown(sender As Object, e As EventArgs) Handles BtnClose.MouseDown
+        Private Sub BtnClose_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnClose.MouseDown
             BtnClose.BackgroundImage = New Bitmap("assets\closebutton_pressed.png")
         End Sub
 

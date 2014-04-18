@@ -72,7 +72,7 @@
         ''' constante MaxChar.
         ''' </summary>
         Private Sub ChangeHeight()
-            For i As Integer = MaxChar - 1 To LblMensaje.Text.Count() Step MaxChar
+            For i As Integer = MaxChar - 1 To LblMensaje.Text.Length() Step MaxChar
                 LblMensaje.Text = LblMensaje.Text.Insert(i, vbCrLf)
             Next
 
