@@ -4,10 +4,10 @@ Public Class FrmLogin
     Dim formPosition As Point
     Dim mouseAction As Boolean
     Private Sub BtnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnLogin.MyClick
-        Dim result = Common.UserLogin(TxtUser.Message, TxtPasswd.Message)
-        If result.isLoggedIn Then
-            Dim HeyDudeFrm As New FrmHeyDude(result)
-            HeyDudeFrm.Show()
+        Dim result = UserLogin(TxtUser.Message, TxtPasswd.Message)
+        If result.IsLoggedIn Then
+            Dim heyDudeFrm As New FrmHeyDude(result)
+            heyDudeFrm.Show()
         Else
             LblLoginError.Visible = True
         End If
@@ -32,7 +32,7 @@ Public Class FrmLogin
     End Sub
 
     Private Sub PictureBox2_Click(ByVal sender As Object, ByVal e As EventArgs)
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.MyClick

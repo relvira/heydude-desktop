@@ -1,5 +1,4 @@
-﻿
-Imports CustomControls
+﻿Imports CustomControls
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmHeyDude

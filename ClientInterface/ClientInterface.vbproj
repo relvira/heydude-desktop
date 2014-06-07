@@ -192,7 +192,7 @@
       <Project>{366439BB-04AD-45EC-A799-6F1C2087384B}</Project>
       <Name>CustomControls</Name>
     </ProjectReference>
-    <ProjectReference Include="DataAccess\DataAccess.vbproj">
+    <ProjectReference Include="..\DataAccess\DataAccess.vbproj">
       <Project>{447762D5-6B61-40A1-A40A-58002366039E}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>

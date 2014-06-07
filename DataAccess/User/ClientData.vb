@@ -5,6 +5,9 @@ Namespace User
     Public Class ClientData
         Private _mId As Integer
         Private _mName As String
+        Private _mEmail As String
+        Private _mFullName As String
+        Private _mLoggedIn As Boolean
         Private _mPasswd As String
         Private _mStateMessage As String
         Private _mImgStringSrc As String
@@ -56,8 +59,12 @@ Namespace User
             End Set
         End Property
 
-        Public WriteOnly Property FullName As String
+        Public Property FullName As String
+            Get
+                Return _mFullName
+            End Get
             Set(ByVal value As String)
+                _mFullName = value
             End Set
         End Property
 
@@ -70,20 +77,43 @@ Namespace User
             End Set
         End Property
 
-        Public WriteOnly Property Email As String
+        Public Property Email As String
+            Get
+                Return _mEmail
+            End Get
             Set(ByVal value As String)
+                _mEmail = value
             End Set
         End Property
 
-        Public WriteOnly Property IsLoggedIn As Boolean
+        Public Property IsLoggedIn As Boolean
+            Get
+                Return _mLoggedIn
+            End Get
             Set(ByVal value As Boolean)
+                _mLoggedIn = value
             End Set
         End Property
 
 
         Public Function GetUserAllFriends() As ArrayList
+            'Dim sqlManager As New MySQLManager
+            'Dim queryResult = sqlManager.ExecuteQuery("SELECT friend_to FROM user_friends where friend_of='" & Id & "'", "user_friends")
+
+            'Dim J = 0
+            'Dim Result As New ArrayList
+            'For Each oDataRow In queryResult.Rows
+            '    Dim Idfriend = queryResult.Rows(J)("friend_to")
+            '    Dim frnd = sqlManager.ExecuteQuery("SELECT id, uid, full_name, profile_img, user_status FROM user where id='" & Idfriend & "'", "user")
+            '    For Each f In frnd.Rows
+            '        Result.Add(frnd.Rows(0)("id") & "," & frnd.Rows(0)("uid") & "," & frnd.Rows(0)("full_name") & "," & frnd.Rows(0)("profile_img") & "," & frnd.Rows(0)("user_status"))
+            '    Next
+            '    J = J + 1
+            'Next
+            'Return Result
+
             ServicePointManager.Expect100Continue = False
-            Const downloaddServer As String = DynamicServer & "getUserFriends.php"
+            Dim downloaddServer = Config.DynamicServer & "getUserFriends.php"
 
             Dim webcl As New WebClient()
 
@@ -91,12 +121,15 @@ Namespace User
             reqParam.Add("id", _mId)
             reqParam.Add("passwd", _mPasswd)
 
+            Dim responseBytes As Byte()
+
             Try
-                webcl.UploadValues(downloaddServer, "POST", reqParam)
+                responseBytes = webcl.UploadValues(downloaddServer, "POST", reqParam)
             Catch ex As Exception
                 MessageBox.Show(ex.Message)
             End Try
-            ' TODO: ¿Return?
+
+
         End Function
     End Class
 End Namespace
