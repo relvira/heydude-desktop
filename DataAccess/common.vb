@@ -5,7 +5,7 @@ Imports System.Text.RegularExpressions
 Imports System.Collections.Specialized
 Imports System.Security.Cryptography
 Imports DataAccess.User
-Imports DataAccess.DbManagers
+Imports DataAccess.Managers
 
 Public Module Common
     Public SqliteManager As SQLiteManager

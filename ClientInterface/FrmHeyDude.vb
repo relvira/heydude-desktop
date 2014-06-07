@@ -1,7 +1,7 @@
 ﻿Imports CustomControls
 Imports DataAccess
 Imports DataAccess.User
-Imports DataAccess.DbManagers
+Imports DataAccess.Managers
 
 Public Class FrmHeyDude
     Implements IAccesibleMultiThread

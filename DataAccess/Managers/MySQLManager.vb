@@ -1,6 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Namespace DbManagers
+Namespace Managers
     Public Class MySQLManager
         Private ReadOnly _connection As New MySqlConnection
         Private Const Server As String = Config.MySQLServer
@@ -50,7 +50,7 @@ Namespace DbManagers
         ' Function to query the database, returns an ArrayList if we 
         Public Function ExecuteQuery(ByVal sqlStatement As String, ByVal tableName As String) As DataTable
             Try
-                Dim oDataAdapter As New MySqlDataAdapter(SqlStatement, _connection)
+                Dim oDataAdapter As New MySqlDataAdapter(sqlStatement, _connection)
                 Dim oDataSet As New DataSet
                 Dim myTable As DataTable
                 oDataAdapter.Fill(oDataSet, tableName)
@@ -70,7 +70,7 @@ Namespace DbManagers
         ' Method to execute commands that aren't a query (insert, update, delete,...)
         Public Function ExecuteNoQuery(ByVal sqlStatement As String) As Boolean
             Dim sqlCommand As New MySqlCommand()
-            sqlCommand.CommandText = SqlStatement
+            sqlCommand.CommandText = sqlStatement
             sqlCommand.Connection = _connection
 
             Try

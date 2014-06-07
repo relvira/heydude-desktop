@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SQLite
 
-Namespace DbManagers
+Namespace Managers
     Public Class SQLiteManager
         Dim _connection As SQLiteConnection
         Public Sub New()
@@ -24,7 +24,7 @@ Namespace DbManagers
 
         Public Function ExecuteNoQuery(ByVal sqlStatement As String)
             Dim sqlCommand As New SQLiteCommand
-            sqlCommand.CommandText = SqlStatement
+            sqlCommand.CommandText = sqlStatement
             sqlCommand.Connection = _connection
 
             Try
@@ -38,7 +38,7 @@ Namespace DbManagers
 
         Public Function ExecuteQuery(ByVal sqlStatement As String, ByVal tableName As String) As DataTable
             Try
-                Dim oDataAdapter As New SQLiteDataAdapter(SqlStatement, _connection)
+                Dim oDataAdapter As New SQLiteDataAdapter(sqlStatement, _connection)
                 Dim oDataSet As New DataSet
                 Dim myTable As DataTable
                 oDataAdapter.Fill(oDataSet, tableName)

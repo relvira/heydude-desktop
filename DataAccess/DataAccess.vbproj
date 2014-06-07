@@ -87,8 +87,8 @@
     <Compile Include="Common.vb" />
     <Compile Include="Config.vb" />
     <Compile Include="IAccesibleMultiThread.vb" />
-    <Compile Include="DbManagers\MySQLManager.vb" />
-    <Compile Include="DbManagers\SQLiteManager.vb" />
+    <Compile Include="Managers\MySQLManager.vb" />
+    <Compile Include="Managers\SQLiteManager.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
