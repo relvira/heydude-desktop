@@ -3,7 +3,7 @@
 Namespace DbManagers
     Public Class MySQLManager
         Private ReadOnly _connection As New MySqlConnection
-        Private ReadOnly _server As String = Config.MySQLServer
+        Private Const Server As String = Config.MySQLServer
         Private Const Port As String = "3306"
         Private Const DbUser As String = "project_user"
         Private Const DbPasswd As String = "$$JoYf3FTWNiGGa$$"
@@ -32,7 +32,7 @@ Namespace DbManagers
         Private Function Connect()
             Try
                 _connection.ConnectionString =
-                    "server=" & _server & ";" &
+                    "server=" & Server & ";" &
                     "user id=" & DbUser & ";" &
                     "password=" & DbPasswd & ";" &
                     "port=" & Port & ";" &

@@ -1,22 +1,10 @@
 ﻿Namespace User
     Public Class Protocol
-        Private _mValue As String
-
-        Public Sub New()
-        End Sub
+        Private ReadOnly _mValue As String
 
         Private Sub New(ByVal pValue As String)
             _mValue = pValue
         End Sub
-
-        Public Property Value() As String
-            Get
-                Return _mValue
-            End Get
-            Set(pValue As String)
-                _mValue = pValue
-            End Set
-        End Property
 
         Public Overrides Function ToString() As String
             Return _mValue

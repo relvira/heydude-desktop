@@ -51,7 +51,7 @@ Public Class FrmHeyDude
         _request.Protocol = Protocol.Disconnect
         _userBuffer.SendRequest(_request)
 
-        Common.UploadUserLocalData(_user.Id)
+        UploadUserLocalData(_user.Id)
 
         FrmLogin.Close()
     End Sub
@@ -67,7 +67,7 @@ Public Class FrmHeyDude
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
             ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
-            Common.SaveMessage(_user.Id, TitleChatList.Id, TextBoxHD.Message)
+            SaveMessage(_user.Id, TitleChatList.Id, TextBoxHD.Message)
             SendMessage()
         End If
 
@@ -118,7 +118,7 @@ Public Class FrmHeyDude
 
     Private Sub GetUserLocalData()
         ' Download Local User data
-        Common.LocalDataInitCheck(_user.Id, _user.Passwd)
+        LocalDataInitCheck(_user.Id, _user.Passwd)
         ' After download create MySQL Instance
         Common.SqliteManager = New SQLiteManager
     End Sub

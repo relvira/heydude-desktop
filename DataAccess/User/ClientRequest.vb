@@ -1,6 +1,4 @@
-﻿
-
-Namespace User
+﻿Namespace User
     Public Class ClientRequest
         Private _mProtocol As Protocol
         Private _mFromId As Integer

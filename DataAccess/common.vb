@@ -7,10 +7,10 @@ Imports DataAccess.User
 Imports System.Collections.Specialized
 Imports DataAccess.DbManagers
 
-Public Class Common
-    Public Shared SqliteManager As SQLiteManager
+Public Module Common
+    Public SqliteManager As SQLiteManager
 
-    Public Shared Function UserLogin(ByVal user As String, ByVal password As String)
+    Public Function UserLogin(ByVal user As String, ByVal password As String)
         Dim sqlManager As New MySQLManager
         Dim queryResult = sqlManager.ExecuteQuery("SELECT id, uid, password, email, full_name, profile_img, user_status FROM user where uid='" & user & "'", "user")
 
@@ -28,26 +28,26 @@ Public Class Common
                     userItem.FullName = queryResult.Rows(i)("full_name")
                     userItem.ImageSource = queryResult.Rows(i)("profile_img")
                     userItem.StateMessage = queryResult.Rows(i)("user_status")
-                    userItem.isLoggedIn = True
+                    userItem.IsLoggedIn = True
                     Exit For
                 Else
-                    userItem.isLoggedIn = False
+                    userItem.IsLoggedIn = False
                 End If
                 i = i + 1
             Next
         Else
-            userItem.isLoggedIn = False
+            userItem.IsLoggedIn = False
         End If
         Return userItem
     End Function
 
-    Shared Function IsEmail(ByVal email As String) As Boolean
+    Function IsEmail(ByVal email As String) As Boolean
         Static emailExpression As New Regex("^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$")
 
         Return emailExpression.IsMatch(email)
     End Function
 
-    Shared Function GetSha1Hash(ByVal strToHash As String) As String
+    Function GetSha1Hash(ByVal strToHash As String) As String
 
         Dim sha1Obj As New SHA1CryptoServiceProvider
         Dim bytesToHash() As Byte = Encoding.ASCII.GetBytes(strToHash)
@@ -56,29 +56,29 @@ Public Class Common
 
         Dim strResult As String = ""
 
+        ' TODO: Convertir a LinQ
         For Each b As Byte In bytesToHash
             strResult += b.ToString("x2")
         Next
 
         Return strResult
-
     End Function
 
-    Shared Function UploadUserLocalData(ByVal uid As String)
+    Function UploadUserLocalData(ByVal uid As String)
         SqliteManager.Close()
-        Dim SQLitePath = "sqlite/heydude.db"
+        Const sqLitePath As String = "sqlite/heydude.db"
         Try
 
             'Upload image!
             ServicePointManager.Expect100Continue = False
-            Dim uploadServer = Config.DynamicServer & "sqliteUpload.php?uid=" & uid
+            Dim uploadServer = DynamicServer & "sqliteUpload.php?uid=" & uid
 
             Dim webp As New WebProxy("192.168.255.1", 3128)
             webp.UseDefaultCredentials = True
 
             Dim webcl As New WebClient()
             'webcl.Proxy = webp
-            webcl.UploadFile(uploadServer, SQLitePath)
+            webcl.UploadFile(uploadServer, sqLitePath)
 
             Return True
         Catch ex As Exception
@@ -86,12 +86,12 @@ Public Class Common
         End Try
     End Function
 
-    Shared Function DownloadUserLocalFromServer(ByVal id As Integer, Optional ByVal passwd As String = "")
-        Dim SQLitePath = "sqlite/heydude.db"
+    Private Function DownloadUserLocalFromServer(ByVal id As Integer, Optional ByVal passwd As String = "")
+        Const sqLitePath As String = "sqlite/heydude.db"
         Try
             ServicePointManager.Expect100Continue = False
             ServicePointManager.Expect100Continue = False
-            Dim downloadServer = Config.DynamicServer & "downloadSqlite.php"
+            Const downloadServer As String = DynamicServer & "downloadSqlite.php"
 
             Dim webcl As New WebClient()
 
@@ -103,18 +103,17 @@ Public Class Common
             Dim responsebytes = webcl.UploadValues(downloadServer, "POST", reqparm)
 
             Try
-                Dim oBin As New BinaryWriter(New FileStream(SQLitePath, FileMode.OpenOrCreate))
+                Dim oBin As New BinaryWriter(New FileStream(sqLitePath, FileMode.OpenOrCreate))
                 oBin.Write(responsebytes)
                 oBin.Close()
-                oBin = Nothing
             Catch ex As Exception
 
             End Try
 
-            Dim _mFileInfo As New FileInfo(SQLitePath)
+            Dim mFileInfo As New FileInfo(sqLitePath)
             ' If file recieved is 1kb
-            If _mFileInfo.Length < 62 Then
-                File.Delete(SQLitePath)
+            If mFileInfo.Length < 62 Then
+                File.Delete(sqLitePath)
                 Return False
             End If
 
@@ -124,47 +123,46 @@ Public Class Common
         End Try
     End Function
 
-    Public Shared Sub SaveMessage(ByVal _pFrom As Integer, ByVal _pTo As Integer, ByVal _pMessage As String)
+    Public Sub SaveMessage(ByVal fromUser As Integer, ByVal toUser As Integer, ByVal message As String)
         ' Save this shit in SQLite
         Try
-            Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & _pFrom & ", " & _pTo & " ,'" & _pMessage & "');"
-            Dim result = SqliteManager.ExecuteNoQuery(messageStatement)
+            Dim messageStatement = "INSERT INTO messages(from_id, to_id, message) VALUES(" & fromUser & ", " & toUser & " ,'" & message & "');"
+            SqliteManager.ExecuteNoQuery(messageStatement)
         Catch ex As Exception
             MessageBox.Show("DB error: " & ex.Message)
         End Try
     End Sub
 
-    Public Shared Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
+    Public Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
         If File.Exists("sqlite/heydude.db") Then
             ' Este cliente ya tiene sqlite local, descargamos la ultima version del servidor
             DownloadUserLocalFromServer(id, passwd)
         Else
-            Dim _mHasVersion As Boolean = DownloadUserLocalFromServer(id, passwd)
+            Dim mHasVersion As Boolean = DownloadUserLocalFromServer(id, passwd)
             ' El usuario no tiene sqlite local, tiene alguno en el servidor?
-            If _mHasVersion Then
+            If mHasVersion Then
                 ' No tiene version en local de sqlite per si en el servidor, la descargamos
                 DownloadUserLocalFromServer(id, passwd)
             Else
                 ' Si no tiene en el servidor tampoco descargamos el de por defecto
-                DownloadDefaultUserLocalSqlite(id, passwd)
+                DownloadDefaultUserLocalSqlite()
             End If
         End If
     End Sub
 
-    Shared Function DownloadDefaultUserLocalSqlite(ByVal id As Integer, Optional ByVal passwd As String = "")
-        Dim SQLiteSavePath = "sqlite/heydude.db"
+    Private Function DownloadDefaultUserLocalSqlite()
+        Const sqLiteSavePath As String = "sqlite/heydude.db"
         Try
-
             ' Descargar base de datos por defecto (vacia)
             ServicePointManager.Expect100Continue = False
-            Dim _mDownloadServer = Config.StaticServer & "default.db"
+            Const downloadServer As String = StaticServer & "default.db"
 
             Dim webcl As New WebClient()
-            webcl.DownloadFile(_mDownloadServer, SQLiteSavePath)
+            webcl.DownloadFile(downloadServer, sqLiteSavePath)
 
             Return True
         Catch ex As Exception
             Return False
         End Try
     End Function
-End Class
+End Module

@@ -3,7 +3,7 @@
 Public Class FrmLogin
     Dim formPosition As Point
     Dim mouseAction As Boolean
-    Private Sub BtnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnLogin.myClick
+    Private Sub BtnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnLogin.MyClick
         Dim result = Common.UserLogin(TxtUser.Message, TxtPasswd.Message)
         If result.isLoggedIn Then
             Dim HeyDudeFrm As New FrmHeyDude(result)
@@ -35,7 +35,7 @@ Public Class FrmLogin
         Me.Close()
     End Sub
 
-    Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.myClick
+    Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.MyClick
         Dim FrmRegister As New FrmRegister()
         FrmRegister.Show()
     End Sub

@@ -1,13 +1,12 @@
 ﻿Imports System.Net.Sockets
 Imports System.IO
 Imports System.Threading
-Imports DataAccess.Common
 Imports Newtonsoft.Json
 
 Namespace User
     Public Class ClientBuffer
         Private Const Port As Integer = 8000
-        Private ReadOnly _ipAddress As String = Config.ChatServer
+        Private Const IpAddress As String = ChatServer
 
         Private ReadOnly _mClientSocket As TcpClient
         Private ReadOnly _mNetworkStream As NetworkStream
@@ -17,12 +16,12 @@ Namespace User
         Private _mThReciveRequest As Thread
         Private ReadOnly _mContext As IAccesibleMultiThread
 
-        Delegate Sub GetRequestCallback(ByVal pRequest As ClientRequest)
+        Private Delegate Sub GetRequestCallback(ByVal pRequest As ClientRequest)
 
         Public Sub New(ByVal pContext As IAccesibleMultiThread)
             _mContext = pContext
             Try
-                _mClientSocket = New TcpClient(_ipAddress, Port)
+                _mClientSocket = New TcpClient(IpAddress, Port)
                 _mNetworkStream = _mClientSocket.GetStream()
                 InitBuffers()
             Catch ex As Exception
@@ -39,7 +38,7 @@ Namespace User
             _mThReciveRequest.Start()
         End Sub
 
-        Public Sub RecieveRequest()
+        Private Sub RecieveRequest()
             Dim request As ClientRequest
             While True
                 request = ReadRequest()
