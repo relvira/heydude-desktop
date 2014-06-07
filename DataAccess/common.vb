@@ -68,7 +68,6 @@ Public Module Common
         SqliteManager.Close()
         Const sqLitePath As String = "sqlite/heydude.db"
         Try
-
             'Upload image!
             ServicePointManager.Expect100Continue = False
             Dim uploadServer = DynamicServer & "sqliteUpload.php?uid=" & uid
