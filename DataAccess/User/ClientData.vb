@@ -1,7 +1,5 @@
-﻿
-Imports System.Net
+﻿Imports System.Net
 Imports System.Collections.Specialized
-Imports DataAccess.Common
 
 Namespace User
     Public Class ClientData

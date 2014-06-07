@@ -15,11 +15,11 @@ Namespace User
         Private _mInput As StreamReader
         Private _mOutput As StreamWriter
         Private _mThReciveRequest As Thread
-        Private ReadOnly _mContext As FrmHeyDude
+        Private ReadOnly _mContext As IAccesibleMultiThread
 
         Delegate Sub GetRequestCallback(ByVal pRequest As ClientRequest)
 
-        Public Sub New(ByVal pContext As FrmHeyDude)
+        Public Sub New(ByVal pContext As IAccesibleMultiThread)
             _mContext = pContext
             Try
                 _mClientSocket = New TcpClient(_ipAddress, Port)
@@ -54,17 +54,18 @@ Namespace User
                 Catch ex As Exception
                     MessageBox.Show(ex.Message)
                     Finalize()
+                    Return
                 End Try
             End While
         End Sub
 
         Private Sub RaiseRequest(ByVal pRequest As ClientRequest)
-            If _mContext.ChatList.InvokeRequired Then
+            If _mContext.NeedExecute Then
                 Dim d As New GetRequestCallback(AddressOf RaiseRequest)
-                _mContext.ChatList.Invoke(d, New Object() {pRequest})
+                _mContext.ExecuteMethod(d, New Object() {pRequest})
             Else
                 SaveMessage(pRequest.FromId, pRequest.ToId, pRequest.Message)
-                _mContext.ChatList.AddChatBox(pRequest.Message, AlignedTo.Left)
+                _mContext.AddComponent(pRequest)
             End If
         End Sub
 

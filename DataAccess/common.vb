@@ -4,6 +4,8 @@ Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports DataAccess.User
+Imports System.Collections.Specialized
+Imports DataAccess.DbManagers
 
 Public Class Common
     Public Shared SqliteManager As SQLiteManager
@@ -39,7 +41,7 @@ Public Class Common
         Return userItem
     End Function
 
-    Function IsEmail(ByVal email As String) As Boolean
+    Shared Function IsEmail(ByVal email As String) As Boolean
         Static emailExpression As New Regex("^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$")
 
         Return emailExpression.IsMatch(email)
@@ -63,7 +65,7 @@ Public Class Common
     End Function
 
     Shared Function UploadUserLocalData(ByVal uid As String)
-        SQLiteManager.Close()
+        SqliteManager.Close()
         Dim SQLitePath = "sqlite/heydude.db"
         Try
 
@@ -88,13 +90,13 @@ Public Class Common
         Dim SQLitePath = "sqlite/heydude.db"
         Try
             ServicePointManager.Expect100Continue = False
-            System.Net.ServicePointManager.Expect100Continue = False
+            ServicePointManager.Expect100Continue = False
             Dim downloadServer = Config.DynamicServer & "downloadSqlite.php"
 
             Dim webcl As New WebClient()
 
             'params
-            Dim reqparm As New Specialized.NameValueCollection
+            Dim reqparm As New NameValueCollection
             reqparm.Add("id", id)
             reqparm.Add("passwd", passwd)
 
