@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("FormComponent")> 
+<Assembly: AssemblyTitle("DataAccess")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("JOYFE")> 
-<Assembly: AssemblyProduct("FormComponent")> 
-<Assembly: AssemblyCopyright("Copyright © JOYFE 2014")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("DataAccess")> 
+<Assembly: AssemblyCopyright("Copyright ©  2014")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'El siguiente GUID sirve como identificador de typelib si este proyecto se expone a COM
-<Assembly: Guid("0f46395e-14f9-473b-854d-c1cfb10bbded")> 
+<Assembly: Guid("c7b33c81-6e41-4036-a599-d2de25cbfdc8")> 
 
 ' La información de versión de un ensamblado consta de los cuatro valores siguientes:
 '
