@@ -1,5 +1,4 @@
 ﻿Imports Entities
-Imports Entities.User
 
 Public Class UserList
     Private ReadOnly _mUserBoxlist As List(Of UserBox) = New List(Of UserBox)()

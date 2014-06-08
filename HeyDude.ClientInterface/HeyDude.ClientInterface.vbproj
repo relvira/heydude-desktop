@@ -171,20 +171,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CustomControls\CustomControls.vbproj">
+    <ProjectReference Include="..\HeyDude.CustomControls\HeyDude.CustomControls.vbproj">
       <Project>{366439BB-04AD-45EC-A799-6F1C2087384B}</Project>
-      <Name>CustomControls</Name>
+      <Name>HeyDude.CustomControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAccess\DataAccess.vbproj">
+    <ProjectReference Include="..\HeyDude.DataAccess\HeyDude.DataAccess.vbproj">
       <Project>{447762D5-6B61-40A1-A40A-58002366039E}</Project>
-      <Name>DataAccess</Name>
+      <Name>HeyDude.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.vbproj">
+    <ProjectReference Include="..\HeyDude.Entities\HeyDude.Entities.vbproj">
       <Project>{5CFA08D8-325B-44DB-8494-4435A1D84885}</Project>
-      <Name>Entities</Name>
+      <Name>HeyDude.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

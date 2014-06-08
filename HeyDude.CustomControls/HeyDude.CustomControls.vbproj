@@ -194,16 +194,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.vbproj">
-      <Project>{447762D5-6B61-40A1-A40A-58002366039E}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.vbproj">
-      <Project>{5CFA08D8-325B-44DB-8494-4435A1D84885}</Project>
-      <Name>Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\cancelsearchbutton_pressed.png" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +213,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\close-button-large.png" />
+    <Content Include="Resources\google-hangouts-icon.png" />
+    <Content Include="Resources\hangouts-icon.png" />
+    <Content Include="Resources\imessage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HeyDude.Entities\HeyDude.Entities.vbproj">
+      <Project>{5CFA08D8-325B-44DB-8494-4435A1D84885}</Project>
+      <Name>HeyDude.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
