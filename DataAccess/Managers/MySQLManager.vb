@@ -1,13 +1,9 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Configuration
+Imports MySql.Data.MySqlClient
 
 Namespace Managers
     Public Class MySQLManager
         Private ReadOnly _connection As New MySqlConnection
-        Private Const Server As String = MySQLServer
-        Private Const Port As String = "3306"
-        Private Const DbUser As String = "project_user"
-        Private Const DbPasswd As String = "$$JoYf3FTWNiGGa$$"
-        Private Const Database As String = "chat_project"
 
         'Public Sub New(ByVal server As String, ByVal port As String, ByVal dbUser As String, ByVal dbPasswd As String, ByVal database As String)
         '    _server = server
@@ -31,13 +27,7 @@ Namespace Managers
         ' Database connect method
         Private Function Connect()
             Try
-                _connection.ConnectionString =
-                    "server=" & Server & ";" &
-                    "user id=" & DbUser & ";" &
-                    "password=" & DbPasswd & ";" &
-                    "port=" & Port & ";" &
-                    "database=" & Database & ";"
-
+                _connection.ConnectionString = ConfigurationManager.ConnectionStrings("MySQL").ConnectionString
                 _connection.Open()
             Catch ex As Exception
                 MessageBox.Show("Error al conectar al servidor MySQL: " & ex.Message)
