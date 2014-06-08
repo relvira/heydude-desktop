@@ -7,6 +7,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CustomControls", "CustomCon
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ClientInterface", "ClientInterface\ClientInterface.vbproj", "{31818FC3-898E-4B40-B663-DAB631664047}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Entities", "Entities\Entities.vbproj", "{5CFA08D8-325B-44DB-8494-4435A1D84885}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,6 +27,10 @@ Global
 		{31818FC3-898E-4B40-B663-DAB631664047}.Debug|x86.Build.0 = Debug|x86
 		{31818FC3-898E-4B40-B663-DAB631664047}.Release|x86.ActiveCfg = Release|x86
 		{31818FC3-898E-4B40-B663-DAB631664047}.Release|x86.Build.0 = Release|x86
+		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Debug|x86.ActiveCfg = Debug|x86
+		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Debug|x86.Build.0 = Debug|x86
+		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Release|x86.ActiveCfg = Release|x86
+		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

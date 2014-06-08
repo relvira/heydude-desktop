@@ -1,4 +1,4 @@
-﻿Imports DataAccess
+﻿Imports Entities
 
 Public Class FrmLogin
     Dim formPosition As Point

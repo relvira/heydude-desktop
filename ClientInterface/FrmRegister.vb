@@ -1,6 +1,6 @@
 ﻿Imports System.Net
-Imports DataAccess
 Imports DataAccess.Managers
+Imports Entities
 
 Public Class FrmRegister
     Dim _formPosition As Point

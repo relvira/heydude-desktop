@@ -5,26 +5,10 @@ Namespace Managers
     Public Class MySQLManager
         Private ReadOnly _connection As New MySqlConnection
 
-        'Public Sub New(ByVal server As String, ByVal port As String, ByVal dbUser As String, ByVal dbPasswd As String, ByVal database As String)
-        '    _server = server
-        '    _port = port
-        '    _dbUser = dbUser
-        '    _dbPasswd = dbPasswd
-        '    _database = database
-
-        '    Connect()
-        'End Sub
-
-        'Public Sub New(ByVal database As String)
-        '    _database = Database
-        '    Connect()
-        'End Sub
-
         Public Sub New()
             Connect()
         End Sub
 
-        ' Database connect method
         Private Function Connect()
             Try
                 _connection.ConnectionString = ConfigurationManager.ConnectionStrings("MySQL").ConnectionString
@@ -69,13 +53,13 @@ Namespace Managers
                 MsgBox(ex.Message.ToString)
                 Return False
             Finally
-                _connection.Close()
+                Close()
             End Try
             Return True
         End Function
 
         ' Database connection close method
-        Public Sub Close()
+        Private Sub Close()
             _connection.Close()
         End Sub
     End Class
