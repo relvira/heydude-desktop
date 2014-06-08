@@ -98,8 +98,6 @@
     <Compile Include="FrmRegister.Designer.vb">
       <DependentUpon>FrmRegister.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmRegister.vb" />
-    <Compile Include="FrmHeyDude.vb" />
     <Compile Include="FrmRegister.vb">
       <SubType>Form</SubType>
     </Compile>
