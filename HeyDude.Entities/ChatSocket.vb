@@ -1,12 +1,13 @@
 ﻿Imports System.Net.Sockets
 Imports System.IO
 Imports System.Threading
+Imports System.Windows.Forms
 Imports Newtonsoft.Json
 
 Namespace User
-    Public Class ClientBuffer
+    Public Class ChatSocket
         Private Const Port As Integer = 8000
-        Private Const IpAddress As String = ChatServer
+        Private Const IpAddress As String = "162.243.214.24"
 
         Private ReadOnly _mClientSocket As TcpClient
         Private ReadOnly _mNetworkStream As NetworkStream

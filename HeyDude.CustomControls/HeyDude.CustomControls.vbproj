@@ -80,11 +80,15 @@
     <Compile Include="ChatBox.Designer.vb">
       <DependentUpon>ChatBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="ChatBox.vb" />
+    <Compile Include="ChatBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ChatList.Designer.vb">
       <DependentUpon>ChatList.vb</DependentUpon>
     </Compile>
-    <Compile Include="ChatList.vb" />
+    <Compile Include="ChatList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -103,31 +107,45 @@
     <Compile Include="SimpleButton.Designer.vb">
       <DependentUpon>SimpleButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="SimpleButton.vb" />
+    <Compile Include="SimpleButton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="SimpleTextBox.Designer.vb">
       <DependentUpon>SimpleTextBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="SimpleTextBox.vb" />
+    <Compile Include="SimpleTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="TextBoxHD.Designer.vb">
       <DependentUpon>TextBoxHD.vb</DependentUpon>
     </Compile>
-    <Compile Include="TextBoxHD.vb" />
+    <Compile Include="TextBoxHD.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="TitleChatList.Designer.vb">
       <DependentUpon>TitleChatList.vb</DependentUpon>
     </Compile>
-    <Compile Include="TitleChatList.vb" />
+    <Compile Include="TitleChatList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ModernToolBar.Designer.vb">
       <DependentUpon>ModernToolBar.vb</DependentUpon>
     </Compile>
-    <Compile Include="ModernToolBar.vb" />
+    <Compile Include="ModernToolBar.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserBox.Designer.vb">
       <DependentUpon>UserBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="UserBox.vb" />
+    <Compile Include="UserBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserList.Designer.vb">
       <DependentUpon>UserList.vb</DependentUpon>
     </Compile>
-    <Compile Include="UserList.vb" />
+    <Compile Include="UserList.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ChatBox.resx">

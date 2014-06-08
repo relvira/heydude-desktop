@@ -1,43 +1,17 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Configuration
+Imports MySql.Data.MySqlClient
 
 Namespace Managers
     Public Class MySQLManager
         Private ReadOnly _connection As New MySqlConnection
-        Private Const Server As String = MySQLServer
-        Private Const Port As String = "3306"
-        Private Const DbUser As String = "project_user"
-        Private Const DbPasswd As String = "$$JoYf3FTWNiGGa$$"
-        Private Const Database As String = "chat_project"
-
-        'Public Sub New(ByVal server As String, ByVal port As String, ByVal dbUser As String, ByVal dbPasswd As String, ByVal database As String)
-        '    _server = server
-        '    _port = port
-        '    _dbUser = dbUser
-        '    _dbPasswd = dbPasswd
-        '    _database = database
-
-        '    Connect()
-        'End Sub
-
-        'Public Sub New(ByVal database As String)
-        '    _database = Database
-        '    Connect()
-        'End Sub
 
         Public Sub New()
             Connect()
         End Sub
 
-        ' Database connect method
         Private Function Connect()
             Try
-                _connection.ConnectionString =
-                    "server=" & Server & ";" &
-                    "user id=" & DbUser & ";" &
-                    "password=" & DbPasswd & ";" &
-                    "port=" & Port & ";" &
-                    "database=" & Database & ";"
-
+                _connection.ConnectionString = ConfigurationManager.ConnectionStrings("MySQL").ConnectionString
                 _connection.Open()
             Catch ex As Exception
                 MessageBox.Show("Error al conectar al servidor MySQL: " & ex.Message)
@@ -79,13 +53,13 @@ Namespace Managers
                 MsgBox(ex.Message.ToString)
                 Return False
             Finally
-                _connection.Close()
+                Close()
             End Try
             Return True
         End Function
 
         ' Database connection close method
-        Public Sub Close()
+        Private Sub Close()
             _connection.Close()
         End Sub
     End Class

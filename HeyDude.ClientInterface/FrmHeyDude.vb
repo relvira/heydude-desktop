@@ -1,13 +1,13 @@
 ﻿Imports CustomControls
-Imports DataAccess
-Imports DataAccess.User
 Imports DataAccess.Managers
+Imports Entities
+Imports Entities.User
 
 Public Class FrmHeyDude
     Implements IAccesibleMultiThread
 
     Private ReadOnly _user As ClientData
-    Private ReadOnly _userBuffer As New ClientBuffer(Me)
+    Private ReadOnly _userBuffer As New ChatSocket(Me)
     Private ReadOnly _request As ClientRequest
     Private ReadOnly _friends As New ArrayList
 

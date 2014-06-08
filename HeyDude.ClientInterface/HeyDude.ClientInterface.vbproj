@@ -92,12 +92,20 @@
     <Compile Include="FrmLogin.Designer.vb">
       <DependentUpon>FrmLogin.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmLogin.vb" />
+    <Compile Include="FrmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmRegister.Designer.vb">
       <DependentUpon>FrmRegister.vb</DependentUpon>
     </Compile>
     <Compile Include="FrmRegister.vb" />
     <Compile Include="FrmHeyDude.vb" />
+    <Compile Include="FrmRegister.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHeyDude.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmHeyDude.Designer.vb">
       <DependentUpon>FrmHeyDude.vb</DependentUpon>
       <SubType>Form</SubType>

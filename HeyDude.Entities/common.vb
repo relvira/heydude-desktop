@@ -4,8 +4,8 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Collections.Specialized
 Imports System.Security.Cryptography
-Imports DataAccess.User
 Imports DataAccess.Managers
+Imports System.Windows.Forms
 
 Public Module Common
     Public SqliteManager As SQLiteManager

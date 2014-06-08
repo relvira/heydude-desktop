@@ -1,4 +1,4 @@
-﻿Imports DataAccess.User
+﻿Imports Entities.User
 
 Public Interface IAccesibleMultiThread
     Property NeedExecute As Boolean

@@ -51,7 +51,6 @@
     ''' el caso Left.
     ''' </summary>
     ''' <value>Donde será mostrado el control en el contenedor.</value>
-    ''' <returns>En que posición está alineada actualmente el control.</returns>
     Public WriteOnly Property AlignTo As AlignedTo
         Set(ByVal value As AlignedTo)
             _mAlignTo = value
