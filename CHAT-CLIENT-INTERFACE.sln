@@ -9,6 +9,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HeyDude.DataAccess", "HeyDu
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HeyDude.Entities", "HeyDude.Entities\HeyDude.Entities.vbproj", "{5CFA08D8-325B-44DB-8494-4435A1D84885}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HeyDude.UnitTest", "HeyDude.UnitTest\HeyDude.UnitTest.vbproj", "{03CC5C24-2ED1-4031-A2FD-BF8816315D90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -31,6 +33,10 @@ Global
 		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Debug|x86.Build.0 = Debug|x86
 		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Release|x86.ActiveCfg = Release|x86
 		{5CFA08D8-325B-44DB-8494-4435A1D84885}.Release|x86.Build.0 = Release|x86
+		{03CC5C24-2ED1-4031-A2FD-BF8816315D90}.Debug|x86.ActiveCfg = Debug|x86
+		{03CC5C24-2ED1-4031-A2FD-BF8816315D90}.Debug|x86.Build.0 = Debug|x86
+		{03CC5C24-2ED1-4031-A2FD-BF8816315D90}.Release|x86.ActiveCfg = Release|x86
+		{03CC5C24-2ED1-4031-A2FD-BF8816315D90}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

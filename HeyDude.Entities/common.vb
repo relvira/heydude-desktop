@@ -6,6 +6,7 @@ Imports System.Collections.Specialized
 Imports System.Security.Cryptography
 Imports DataAccess.Managers
 Imports System.Windows.Forms
+Imports Entities.UserComponents
 
 Public Module Common
     Public SqliteManager As SQLiteManager
@@ -15,7 +16,7 @@ Public Module Common
         Dim queryResult = sqlManager.ExecuteQuery("SELECT id, uid, password, email, full_name, profile_img, user_status FROM user where uid='" & user & "'", "user")
 
         Dim i As Integer = 0
-        Dim userItem As New ClientData
+        Dim userItem As New PersonalData
 
         If queryResult.Rows.Count > 0 Then
             For Each oDataRow In queryResult.Rows
@@ -64,26 +65,27 @@ Public Module Common
         Return strResult
     End Function
 
-    Function UploadUserLocalData(ByVal uid As String)
-        SqliteManager.Close()
-        Const sqLitePath As String = "sqlite/heydude.db"
-        Try
-            'Upload image!
-            ServicePointManager.Expect100Continue = False
-            Dim uploadServer = DynamicServer & "sqliteUpload.php?uid=" & uid
+    ' TODO: Descomentar!!!
+    'Function UploadUserLocalData(ByVal uid As String)
+    '    SqliteManager.Close()
+    '    Const sqLitePath As String = "sqlite/heydude.db"
+    '    Try
+    '        'Upload image!
+    '        ServicePointManager.Expect100Continue = False
+    '        Dim uploadServer = DynamicServer & "sqliteUpload.php?uid=" & uid
 
-            Dim webp As New WebProxy("192.168.255.1", 3128)
-            webp.UseDefaultCredentials = True
+    '        Dim webp As New WebProxy("192.168.255.1", 3128)
+    '        webp.UseDefaultCredentials = True
 
-            Dim webcl As New WebClient()
-            'webcl.Proxy = webp
-            webcl.UploadFile(uploadServer, sqLitePath)
+    '        Dim webcl As New WebClient()
+    '        'webcl.Proxy = webp
+    '        webcl.UploadFile(uploadServer, sqLitePath)
 
-            Return True
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
+    '        Return True
+    '    Catch ex As Exception
+    '        Return False
+    '    End Try
+    'End Function
 
     Private Function DownloadUserLocalFromServer(ByVal id As Integer, Optional ByVal passwd As String = "")
         Const sqLitePath As String = "sqlite/heydude.db"

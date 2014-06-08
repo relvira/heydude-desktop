@@ -1,4 +1,5 @@
 ﻿Imports Entities
+Imports Entities.UserComponents
 
 Public Class UserList
     Private ReadOnly _mUserBoxlist As List(Of UserBox) = New List(Of UserBox)()
@@ -16,12 +17,12 @@ Public Class UserList
         BtnCancelSearch.FlatAppearance.MouseDownBackColor = Color.Transparent
     End Sub
 
-    Sub AddUserBox(clientData As ClientData)
+    Sub AddUserBox(personalData As PersonalData)
         Dim userBox As New UserBox()
-        userBox.Id = clientData.Id
-        userBox.UserName = clientData.Name
-        userBox.UserState = clientData.StateMessage
-        userBox.ImageUser = clientData.ImageSource
+        userBox.Id = personalData.Id
+        userBox.UserName = personalData.Name
+        userBox.UserState = personalData.StateMessage
+        userBox.ImageUser = personalData.ImageSource
         userBox.Location = New Point(1, _mPosY)
         AddHandler userBox.UserBoxSelected, AddressOf UserBoxSelected
 
