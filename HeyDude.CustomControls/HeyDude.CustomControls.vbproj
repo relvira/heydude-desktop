@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{366439BB-04AD-45EC-A799-6F1C2087384B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
+    <RootNamespace>CustomControls</RootNamespace>
+    <AssemblyName>CustomControls</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>CustomControls.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>CustomControls.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlignedTo.vb" />
+    <Compile Include="ChatBox.Designer.vb">
+      <DependentUpon>ChatBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ChatBox.vb" />
+    <Compile Include="ChatList.Designer.vb">
+      <DependentUpon>ChatList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ChatList.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SimpleButton.Designer.vb">
+      <DependentUpon>SimpleButton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SimpleButton.vb" />
+    <Compile Include="SimpleTextBox.Designer.vb">
+      <DependentUpon>SimpleTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SimpleTextBox.vb" />
+    <Compile Include="TextBoxHD.Designer.vb">
+      <DependentUpon>TextBoxHD.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxHD.vb" />
+    <Compile Include="TitleChatList.Designer.vb">
+      <DependentUpon>TitleChatList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TitleChatList.vb" />
+    <Compile Include="ModernToolBar.Designer.vb">
+      <DependentUpon>ModernToolBar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ModernToolBar.vb" />
+    <Compile Include="UserBox.Designer.vb">
+      <DependentUpon>UserBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserBox.vb" />
+    <Compile Include="UserList.Designer.vb">
+      <DependentUpon>UserList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserList.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ChatBox.resx">
+      <DependentUpon>ChatBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChatList.resx">
+      <DependentUpon>ChatList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimpleButton.resx">
+      <DependentUpon>SimpleButton.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SimpleTextBox.resx">
+      <DependentUpon>SimpleTextBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextBoxHD.resx">
+      <DependentUpon>TextBoxHD.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TitleChatList.resx">
+      <DependentUpon>TitleChatList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModernToolBar.resx">
+      <DependentUpon>ModernToolBar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserBox.resx">
+      <DependentUpon>UserBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserList.resx">
+      <DependentUpon>UserList.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelsearchbutton_pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelsearchbutton_unpressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebutton_over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebutton_pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebutton_unpressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\close-button-large.png" />
+    <Content Include="Resources\google-hangouts-icon.png" />
+    <Content Include="Resources\hangouts-icon.png" />
+    <Content Include="Resources\imessage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HeyDude.Entities\HeyDude.Entities.vbproj">
+      <Project>{5CFA08D8-325B-44DB-8494-4435A1D84885}</Project>
+      <Name>HeyDude.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
