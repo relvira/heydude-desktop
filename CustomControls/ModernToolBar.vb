@@ -9,15 +9,15 @@
     End Sub
 
     Private Sub BtnClose_MouseDown(sender As Object, e As EventArgs) Handles BtnClose.MouseDown
-        BtnClose.BackgroundImage = New Bitmap("assets\closebutton_pressed.png")
+        BtnClose.BackgroundImage = New Bitmap(My.Resources.closebutton_pressed)
     End Sub
 
     Private Sub BtnClose_MouseEnter(sender As Object, e As EventArgs) Handles BtnClose.MouseEnter
-        BtnClose.BackgroundImage = New Bitmap("assets\closebutton_over.png")
+        BtnClose.BackgroundImage = New Bitmap(My.Resources.closebutton_over)
     End Sub
 
     Private Sub BtnClose_MouseLeave(sender As Object, e As EventArgs) Handles BtnClose.MouseLeave
-        BtnClose.BackgroundImage = New Bitmap("assets\closebutton_unpressed.png")
+        BtnClose.BackgroundImage = New Bitmap(My.Resources.closebutton_unpressed)
     End Sub
 
     Private Sub ToolBar_MouseDown(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseDown

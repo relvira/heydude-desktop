@@ -3,7 +3,7 @@
 Namespace Managers
     Public Class MySQLManager
         Private ReadOnly _connection As New MySqlConnection
-        Private Const Server As String = Config.MySQLServer
+        Private Const Server As String = MySQLServer
         Private Const Port As String = "3306"
         Private Const DbUser As String = "project_user"
         Private Const DbPasswd As String = "$$JoYf3FTWNiGGa$$"

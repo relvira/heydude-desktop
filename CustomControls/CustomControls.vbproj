@@ -196,6 +196,27 @@
       <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelsearchbutton_pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancelsearchbutton_unpressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebutton_over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebutton_pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closebutton_unpressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lupa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
