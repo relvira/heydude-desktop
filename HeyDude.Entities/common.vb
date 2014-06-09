@@ -4,6 +4,7 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Collections.Specialized
 Imports System.Security.Cryptography
+Imports System.Configuration
 Imports DataAccess.Managers
 Imports System.Windows.Forms
 Imports Entities.UserComponents
@@ -92,7 +93,7 @@ Public Module Common
         Try
             ServicePointManager.Expect100Continue = False
             ServicePointManager.Expect100Continue = False
-            Const downloadServer As String = DynamicServer & "downloadSqlite.php"
+            Dim downloadServer As String = ConfigurationManager.AppSettings("DynamicServer") & "downloadSqlite.php"
 
             Dim webcl As New WebClient()
 
@@ -156,7 +157,7 @@ Public Module Common
         Try
             ' Descargar base de datos por defecto (vacia)
             ServicePointManager.Expect100Continue = False
-            Const downloadServer As String = StaticServer & "default.db"
+            Dim downloadServer As String = ConfigurationManager.AppSettings("StaticServer") & "default.db"
 
             Dim webcl As New WebClient()
             webcl.DownloadFile(downloadServer, sqLiteSavePath)

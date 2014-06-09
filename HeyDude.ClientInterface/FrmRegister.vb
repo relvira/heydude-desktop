@@ -1,4 +1,5 @@
 ﻿Imports System.Net
+Imports System.Configuration
 Imports DataAccess.Managers
 Imports Entities
 
@@ -73,7 +74,7 @@ Public Class FrmRegister
             If _uploadClicked Then
                 'Upload image!
                 ServicePointManager.Expect100Continue = False
-                Dim uploadServer = Config.DynamicServer & "profileImageUpload.php?uid=" & TxtUsername.Message
+                Dim uploadServer = ConfigurationManager.AppSettings("DynamicServer") & "profileImageUpload.php?uid=" & TxtUsername.Message
 
                 Dim webp As New WebProxy("192.168.255.1", 3128)
                 webp.UseDefaultCredentials = True

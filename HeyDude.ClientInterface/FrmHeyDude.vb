@@ -3,33 +3,26 @@ Imports DataAccess.Managers
 Imports Entities
 Imports Entities.UserComponents
 Imports ChatClient.My.Resources
+Imports Entities.SocketUtil
 
 Public Class FrmHeyDude
-    Private ReadOnly _user As New User
-    Private ReadOnly _request As Request
-    Private ReadOnly _friends As New ArrayList
+    Private Property User As User
+    Private Property ChatRequest As ChatRequest
+    Private Property Friends As New ArrayList
 
-    Private Delegate Sub RequestReceivedCallback(ByVal request As Request)
-
-    Public Sub New()
-        ' Llamada necesaria para el diseñador.
-        InitializeComponent()
-    End Sub
-
+    Private Delegate Sub RequestReceivedCallback(ByVal chatRequest As ChatRequest)
+    
     Public Sub New(ByVal personalData As PersonalData)
-        ' Llamada necesaria para el diseñador.
-        InitializeComponent()
+        Me.New()
 
-        ' Build Connect request
-        _request = New Request(personalData.Id, Protocol.Connect)
+        ChatRequest = New ChatRequest(personalData.Id, ChatProtocol.Connect)
 
-        ' Init user
-        _user = New User()
-        _user.SendMessage(_request)
-        _user.PersonalData = personalData
-        AddHandler _user.OnMessageReceived, AddressOf OnMessageReceived
+        User = New User()
+        User.SendMessage(ChatRequest)
+        User.PersonalData = personalData
+        AddHandler User.OnMessageReceived, AddressOf OnMessageReceived
 
-        _friends = personalData.GetUserAllFriends()
+        Friends = personalData.GetUserAllFriends()
     End Sub
 
     Private Sub FrmHeyDude_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
@@ -37,7 +30,7 @@ Public Class FrmHeyDude
         FrmLogin.Hide()
 
         ' Load User friends. LinQ expression.
-        For Each f In From frnd As String In _friends Select frnd.ToString.Split(",")
+        For Each f In From frnd As String In Friends Select frnd.ToString.Split(",")
             UserList.AddUserBox(New PersonalData(f(0), f(2), f(4), f(3)))
         Next
 
@@ -52,9 +45,9 @@ Public Class FrmHeyDude
     End Sub
 
     Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
-        _request.FromId = _user.PersonalData.Id
-        _request.Protocol = Protocol.Disconnect
-        _user.SendMessage(_request)
+        ChatRequest.FromId = User.PersonalData.Id
+        ChatRequest.ChatProtocol = ChatProtocol.Disconnect
+        User.SendMessage(ChatRequest)
 
         'UploadUserLocalData(_user.PersonalData.Id)
 
@@ -72,7 +65,7 @@ Public Class FrmHeyDude
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
             ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
-            SaveMessage(_user.PersonalData.Id, TitleChatList.Id, TextBoxHD.Message)
+            SaveMessage(User.PersonalData.Id, TitleChatList.Id, TextBoxHD.Message)
             SendMessage()
         End If
 
@@ -88,13 +81,13 @@ Public Class FrmHeyDude
     End Sub
 
     Private Sub SendMessage()
-        _request.FromId = _user.PersonalData.Id
-        _request.Protocol = Protocol.SendMessage
-        '_request.ToId = _user.Id
-        _request.ToId = TitleChatList.Id
-        _request.Message = TextBoxHD.Message
+        ChatRequest.FromId = User.PersonalData.Id
+        ChatRequest.ChatProtocol = ChatProtocol.SendMessage
+        '_chatRequest.ToId = _user.Id
+        ChatRequest.ToId = TitleChatList.Id
+        ChatRequest.Message = TextBoxHD.Message
 
-        _user.SendMessage(_request)
+        User.SendMessage(ChatRequest)
     End Sub
 
     Private Sub RefreshMessageHistory()
@@ -107,7 +100,7 @@ Public Class FrmHeyDude
                     If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
                         ' From other messages
                         ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
-                    ElseIf queryResult.Rows(i)("from_id") = _user.PersonalData.Id Then
+                    ElseIf queryResult.Rows(i)("from_id") = User.PersonalData.Id Then
                         ' Messages from me to others
                         ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
                     End If
@@ -123,12 +116,12 @@ Public Class FrmHeyDude
 
     Private Sub GetUserLocalData()
         ' Download Local User data
-        LocalDataInitCheck(_user.PersonalData.Id, _user.PersonalData.Passwd)
+        LocalDataInitCheck(User.PersonalData.Id, User.PersonalData.Passwd)
         ' After download create MySQL Instance
         Common.SqliteManager = New SQLiteManager
     End Sub
 
-    Private Sub OnMessageReceived(ByVal request As Request)
+    Private Sub OnMessageReceived(ByVal request As ChatRequest)
         If ChatList.InvokeRequired Then
             Dim callback As New RequestReceivedCallback(AddressOf OnMessageReceived)
             ChatList.Invoke(callback, New Object() {request})
