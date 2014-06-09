@@ -2,33 +2,43 @@
 Imports System.IO
 Imports System.Net.Sockets
 Imports System.Threading
+Imports NUnit.Framework
 Imports Newtonsoft.Json
 Imports Entities.My.Resources
+Imports Entities.SocketUtil
 
 Namespace UserComponents
     Public Class ChatSocket
-        Private ReadOnly _tcpSocket As TcpClient
-        Private ReadOnly _networkStream As NetworkStream
-        Private ReadOnly _input As StreamReader
-        Private ReadOnly _output As StreamWriter
-        Private ReadOnly _requestThread As Thread
+        Public Property IpAddress As String
+        Private Property Port As Integer
+        Private Property TcpSocket As TcpClient
+        Private Property NetworkStream As NetworkStream
+        Private Property Input As StreamReader
+        Private Property Output As StreamWriter
+        Private Property RequestThread As Thread
+        Private Property ChatException As ChatException
 
-        Public Event OnRequestReceived(ByVal request As Request)
+        Public Event OnRequestReceived(ByVal chatRequest As ChatRequest)
 
         Public Sub New()
-            _tcpSocket = InstantiateNewTcpClient()
-            _networkStream = GetTcpStream()
-
-            _input = New StreamReader(_networkStream)
-            _output = New StreamWriter(_networkStream)
-
-            _requestThread = New Thread(New ThreadStart(AddressOf RecieveRequest))
-            _requestThread.Name = "Recieve request thread"
-            _requestThread.Start()
+            IpAddress = ConfigurationManager.AppSettings("IP-ADDRESS")
+            Port = ConfigurationManager.AppSettings("PORT")
         End Sub
 
-        Public Sub SendRequest(ByVal pRequest As Request)
-            WriteSocketLine(JsonConvert.SerializeObject(pRequest))
+        Public Function StartListening() As TestDelegate
+            TcpSocket = InstantiateNewTcpClient()
+            NetworkStream = GetTcpStream()
+
+            Input = New StreamReader(NetworkStream)
+            Output = New StreamWriter(NetworkStream)
+
+            RequestThread = New Thread(New ThreadStart(AddressOf RecieveRequest))
+            RequestThread.Name = "Recieve ChatRequest thread"
+            RequestThread.Start()
+        End Function
+
+        Public Sub SendRequest(ByVal pChatRequest As ChatRequest)
+            WriteSocketLine(JsonConvert.SerializeObject(pChatRequest))
         End Sub
 
         Private Sub RecieveRequest()
@@ -38,61 +48,63 @@ Namespace UserComponents
             ' ReSharper disable once FunctionNeverReturns
         End Sub
 
-        Private Function DeserializeRequest() As Request
-            Return JsonConvert.DeserializeObject(Of Request)(ReadSocketLine())
+        Private Function DeserializeRequest() As ChatRequest
+            Return JsonConvert.DeserializeObject(Of ChatRequest)(ReadSocketLine())
         End Function
 
-        Private Shared Function InstantiateNewTcpClient() As TcpClient
-            Dim ip = ConfigurationManager.AppSettings("IP-ADDRESS")
-            Dim port = ConfigurationManager.AppSettings("PORT")
-
+        Private Function InstantiateNewTcpClient() As TcpClient
             Try
-                Return New TcpClient(ip, port)
+                Return New TcpClient(IpAddress, Port)
             Catch ex As ArgumentNullException
-                Throw New ChatException(PortIsNothing, ex)
+                Throw NewChatException(PortIsNothing, ex)
             Catch ex As SocketException
-                Throw New ChatException(UnableToConnectToServer, ex)
+                Throw NewChatException(UnableToConnectToServer, ex)
             End Try
         End Function
 
         Private Function GetTcpStream() As NetworkStream
             Try
-                Return _tcpSocket.GetStream()
+                Return TcpSocket.GetStream()
             Catch ex As InvalidExpressionException
-                Throw New ChatException(TCPNotConnected, ex)
+                Throw NewChatException(TCPNotConnected, ex)
             Catch ex As ObjectDisposedException
-                Throw New ChatException(TCPClosed, ex)
+                Throw NewChatException(TCPClosed, ex)
             End Try
         End Function
 
         Private Function ReadSocketLine() As String
             Try
-                Return _input.ReadLine()
+                Return Input.ReadLine()
             Catch ex As OutOfMemoryException
-                Throw New ChatException(BufferSizeOverflow, ex)
+                Throw NewChatException(BufferSizeOverflow, ex)
             Catch ex As IOException
-                Throw New ChatException(ServerConnectionClosed, ex)
+                Throw NewChatException(ServerConnectionClosed, ex)
             End Try
         End Function
 
         Private Sub WriteSocketLine(ByVal msg As String)
             Console.WriteLine(msg)
             Try
-                _output.WriteLine(msg)
-                _output.Flush()
+                Output.WriteLine(msg)
+                Output.Flush()
             Catch ex As IOException
-                Throw New ChatException(ServerConnectionClosed, ex)
+                Throw NewChatException(ServerConnectionClosed, ex)
             End Try
         End Sub
 
+        Private Function NewChatException(ByVal msg As String, ByVal ex As Exception) As ChatException
+            ChatException = New ChatException(msg, ex)
+            Return ChatException
+        End Function
+
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
-            If Not _tcpSocket Is Nothing Then
-                _tcpSocket.Close()
-                _networkStream.Close()
-                _input.Close()
-                _output.Close()
-                _requestThread.Abort()
+            If Not TcpSocket Is Nothing Then
+                TcpSocket.Close()
+                NetworkStream.Close()
+                Input.Close()
+                Output.Close()
+                RequestThread.Abort()
             End If
         End Sub
     End Class

@@ -19,8 +19,7 @@ Namespace Managers
             End Try
             Return True
         End Function
-
-
+        
         ' Function to query the database, returns an ArrayList if we 
         Public Function ExecuteQuery(ByVal sqlStatement As String, ByVal tableName As String) As DataTable
             Try

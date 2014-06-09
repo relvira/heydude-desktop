@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Configuration
 Imports Entities
 
 Public Class UserBox
@@ -35,7 +36,7 @@ Public Class UserBox
 
     Public WriteOnly Property ImageUser As String
         Set(ByVal value As String)
-            value = ProfileImagesPath & value
+            value = ConfigurationManager.AppSettings("ProfileImagesPath") & value
             ' Get the image from a web server
             Dim tClient As WebClient = New WebClient
             Dim tImage As Bitmap = Bitmap.FromStream(New MemoryStream(tClient.DownloadData(value)))

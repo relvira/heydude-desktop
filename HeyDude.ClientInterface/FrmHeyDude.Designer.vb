@@ -16,6 +16,11 @@ Partial Class FrmHeyDude
         End Try
     End Sub
 
+    Public Sub New()
+        ' Llamada necesaria para el diseñador.
+        InitializeComponent()
+    End Sub
+
     'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
 

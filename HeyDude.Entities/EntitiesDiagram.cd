@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Entities.User">
+    <Position X="2.75" Y="0.5" Width="2" />
+    <Members>
+      <Method Name="New" Hidden="true" />
+    </Members>
+    <AssociationLine Name="PersonalData" Type="Entities.UserComponents.PersonalData" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="1.625" />
+        <Point X="5.812" Y="1.625" />
+        <Point X="5.812" Y="2.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.169" Y="0.1" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="ChatSocket" Type="Entities.UserComponents.ChatSocket" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="2.75" Y="1.625" />
+        <Point X="1.553" Y="1.625" />
+        <Point X="1.553" Y="2" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.164" Y="0.099" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Friends" Type="Entities.UserComponents.PersonalData" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="3.017" />
+        <Point X="3.75" Y="3.688" />
+        <Point X="5" Y="3.688" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.227" Y="0.131" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAACAAACAAEgAAAAAEUAAAAAAAAAAABgA=</HashCode>
+      <FileName>User.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PersonalData" />
+      <Property Name="ChatSocket" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Friends" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Entities.SocketUtil.ChatException" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.75" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SocketUtil\ChatException.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Entities.SocketUtil.ChatProtocol">
+    <Position X="7.25" Y="2.75" Width="1.5" />
+    <Members>
+      <Method Name="Equals" Hidden="true" />
+      <Method Name="New" Hidden="true" />
+      <Method Name="Operator &lt;&gt;" Hidden="true" />
+      <Method Name="Operator =" Hidden="true" />
+      <Method Name="ToString" Hidden="true" />
+      <Property Name="Value" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQAAQgAAAAAAAAEgCAAAIAAACAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>SocketUtil\ChatProtocol.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.UserComponents.ChatSocket">
+    <Position X="0.75" Y="2" Width="1.75" />
+    <Members>
+      <Method Name="DeserializeRequest" Hidden="true" />
+      <Method Name="Finalize" Hidden="true" />
+      <Method Name="GetTcpStream" Hidden="true" />
+      <Method Name="InstantiateNewTcpClient" Hidden="true" />
+      <Method Name="New" Hidden="true" />
+      <Method Name="NewChatException" Hidden="true" />
+      <Method Name="WriteSocketLine" Hidden="true" />
+    </Members>
+    <AssociationLine Name="ChatException" Type="Entities.SocketUtil.ChatException" FixedFromPoint="true">
+      <Path>
+        <Point X="1.698" Y="5.738" />
+        <Point X="1.698" Y="6.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.244" Y="0.133" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gABAAAgAAAAQAAAAAACICCCAGAAAQAAAAgAAABABAIA=</HashCode>
+      <FileName>UserComponents\ChatSocket.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ChatException" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Entities.UserComponents.PersonalData">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <Members>
+      <Method Name="GetUserAllFriends" Hidden="true" />
+      <Method Name="New" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAACAAAAACAAAIAAAAEAAAQAAAAAAAAAQAAGAAAAAAA=</HashCode>
+      <FileName>UserComponents\PersonalData.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.SocketUtil.ChatRequest">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="New" Hidden="true" />
+    </Members>
+    <AssociationLine Name="ChatProtocol" Type="Entities.SocketUtil.ChatProtocol">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.18" Y="0.11" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAAAAIAAAAAAAAAAAAAAAAAAABAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>SocketUtil\ChatRequest.vb</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ChatProtocol" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

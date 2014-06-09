@@ -1,99 +1,28 @@
 ﻿Imports System.Collections.Specialized
 Imports System.Net
 Imports System.Windows.Forms
+Imports System.Configuration
 
 Namespace UserComponents
     Public Class PersonalData
-        Private _mId As Integer
-        Private _mName As String
-        Private _mEmail As String
-        Private _mFullName As String
-        Private _mLoggedIn As Boolean
-        Private _mPasswd As String
-        Private _mStateMessage As String
-        Private _mImgStringSrc As String
+        Public Property Id As Integer
+        Public Property Name As String
+        Public Property Passwd As String
+        Public Property StateMessage As String
+        Public Property ImageSource As String
+        Public Property FullName As String
+        Public Property Email As String
+        Public Property IsLoggedIn As Boolean
 
         Public Sub New()
         End Sub
 
         Public Sub New(ByVal pId As Integer, ByVal pName As String, ByVal pStateMsg As String, ByVal pImgSrc As String)
-            _mId = pId
-            _mName = pName
-            _mStateMessage = pStateMsg
-            _mImgStringSrc = pImgSrc
+            Id = pId
+            Name = pName
+            StateMessage = pStateMsg
+            ImageSource = pImgSrc
         End Sub
-
-        Public Property Name() As String
-            Get
-                Return _mName
-            End Get
-            Set(ByVal value As String)
-                _mName = value
-            End Set
-        End Property
-
-        Public Property Passwd() As String
-            Get
-                Return _mPasswd
-            End Get
-            Set(ByVal value As String)
-                _mPasswd = value
-            End Set
-        End Property
-
-        Public Property StateMessage() As String
-            Get
-                Return _mStateMessage
-            End Get
-            Set(ByVal value As String)
-                _mStateMessage = value
-            End Set
-        End Property
-
-        Public Property ImageSource As String
-            Get
-                Return _mImgStringSrc
-            End Get
-            Set(ByVal value As String)
-                _mImgStringSrc = ProfileImagesPath & value
-            End Set
-        End Property
-
-        Public Property FullName As String
-            Get
-                Return _mFullName
-            End Get
-            Set(ByVal value As String)
-                _mFullName = value
-            End Set
-        End Property
-
-        Public Property Id As Integer
-            Get
-                Return _mId
-            End Get
-            Set(ByVal value As Integer)
-                _mId = value
-            End Set
-        End Property
-
-        Public Property Email As String
-            Get
-                Return _mEmail
-            End Get
-            Set(ByVal value As String)
-                _mEmail = value
-            End Set
-        End Property
-
-        Public Property IsLoggedIn As Boolean
-            Get
-                Return _mLoggedIn
-            End Get
-            Set(ByVal value As Boolean)
-                _mLoggedIn = value
-            End Set
-        End Property
 
 
         Public Function GetUserAllFriends() As ArrayList
@@ -113,13 +42,13 @@ Namespace UserComponents
             'Return Result
 
             ServicePointManager.Expect100Continue = False
-            Const downloaddServer As String = DynamicServer & "getUserFriends.php"
+            Dim downloaddServer As String = ConfigurationManager.AppSettings("DynamicServer") & "getUserFriends.php"
 
             Dim webcl As New WebClient()
 
             Dim reqParam As New NameValueCollection
-            reqParam.Add("id", _mId)
-            reqParam.Add("passwd", _mPasswd)
+            reqParam.Add("id", Id)
+            reqParam.Add("passwd", Passwd)
 
             Dim responseBytes As Byte()
 
