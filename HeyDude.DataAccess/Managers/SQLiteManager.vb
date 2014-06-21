@@ -13,7 +13,7 @@ Namespace Managers
 
         Private Sub Connect()
             Try
-                _connection = New SQLiteConnection("Data Source=sqlite/heydude.db")
+                _connection = New SQLiteConnection("Data Source=heydude.db")
                 ' Set sqlite password sha-1 generated + our own salt (more secure) :)
                 'connection.SetPassword(GetSha1Hash("H3yDud3R0ckZzZDud3") & "sT1llRoCksNiGGa")
                 _connection.Open()
