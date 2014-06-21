@@ -2,14 +2,14 @@
 Imports System.IO
 Imports System.Net.Sockets
 Imports System.Threading
-Imports NUnit.Framework
+Imports System.Windows.Forms
 Imports Newtonsoft.Json
 Imports Entities.My.Resources
 Imports Entities.SocketUtil
 
 Namespace UserComponents
     Public Class ChatSocket
-        Public Property IpAddress As String
+        Private Property IpAddress As String
         Private Property Port As Integer
         Private Property TcpSocket As TcpClient
         Private Property NetworkStream As NetworkStream
@@ -25,7 +25,7 @@ Namespace UserComponents
             Port = ConfigurationManager.AppSettings("PORT")
         End Sub
 
-        Public Function StartListening() As TestDelegate
+        Public Sub StartListening()
             TcpSocket = InstantiateNewTcpClient()
             NetworkStream = GetTcpStream()
 
@@ -35,7 +35,7 @@ Namespace UserComponents
             RequestThread = New Thread(New ThreadStart(AddressOf RecieveRequest))
             RequestThread.Name = "Recieve ChatRequest thread"
             RequestThread.Start()
-        End Function
+        End Sub
 
         Public Sub SendRequest(ByVal pChatRequest As ChatRequest)
             WriteSocketLine(JsonConvert.SerializeObject(pChatRequest))

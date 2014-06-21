@@ -25,6 +25,7 @@ Partial Class ModernToolBar
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModernToolBar))
         Me.BtnClose = New System.Windows.Forms.Button()
+        Me.BtnAdd = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'BtnClose
@@ -42,11 +43,24 @@ Partial Class ModernToolBar
         Me.BtnClose.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.BtnClose.UseVisualStyleBackColor = False
         '
+        'BtnAdd
+        '
+        Me.BtnAdd.BackgroundImage = Global.CustomControls.My.Resources.Resources.icon_add
+        Me.BtnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.BtnAdd.FlatAppearance.BorderSize = 0
+        Me.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnAdd.Location = New System.Drawing.Point(3, 3)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(32, 32)
+        Me.BtnAdd.TabIndex = 1
+        Me.BtnAdd.UseVisualStyleBackColor = True
+        '
         'ModernToolBar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(168, Byte), Integer))
+        Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnClose)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ModernToolBar"
@@ -55,5 +69,6 @@ Partial Class ModernToolBar
 
     End Sub
     Friend WithEvents BtnClose As System.Windows.Forms.Button
+    Friend WithEvents BtnAdd As System.Windows.Forms.Button
 
 End Class

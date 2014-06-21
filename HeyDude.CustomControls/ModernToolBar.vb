@@ -1,5 +1,6 @@
 ﻿Public Class ModernToolBar
     Public Event OnCloseButtonClick(sender As Object, e As EventArgs)
+    Public Event OnPlusButtonCLick(sender As Object, e As EventArgs)
 
     Private _mParentPosition As Point
     Private _mMouseAction As Boolean
@@ -33,5 +34,9 @@
 
     Private Sub ToolBar_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles MyBase.MouseUp
         _mMouseAction = False
+    End Sub
+
+    Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
+        RaiseEvent OnPlusButtonCLick(sender, e)
     End Sub
 End Class

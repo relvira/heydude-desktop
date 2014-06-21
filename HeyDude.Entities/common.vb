@@ -67,32 +67,30 @@ Public Module Common
     End Function
 
     ' TODO: Descomentar!!!
-    'Function UploadUserLocalData(ByVal uid As String)
-    '    SqliteManager.Close()
-    '    Const sqLitePath As String = "sqlite/heydude.db"
-    '    Try
-    '        'Upload image!
-    '        ServicePointManager.Expect100Continue = False
-    '        Dim uploadServer = DynamicServer & "sqliteUpload.php?uid=" & uid
+    Function UploadUserLocalData(ByVal uid As String)
+        SqliteManager.Close()
+        Const sqLitePath As String = "heydude.db"
+        Try
+            'Upload image!
+            ServicePointManager.Expect100Continue = False
+            Dim uploadServer = ConfigurationManager.AppSettings("DynamicServer") & "sqliteUpload.php?uid=" & uid
 
-    '        Dim webp As New WebProxy("192.168.255.1", 3128)
-    '        webp.UseDefaultCredentials = True
+            Dim webp As New WebProxy("192.168.255.1", 3128)
+            webp.UseDefaultCredentials = True
 
-    '        Dim webcl As New WebClient()
-    '        'webcl.Proxy = webp
-    '        webcl.UploadFile(uploadServer, sqLitePath)
+            Dim webcl As New WebClient()
+            'webcl.Proxy = webp
+            webcl.UploadFile(uploadServer, sqLitePath)
 
-    '        Return True
-    '    Catch ex As Exception
-    '        Return False
-    '    End Try
-    'End Function
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     Private Function DownloadUserLocalFromServer(ByVal id As Integer, Optional ByVal passwd As String = "")
-        Const sqLitePath As String = "sqlite/heydude.db"
+        Const sqLitePath As String = "heydude.db"
         Try
-            ServicePointManager.Expect100Continue = False
-            ServicePointManager.Expect100Continue = False
             Dim downloadServer As String = ConfigurationManager.AppSettings("DynamicServer") & "downloadSqlite.php"
 
             Dim webcl As New WebClient()
@@ -109,7 +107,7 @@ Public Module Common
                 oBin.Write(responsebytes)
                 oBin.Close()
             Catch ex As Exception
-
+                Console.WriteLine(ex.Message)
             End Try
 
             Dim mFileInfo As New FileInfo(sqLitePath)
@@ -136,7 +134,7 @@ Public Module Common
     End Sub
 
     Public Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
-        If File.Exists("sqlite/heydude.db") Then
+        If File.Exists("heydude.db") Then
             ' Este cliente ya tiene sqlite local, descargamos la ultima version del servidor
             DownloadUserLocalFromServer(id, passwd)
         Else
@@ -153,7 +151,7 @@ Public Module Common
     End Sub
 
     Private Function DownloadDefaultUserLocalSqlite()
-        Const sqLiteSavePath As String = "sqlite/heydude.db"
+        Const sqLiteSavePath As String = "heydude.db"
         Try
             ' Descargar base de datos por defecto (vacia)
             ServicePointManager.Expect100Continue = False

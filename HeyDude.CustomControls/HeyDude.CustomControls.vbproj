@@ -219,6 +219,7 @@
     <Content Include="Resources\close-button-large.png" />
     <Content Include="Resources\google-hangouts-icon.png" />
     <Content Include="Resources\hangouts-icon.png" />
+    <None Include="Resources\icon_add.png" />
     <Content Include="Resources\imessage.png" />
   </ItemGroup>
   <ItemGroup>
