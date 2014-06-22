@@ -85,7 +85,6 @@
     <Compile Include="UserComponents\ChatSocket.vb" />
     <Compile Include="UserComponents\PersonalData.vb" />
     <Compile Include="SocketUtil\ChatRequest.vb" />
-    <Compile Include="common.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -104,6 +103,8 @@
     <Compile Include="SocketUtil\ChatProtocol.vb" />
     <Compile Include="User.vb" />
     <Compile Include="Util\Encryption.vb" />
+    <Compile Include="Util\ServerDataCommunication.vb" />
+    <Compile Include="Util\Verification.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

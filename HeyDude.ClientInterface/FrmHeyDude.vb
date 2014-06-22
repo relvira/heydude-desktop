@@ -2,13 +2,14 @@
 Imports Entities
 Imports Entities.UserComponents
 Imports Entities.SocketUtil
+Imports Entities.Util
 Imports ChatClient.My.Resources
 
 Public Class FrmHeyDude
     Private Property User As User
 
     Private Delegate Sub RequestReceivedCallback(ByVal chatRequest As ChatRequest)
-    
+
     Public Sub New(ByVal personalData As PersonalData)
         Me.New()
 
@@ -31,7 +32,7 @@ Public Class FrmHeyDude
 
     Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
         User.SendMessage(ChatProtocol.Disconnect)
-        UploadUserLocalData(_User.PersonalData.Id)
+        UploadFile("sqliteUpload.php?uid=" & _User.PersonalData.Id)
         FrmLogin.Close()
     End Sub
 
@@ -58,7 +59,7 @@ Public Class FrmHeyDude
         TitleChatList.Id = pUserBox.Id
         RefreshMessageHistory()
     End Sub
-    
+
     Private Sub RefreshMessageHistory()
         ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
         Dim i As Integer = 0
@@ -97,6 +98,13 @@ Public Class FrmHeyDude
         Else
             SaveMessage(request.FromId, request.ToId, request.Message)
             ChatList.AddChatBox(request.Message, AlignedTo.Left)
+        End If
+    End Sub
+
+    Private Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
+        Const url As String = "downloadSqlite.php"
+        If Not DownloadFile(url, id, passwd) Then ' Si no existe el fichero o no hay versión en el servidor...
+            DownloadFile("default.db")  ' Default db file.
         End If
     End Sub
 End Class
