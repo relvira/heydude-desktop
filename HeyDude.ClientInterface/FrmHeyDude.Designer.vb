@@ -1,4 +1,5 @@
 ﻿Imports CustomControls
+Imports Entities.Util
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class FrmHeyDude
@@ -114,5 +115,4 @@ Partial Class FrmHeyDude
     Friend WithEvents ChatList As ChatList
     Friend WithEvents TitleChatList As TitleChatList
     Friend WithEvents ModernToolBar As ModernToolBar
-
 End Class

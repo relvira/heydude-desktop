@@ -1,63 +1,43 @@
 ﻿Imports System.Data.SQLite
 
 Namespace Managers
-    Public Class SQLiteManager
-        Dim _connection As SQLiteConnection
+    Public Class SqLiteManager
+        Private _sqliteInstance As SQLiteConnection
         Public Sub New()
             Try
                 Connect()
             Catch ex As Exception
-                MessageBox.Show(ex.Message)
+                Console.WriteLine(ex.Message)
             End Try
         End Sub
 
         Private Sub Connect()
             Try
-                _connection = New SQLiteConnection("Data Source=heydude.db")
-                ' Set sqlite password sha-1 generated + our own salt (more secure) :)
-                'connection.SetPassword(GetSha1Hash("H3yDud3R0ckZzZDud3") & "sT1llRoCksNiGGa")
-                _connection.Open()
+                _sqliteInstance = New SQLiteConnection("Data Source=heydude.db")
+                _sqliteInstance.Open()
             Catch ex As SQLiteException
-                MessageBox.Show("Fallo al conectar a sqlite: " & ex.Message)
+                Console.WriteLine(ex.Message)
             End Try
         End Sub
 
-        Public Function ExecuteNoQuery(ByVal sqlStatement As String)
-            Dim sqlCommand As New SQLiteCommand
-            sqlCommand.CommandText = sqlStatement
-            sqlCommand.Connection = _connection
+        Public Sub SaveMessage(ByVal msg As Message)
+            ExecuteQuery("INSERT INTO messages(from_id, to_id, message) " & _
+                           "VALUES(" & msg.FromUser & ", " & msg.ToUser & ", '" & msg.Message & "');")
+        End Sub
 
+        Private Sub ExecuteQuery(ByVal sqlStatement As String)
             Try
-                sqlCommand.ExecuteNonQuery()
+                Call New SQLiteCommand() With {
+                    .CommandText = sqlStatement,
+                    .Connection = _sqliteInstance} _
+                .ExecuteNonQuery()
             Catch ex As SQLiteException
-                MsgBox(ex.Message.ToString)
-                Return False
+                Console.WriteLine(ex.Message)
             End Try
-            Return True
-        End Function
-
-        Public Function ExecuteQuery(ByVal sqlStatement As String, ByVal tableName As String) As DataTable
-            Try
-                Dim oDataAdapter As New SQLiteDataAdapter(sqlStatement, _connection)
-                Dim oDataSet As New DataSet
-                Dim myTable As DataTable
-                oDataAdapter.Fill(oDataSet, tableName)
-
-                If oDataSet.Tables(tableName).Rows.Count > 0 Then
-                    Dim oDataRow As DataRow = oDataSet.Tables(tableName).Rows(0)
-                    myTable = oDataRow.Table
-                    Return myTable
-                Else
-                    Return New DataTable
-                End If
-            Catch ex As SQLiteException
-                Return New DataTable
-            End Try
-        End Function
+        End Sub
 
         Public Sub Close()
-            _connection.Close()
+            _sqliteInstance.Close()
         End Sub
-
     End Class
 End Namespace
