@@ -2,7 +2,6 @@
 Imports System.IO
 Imports System.Net.Sockets
 Imports System.Threading
-Imports System.Windows.Forms
 Imports Newtonsoft.Json
 Imports Entities.My.Resources
 Imports Entities.SocketUtil
@@ -23,9 +22,10 @@ Namespace UserComponents
         Public Sub New()
             IpAddress = ConfigurationManager.AppSettings("IP-ADDRESS")
             Port = ConfigurationManager.AppSettings("PORT")
+            StartListening()
         End Sub
 
-        Public Sub StartListening()
+        Private Sub StartListening()
             TcpSocket = InstantiateNewTcpClient()
             NetworkStream = GetTcpStream()
 

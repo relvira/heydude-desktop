@@ -1,9 +1,8 @@
 ﻿Imports CustomControls
-Imports DataAccess.Managers
 Imports Entities
 Imports Entities.UserComponents
-Imports ChatClient.My.Resources
 Imports Entities.SocketUtil
+Imports ChatClient.My.Resources
 
 Public Class FrmHeyDude
     Private Property User As User
@@ -13,8 +12,7 @@ Public Class FrmHeyDude
     Public Sub New(ByVal personalData As PersonalData)
         Me.New()
 
-        User = New User() With {.PersonalData = personalData}
-        User.InitFriends()
+        User = New User(personalData)
         User.SendMessage(ChatProtocol.Connect)
         AddHandler User.OnMessageReceived, AddressOf OnMessageReceived
 
@@ -33,7 +31,7 @@ Public Class FrmHeyDude
 
     Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
         User.SendMessage(ChatProtocol.Disconnect)
-        'UploadUserLocalData(_user.PersonalData.Id)
+        UploadUserLocalData(_User.PersonalData.Id)
         FrmLogin.Close()
     End Sub
 

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChatProjectModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="full_name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="350" Nullable="false" />
+          <Property Name="profile_img" Type="varchar" MaxLength="255" />
+          <Property Name="user_status" Type="varchar" MaxLength="140" />
+        </EntityType>
+        <EntityType Name="user_friends">
+          <Key>
+            <PropertyRef Name="friend_of" />
+            <PropertyRef Name="friend_to" />
+          </Key>
+          <Property Name="friend_of" Type="int" Nullable="false" />
+          <Property Name="friend_to" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="notificator_id" Type="int" Nullable="false" />
+          <Property Name="action" Type="enum" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_pending_messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="notificator_id" Type="int" Nullable="false" />
+          <Property Name="message" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ChatProjectModelStoreContainer">
+          <EntitySet Name="user" EntityType="Self.user" Schema="chat_project" store:Type="Tables" />
+          <EntitySet Name="user_friends" EntityType="Self.user_friends" Schema="chat_project" store:Type="Tables" />
+          <EntitySet Name="user_notifications" EntityType="Self.user_notifications" Schema="chat_project" store:Type="Tables" />
+          <EntitySet Name="user_pending_messages" EntityType="Self.user_pending_messages" Schema="chat_project" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChatProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="full_name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="350" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_img" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user_status" Type="String" MaxLength="140" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="user_friends">
+          <Key>
+            <PropertyRef Name="friend_of" />
+            <PropertyRef Name="friend_to" />
+          </Key>
+          <Property Name="friend_of" Type="Int32" Nullable="false" />
+          <Property Name="friend_to" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_notifications">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="notificator_id" Type="Int32" Nullable="false" />
+          <Property Name="action" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_pending_messages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="notificator_id" Type="Int32" Nullable="false" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ChatProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="user_friends" EntityType="Self.user_friends" />
+          <EntitySet Name="user_notifications" EntityType="Self.user_notifications" />
+          <EntitySet Name="user_pending_messages" EntityType="Self.user_pending_messages" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChatProjectModelStoreContainer" CdmEntityContainer="ChatProjectEntities">
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="ChatProjectModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="profile_img" ColumnName="profile_img" />
+                <ScalarProperty Name="user_status" ColumnName="user_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_friends">
+            <EntityTypeMapping TypeName="ChatProjectModel.user_friends">
+              <MappingFragment StoreEntitySet="user_friends">
+                <ScalarProperty Name="friend_of" ColumnName="friend_of" />
+                <ScalarProperty Name="friend_to" ColumnName="friend_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_notifications">
+            <EntityTypeMapping TypeName="ChatProjectModel.user_notifications">
+              <MappingFragment StoreEntitySet="user_notifications">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="notificator_id" ColumnName="notificator_id" />
+                <ScalarProperty Name="action" ColumnName="action" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_pending_messages">
+            <EntityTypeMapping TypeName="ChatProjectModel.user_pending_messages">
+              <MappingFragment StoreEntitySet="user_pending_messages">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="notificator_id" ColumnName="notificator_id" />
+                <ScalarProperty Name="message" ColumnName="message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
