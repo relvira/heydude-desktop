@@ -1,26 +1,31 @@
 ﻿Imports CustomControls
-Imports Entities
+Imports DataAccess
 Imports Entities.UserComponents
 Imports Entities.SocketUtil
 Imports Entities.Util
 Imports ChatClient.My.Resources
+Imports DataAccess.Managers
 
 Public Class FrmHeyDude
-    Private Property User As User
+    Private Property MessageDb() As New SqLiteManager
+    Private Property User As Entities.User
 
     Private Delegate Sub RequestReceivedCallback(ByVal chatRequest As ChatRequest)
 
     Public Sub New(ByVal personalData As PersonalData)
         Me.New()
 
-        User = New User(personalData)
+        User = New Entities.User(personalData)
         User.SendMessage(ChatProtocol.Connect)
         AddHandler User.OnMessageReceived, AddressOf OnMessageReceived
 
-        Dim friends = From frnd In User.Friends Select frnd.ToString.Split(",")
-        ' Load User friends. LinQ expression.
-        For Each f In friends
-            UserList.AddUserBox(New PersonalData(f(0), f(2), f(4), f(3)))
+        For Each frnd In User.Friends
+            UserList.AddUserBox(New UserBox With {
+                                .Id = frnd.Id,
+                                .UserName = frnd.Name,
+                                .UserState = frnd.StateMessage,
+                                .ImageUser = frnd.ImageSource _
+                            })
         Next
         ' Before loading form, get all user local data
         GetUserLocalData()
@@ -46,10 +51,14 @@ Public Class FrmHeyDude
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
-            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
-            SaveMessage(User.PersonalData.Id, TitleChatList.Id, TextBoxHD.Message)
-            User.SendMessage(TextBoxHD.Message, TitleChatList.Id)
             TextBoxHD.Message = ""
+            ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
+            User.SendMessage(TextBoxHD.Message, TitleChatList.Id)
+            MessageDb.SaveMessage(New Message With {
+                                  .FromUser = User.PersonalData.Id,
+                                  .ToUser = TitleChatList.Id,
+                                  .Message = TextBoxHD.Message _
+                              })
         End If
     End Sub
 
@@ -61,27 +70,6 @@ Public Class FrmHeyDude
     End Sub
 
     Private Sub RefreshMessageHistory()
-        ' THERE ARE OLD MESSAGES? PRINT EM NIGGA!
-        Dim i As Integer = 0
-        Try
-            Dim queryResult = Common.SqliteManager.ExecuteQuery("SELECT from_id, to_id, message, timestamp FROM messages WHERE from_id=" & TitleChatList.Id & " OR to_id=" & TitleChatList.Id & " ORDER BY timestamp ASC;", "messages")
-            If queryResult.Rows.Count > 0 Then
-                For Each oDataRow In queryResult.Rows
-                    If queryResult.Rows(i)("from_id") = TitleChatList.Id Then
-                        ' From other messages
-                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Left, queryResult.Rows(i)("timestamp"))
-                    ElseIf queryResult.Rows(i)("from_id") = User.PersonalData.Id Then
-                        ' Messages from me to others
-                        ChatList.AddChatBox(queryResult.Rows(i)("message"), AlignedTo.Right, queryResult.Rows(i)("timestamp"))
-                    End If
-                    i = i + 1
-                Next
-            Else
-                ' NO ROWS RETURNED
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ReadException & ex.Message)
-        End Try
     End Sub
 
     Private Sub GetUserLocalData()

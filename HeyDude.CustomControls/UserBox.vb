@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Configuration
-Imports Entities
 
 Public Class UserBox
     Private Shared ReadOnly MColor As Color = Color.FromArgb(106, 145, 177)
