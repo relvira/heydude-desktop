@@ -1,4 +1,6 @@
-﻿Public Class ChatBox
+﻿Imports System.Linq
+
+Public Class ChatBox
     ''' <summary>
     ''' Máximo número de caracteres posibles en el mensaje.
     ''' </summary>
