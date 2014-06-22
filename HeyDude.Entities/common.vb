@@ -1,92 +1,15 @@
 ﻿Imports System.IO
 Imports System.Net
-Imports System.Text
-Imports System.Text.RegularExpressions
 Imports System.Collections.Specialized
-Imports System.Security.Cryptography
 Imports System.Configuration
-Imports DataAccess.Managers
 Imports System.Windows.Forms
-Imports Entities.UserComponents
 
 Public Module Common
-    Public SqliteManager As SQLiteManager
-
-    Public Function UserLogin(ByVal user As String, ByVal password As String)
-        Dim sqlManager As New MySQLManager
-        Dim queryResult = sqlManager.ExecuteQuery("SELECT id, uid, password, email, full_name, profile_img, user_status FROM user where uid='" & user & "'", "user")
-
-        Dim i As Integer = 0
-        Dim userItem As New PersonalData
-
-        If queryResult.Rows.Count > 0 Then
-            For Each oDataRow In queryResult.Rows
-
-                If queryResult.Rows(i)("uid") = user And queryResult.Rows(i)("password") = GetSha1Hash(password) Then
-                    userItem.Id = queryResult.Rows(i)("id")
-                    userItem.Passwd = queryResult.Rows(i)("password")
-                    userItem.Name = queryResult.Rows(i)("uid")
-                    userItem.Email = queryResult.Rows(i)("email")
-                    userItem.FullName = queryResult.Rows(i)("full_name")
-                    userItem.ImageSource = queryResult.Rows(i)("profile_img")
-                    userItem.StateMessage = queryResult.Rows(i)("user_status")
-                    userItem.IsLoggedIn = True
-                    Exit For
-                Else
-                    userItem.IsLoggedIn = False
-                End If
-                i = i + 1
-            Next
-        Else
-            userItem.IsLoggedIn = False
-        End If
-        Return userItem
-    End Function
-
-    Function IsEmail(ByVal email As String) As Boolean
-        Static emailExpression As New Regex("^[_a-z0-9-]+(.[a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$")
-
-        Return emailExpression.IsMatch(email)
-    End Function
-
-    Function GetSha1Hash(ByVal strToHash As String) As String
-
-        Dim sha1Obj As New SHA1CryptoServiceProvider
-        Dim bytesToHash() As Byte = Encoding.ASCII.GetBytes(strToHash)
-
-        bytesToHash = sha1Obj.ComputeHash(bytesToHash)
-
-        Dim strResult As String = ""
-
-        ' TODO: Convertir a LinQ
-        For Each b As Byte In bytesToHash
-            strResult += b.ToString("x2")
-        Next
-
-        Return strResult
-    End Function
-
-    ' TODO: Descomentar!!!
-    Function UploadUserLocalData(ByVal uid As String)
-        SqliteManager.Close()
+    Public Sub UploadUserLocalData(ByVal uid As String)
         Const sqLitePath As String = "heydude.db"
-        Try
-            'Upload image!
-            ServicePointManager.Expect100Continue = False
-            Dim uploadServer = ConfigurationManager.AppSettings("DynamicServer") & "sqliteUpload.php?uid=" & uid
-
-            Dim webp As New WebProxy("192.168.255.1", 3128)
-            webp.UseDefaultCredentials = True
-
-            Dim webcl As New WebClient()
-            'webcl.Proxy = webp
-            webcl.UploadFile(uploadServer, sqLitePath)
-
-            Return True
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
+        Dim serverUrl = ConfigurationManager.AppSettings("DynamicServer") & "sqliteUpload.php?uid=" & uid
+        Call New WebClient().UploadFile(serverUrl, sqLitePath)
+    End Sub
 
     Private Function DownloadUserLocalFromServer(ByVal id As Integer, Optional ByVal passwd As String = "")
         Const sqLitePath As String = "heydude.db"

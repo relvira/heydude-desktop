@@ -1,32 +1,33 @@
-﻿Imports Entities.UserComponents
+﻿Imports DataAccess
+Imports Entities.UserComponents
 Imports Entities.SocketUtil
-Imports DataAccess.Managers
 
 Public Class User
     Public Property PersonalData As PersonalData
+    Public Property Friends As List(Of PersonalData)
     Private Property ChatSocket As ChatSocket
-    Public Property Friends As ArrayList
-    
+
     Public Event OnConnect()
     Public Event OnMessageSent(ByVal chatRequest As ChatRequest)
     Public Event OnMessageReceived(ByVal chatRequest As ChatRequest)
     Public Event OnDisconnect()
 
-    Public Sub New()
+    Public Sub New(ByVal data As PersonalData)
+        PersonalData = data
+        Friends = RetrieveFriends()
         ChatSocket = New ChatSocket()
-        ChatSocket.StartListening()
         AddHandler ChatSocket.OnRequestReceived, AddressOf OnChatRequestReceived
     End Sub
-    
+
     Public Sub SendMessage(ByVal msg As String, ByVal toId As Integer)
         ChatSocket.SendRequest(New ChatRequest(PersonalData.Id, ChatProtocol.SendMessage, toId, msg))
     End Sub
 
     Public Sub SendMessage(ByVal protocol As ChatProtocol)
-        If protocol = ChatProtocol.SendMessage Then
-            Throw New ArgumentException("Can't use this overload for send a request with SendMessage protocol.")
-        Else
+        If Not protocol = ChatProtocol.SendMessage Then
             ChatSocket.SendRequest(New ChatRequest(PersonalData.Id, protocol, 0, ""))
+        Else
+            Throw New ArgumentException("Can't use this overload for send a request with SendMessage protocol.")
         End If
     End Sub
 
@@ -43,23 +44,18 @@ Public Class User
         End Select
     End Sub
 
-    Public Sub InitFriends()
-        Friends = RetrieveFriends()
-    End Sub
-    Private Function RetrieveFriends() As ArrayList
-        Dim sqlManager As New MySQLManager
-        Dim queryResult = sqlManager.ExecuteQuery("SELECT friend_to FROM user_friends where friend_of='" & PersonalData.Id & "'", "user_friends")
-
-        Dim J = 0
-        Dim Result As New ArrayList
-        For Each oDataRow In queryResult.Rows
-            Dim Idfriend = queryResult.Rows(J)("friend_to")
-            Dim frnd = sqlManager.ExecuteQuery("SELECT id, uid, full_name, profile_img, user_status FROM user where id='" & Idfriend & "'", "user")
-            For Each f In frnd.Rows
-                Result.Add(frnd.Rows(0)("id") & "," & frnd.Rows(0)("uid") & "," & frnd.Rows(0)("full_name") & "," & frnd.Rows(0)("profile_img") & "," & frnd.Rows(0)("user_status"))
-            Next
-            J = J + 1
-        Next
-        Return Result
+    Private Function RetrieveFriends() As List(Of PersonalData)
+        Dim context As New ChatProjectEntities()
+        Return context.user_friends _
+            .Where(Function(id) id.friend_of = PersonalData.Id) _
+            .Select(Function(id) context.users _
+                        .Where(Function(frnd) frnd.id = id.friend_to) _
+                        .Select(Function(frnd) New PersonalData() With {
+                                    .Id = frnd.id,
+                                    .Name = frnd.uid,
+                                    .FullName = frnd.full_name,
+                                    .ImageSource = frnd.profile_img,
+                                    .StateMessage = frnd.user_status})) _
+            .ToList().Cast(Of PersonalData)()
     End Function
 End Class
