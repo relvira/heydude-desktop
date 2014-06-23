@@ -131,9 +131,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
     <EntityDeploy Include="ChatProjectEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ChatProjectEntities.Designer.vb</LastGenOutput>
