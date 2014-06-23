@@ -2,7 +2,7 @@
 Public Class UserList
     Private ReadOnly _mUserBoxlist As List(Of UserBox) = New List(Of UserBox)()
 
-    Private Shared _mPosY As Integer = 51
+    Private _posY As Integer = 51
 
     Private _mLastUserBoxSelected As UserBox
 
@@ -17,30 +17,9 @@ Public Class UserList
 
     Sub AddUserBox(userBox As UserBox)
         AddHandler userBox.UserBoxSelected, AddressOf UserBoxSelected
+        userBox.Location = New Point(1, _posY)
         Controls.Add(userBox)
-        _mPosY += userBox.Height
-        _mUserBoxlist.Add(userBox)
-    End Sub
-
-
-    ''' <summary>
-    ''' Método para hacer pruebas sin necesitar conectarme a la base de datos.
-    ''' </summary>
-    Sub AddUserBox(pName As String, pState As String)
-        Dim userBox As New UserBox
-
-        Controls.Add(userBox)
-
-        With userBox
-            .UserName = pName
-            .UserState = pState
-            .Location = New Point(1, _mPosY)
-        End With
-
-        AddHandler userBox.UserBoxSelected, AddressOf UserBoxSelected
-
-        _mPosY += userBox.Height
-
+        _posY += userBox.Height
         _mUserBoxlist.Add(userBox)
     End Sub
 
@@ -105,12 +84,12 @@ Public Class UserList
     End Sub
 
     Private Sub BtnCancelSearch_MouseDown(sender As Object, e As MouseEventArgs) Handles BtnCancelSearch.MouseDown
-        BtnCancelSearch.BackgroundImage = New Bitmap("assets\cancelsearchbutton_pressed.png")
+        BtnCancelSearch.BackgroundImage = New Bitmap(My.Resources.cancelsearchbutton_pressed)
     End Sub
 
 
     Private Sub BtnCancelSearch_MouseUp(sender As Object, e As EventArgs) Handles BtnCancelSearch.MouseUp
-        BtnCancelSearch.BackgroundImage = New Bitmap("assets\cancelsearchbutton_unpressed.png")
+        BtnCancelSearch.BackgroundImage = New Bitmap(My.Resources.cancelsearchbutton_unpressed)
     End Sub
 
     Private Sub BtnCancelSearch_Click(sender As Object, e As EventArgs) Handles BtnCancelSearch.Click

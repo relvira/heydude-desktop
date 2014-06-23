@@ -75,19 +75,8 @@ Public Class User
                             .Name = frnd.uid,
                             .FullName = frnd.full_name,
                             .ImageSource = frnd.profile_img,
-                            .StateMessage = frnd.user_status}).Single())
+                            .StateMessage = frnd.user_status}) _
+                    .Single())
         Next
-
-        'Friends = context.user_friends _
-        '                    .Where(Function(id) id.friend_of = PersonalData.Id) _
-        '                    .Select(Function(id) (context.users _
-        '                                .Where(Function(frnd) frnd.id = id.friend_to) _
-        '                                .Select(Function(frnd) New PersonalData() With {
-        '                                            .Id = frnd.id,
-        '                                            .Name = frnd.uid,
-        '                                            .FullName = frnd.full_name,
-        '                                            .ImageSource = frnd.profile_img,
-        '                                            .StateMessage = frnd.user_status})) _
-        '                                .Single())
     End Sub
 End Class

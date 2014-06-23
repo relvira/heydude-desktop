@@ -24,9 +24,32 @@ Partial Class ModernToolBar
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModernToolBar))
-        Me.BtnClose = New System.Windows.Forms.Button()
+        Me.TxtFriendFinder = New System.Windows.Forms.TextBox()
         Me.BtnAdd = New System.Windows.Forms.Button()
+        Me.BtnClose = New System.Windows.Forms.Button()
+        Me.ImgFinderStatus = New System.Windows.Forms.PictureBox()
+        CType(Me.ImgFinderStatus, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'TxtFriendFinder
+        '
+        Me.TxtFriendFinder.Location = New System.Drawing.Point(40, 7)
+        Me.TxtFriendFinder.Name = "TxtFriendFinder"
+        Me.TxtFriendFinder.Size = New System.Drawing.Size(125, 20)
+        Me.TxtFriendFinder.TabIndex = 2
+        Me.TxtFriendFinder.Visible = False
+        '
+        'BtnAdd
+        '
+        Me.BtnAdd.BackgroundImage = Global.CustomControls.My.Resources.Resources.add
+        Me.BtnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BtnAdd.FlatAppearance.BorderSize = 0
+        Me.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnAdd.Location = New System.Drawing.Point(10, 4)
+        Me.BtnAdd.Name = "BtnAdd"
+        Me.BtnAdd.Size = New System.Drawing.Size(24, 24)
+        Me.BtnAdd.TabIndex = 1
+        Me.BtnAdd.UseVisualStyleBackColor = True
         '
         'BtnClose
         '
@@ -43,32 +66,37 @@ Partial Class ModernToolBar
         Me.BtnClose.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.BtnClose.UseVisualStyleBackColor = False
         '
-        'BtnAdd
+        'ImgFinderStatus
         '
-        Me.BtnAdd.BackgroundImage = Global.CustomControls.My.Resources.Resources.icon_add
-        Me.BtnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.BtnAdd.FlatAppearance.BorderSize = 0
-        Me.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnAdd.Location = New System.Drawing.Point(3, 3)
-        Me.BtnAdd.Name = "BtnAdd"
-        Me.BtnAdd.Size = New System.Drawing.Size(32, 32)
-        Me.BtnAdd.TabIndex = 1
-        Me.BtnAdd.UseVisualStyleBackColor = True
+        Me.ImgFinderStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.ImgFinderStatus.Image = Global.CustomControls.My.Resources.Resources.cancel
+        Me.ImgFinderStatus.Location = New System.Drawing.Point(170, 11)
+        Me.ImgFinderStatus.Name = "ImgFinderStatus"
+        Me.ImgFinderStatus.Size = New System.Drawing.Size(12, 12)
+        Me.ImgFinderStatus.TabIndex = 3
+        Me.ImgFinderStatus.TabStop = False
+        Me.ImgFinderStatus.Visible = False
         '
         'ModernToolBar
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(168, Byte), Integer))
+        Me.Controls.Add(Me.ImgFinderStatus)
+        Me.Controls.Add(Me.TxtFriendFinder)
         Me.Controls.Add(Me.BtnAdd)
         Me.Controls.Add(Me.BtnClose)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "ModernToolBar"
         Me.Size = New System.Drawing.Size(502, 40)
+        CType(Me.ImgFinderStatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents BtnClose As System.Windows.Forms.Button
     Friend WithEvents BtnAdd As System.Windows.Forms.Button
+    Friend WithEvents TxtFriendFinder As System.Windows.Forms.TextBox
+    Friend WithEvents ImgFinderStatus As System.Windows.Forms.PictureBox
 
 End Class

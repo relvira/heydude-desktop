@@ -208,6 +208,8 @@
     <None Include="Resources\tick.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\14_Add-128.png" />
+    <None Include="Resources\cancel.png" />
     <Content Include="Resources\close-button-large.png" />
     <Content Include="Resources\google-hangouts-icon.png" />
     <Content Include="Resources\hangouts-icon.png" />

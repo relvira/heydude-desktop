@@ -2,9 +2,11 @@
 Imports Entities.SocketUtil
 Imports Entities.Util
 Imports DataAccess.Managers
+Imports System.IO
+Imports ChatClient.My.Resources
 
 Public Class FrmHeyDude
-    Private Property MessageDb() As New SqLiteManager
+    Private Property MessageDb() As SqLiteManager
     Private Property User As Entities.User
 
     Private Delegate Sub RequestReceivedCallback(ByVal chatRequest As ChatRequest)
@@ -34,9 +36,10 @@ Public Class FrmHeyDude
 
         User.SendMessage(ChatProtocol.Connect)
         AddHandler User.OnMessageReceived, AddressOf OnMessageReceived
-        
+
         ' Before loading form, get all user local data
         GetUserLocalData()
+        MessageDb = New SqLiteManager()
     End Sub
 
     Private Sub FrmHeyDude_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
@@ -45,8 +48,9 @@ Public Class FrmHeyDude
 
     Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
         User.SendMessage(ChatProtocol.Disconnect)
+        MessageDb.Close()
         UploadFile("sqliteUpload.php?uid=" & _User.PersonalData.Id)
-        FrmLogin.Close()
+        Application.Exit()
     End Sub
 
     Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles ModernToolBar.OnCloseButtonClick
@@ -59,7 +63,6 @@ Public Class FrmHeyDude
 
     Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
         If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
-            TextBoxHD.Message = ""
             ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
             User.SendMessage(TextBoxHD.Message, TitleChatList.Id)
             MessageDb.SaveMessage(New Message With {
@@ -68,6 +71,7 @@ Public Class FrmHeyDude
                                   .Message = TextBoxHD.Message _
                               })
         End If
+        TextBoxHD.Message = ""
     End Sub
 
     Private Sub UserSelectedChanged(ByVal pUserBox As UserBox) Handles UserList.UserSelectedChanged
@@ -105,10 +109,30 @@ Public Class FrmHeyDude
         End If
     End Sub
 
-    Private Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
-        Const url As String = "downloadSqlite.php"
-        If Not DownloadFile(url, id, passwd) Then ' Si no existe el fichero o no hay versión en el servidor...
-            DownloadFile("default.db")  ' Default db file.
+    Private Shared Sub LocalDataInitCheck(ByVal id As Integer, Optional ByVal passwd As String = "")
+        If File.Exists("heydude.db") Then
+            UpdateMsgDb("downloadSqlite.php", id, passwd)
+        Else
+            DownloadFile("client-db/default.db")
         End If
     End Sub
+
+    Private Sub ModernToolBar_OnFilterIntroClick(userName As String) Handles ModernToolBar.OnFilterIntroClick
+        If (IsAdded(userName)) Then
+            ModernToolBar.VisibleFilter = False
+            ModernToolBar.EnableFail = False
+            User.LoadFriends()
+        Else
+            ModernToolBar.EnableFail = True
+        End If
+    End Sub
+
+    Private Function IsAdded(ByVal userName As String) As Boolean
+        Try
+            Return AddFriend(User.PersonalData.Id, userName)
+        Catch ex As Exception
+            MessageBox.Show(UserIsAlreadyFriend)
+            Return False
+        End Try
+    End Function
 End Class

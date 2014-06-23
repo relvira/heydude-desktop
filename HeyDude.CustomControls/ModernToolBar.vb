@@ -1,6 +1,20 @@
 ﻿Public Class ModernToolBar
+    Public WriteOnly Property VisibleFilter() As Boolean
+        Set(value As Boolean)
+            TxtFriendFinder.Visible = value
+            TxtFriendFinder.Enabled = value
+        End Set
+    End Property
+
+    Public WriteOnly Property EnableFail() As Boolean
+        Set(value As Boolean)
+            ImgFinderStatus.Visible = value
+            ImgFinderStatus.Enabled = value
+        End Set
+    End Property
+
     Public Event OnCloseButtonClick(sender As Object, e As EventArgs)
-    Public Event OnPlusButtonCLick(sender As Object, e As EventArgs)
+    Public Event OnFilterIntroClick(userName As String)
 
     Private _mParentPosition As Point
     Private _mMouseAction As Boolean
@@ -37,6 +51,21 @@
     End Sub
 
     Private Sub BtnAdd_Click(sender As Object, e As EventArgs) Handles BtnAdd.Click
-        RaiseEvent OnPlusButtonCLick(sender, e)
+        TxtFriendFinder.Visible = True
+        TxtFriendFinder.Enabled = True
+    End Sub
+
+    Private Sub TxtFriendFinder_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtFriendFinder.KeyPress
+        If e.KeyChar = Convert.ToChar(Keys.Enter) Then
+            e.Handled = True
+            RaiseEvent OnFilterIntroClick(TxtFriendFinder.Text)
+        End If
+    End Sub
+
+    Private Sub ImgFinderStatus_Click(sender As Object, e As EventArgs) Handles ImgFinderStatus.Click
+        TxtFriendFinder.Visible = False
+        TxtFriendFinder.Enabled = False
+        ImgFinderStatus.Visible = False
+        ImgFinderStatus.Enabled = False
     End Sub
 End Class

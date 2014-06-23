@@ -11,6 +11,7 @@
 Option Strict On
 Option Explicit On
 
+Imports System
 
 Namespace My.Resources
     
@@ -101,6 +102,15 @@ Namespace My.Resources
         Friend ReadOnly Property ReadException() As String
             Get
                 Return ResourceManager.GetString("ReadException", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a El usuario especificado ya es tu amigo..
+        '''</summary>
+        Friend ReadOnly Property UserIsAlreadyFriend() As String
+            Get
+                Return ResourceManager.GetString("UserIsAlreadyFriend", resourceCulture)
             End Get
         End Property
     End Module

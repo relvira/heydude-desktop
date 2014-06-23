@@ -39,10 +39,10 @@ Partial Class FrmHeyDude
         'ModernToolBar
         '
         Me.ModernToolBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(99, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(168, Byte), Integer))
-        Me.ModernToolBar.Location = New System.Drawing.Point(0, -5)
+        Me.ModernToolBar.Location = New System.Drawing.Point(0, -1)
         Me.ModernToolBar.Margin = New System.Windows.Forms.Padding(0)
         Me.ModernToolBar.Name = "ModernToolBar"
-        Me.ModernToolBar.Size = New System.Drawing.Size(616, 39)
+        Me.ModernToolBar.Size = New System.Drawing.Size(616, 35)
         Me.ModernToolBar.TabIndex = 14
         '
         'TitleChatList

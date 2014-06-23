@@ -22,25 +22,22 @@ Namespace Util
             End If
         End Function
 
-        Public Function DownloadFile(ByVal url As String, ByVal id As String, ByVal pass As String)
+        Public Sub UpdateMsgDb(ByVal url As String, ByVal id As Integer, ByVal passwd As String)
+            Dim params As New NameValueCollection()
+            params.Add("id", id)
+            params.Add("passwd", passwd)
+            Dim bytes = WebClient.UploadValues(ServerUrl & "?" & url, "POST", params)
+            AppendToDb(bytes)
+        End Sub
+
+        Private Sub AppendToDb(ByVal content As Byte())
             Try
-                Dim params As New NameValueCollection()
-                params.Add("id", id)
-                params.Add("passwd", pass)
-                UpdateMsgDb(DownloadFile(url, params))
-            Catch ex As Exception
+                Dim writer = New BinaryWriter(New FileStream(SqLitePath, FileMode.OpenOrCreate))
+                writer.Write(content)
+                writer.Close()
+            Catch ex As IOException
                 Console.WriteLine(ex.Message)
-                Return False
             End Try
-
-            Return VerifyFileCorruption()
-        End Function
-
-        Private Sub UpdateMsgDb(ByVal contentToAdd As Byte())
-            With New BinaryWriter(New FileStream(SqLitePath, FileMode.OpenOrCreate))
-                .Write(contentToAdd)
-                .Close()
-            End With
         End Sub
 
         Private Function VerifyFileCorruption()

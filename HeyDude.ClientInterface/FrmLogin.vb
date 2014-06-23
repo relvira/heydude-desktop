@@ -9,19 +9,20 @@ Public Class FrmLogin
     Private Sub BtnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnLogin.MyClick
         If UserVerified() Then
             Call New FrmHeyDude(_user).Show()
+        Else
+            LblLoginError.Visible = True
         End If
     End Sub
 
     Private Function UserVerified() As Boolean
-        'Try
-        _user = New User(TxtUser.Message)
+        Try
+            _user = New User(TxtUser.Message)
+        Catch ex As Exception
+            Return False
+        End Try
         If _user.PersonalData.Passwd <> GetSha1Hash(TxtPasswd.Message) Then Return False
         If Not _user.PersonalData.IsLoggedIn Then Return False
         Return True
-        'Catch ex As InvalidOperationException
-        '    LblLoginError.Visible = True
-        '    Return False
-        'End Try
     End Function
 
     '---------------- MOVER FORMULARIO ----------------

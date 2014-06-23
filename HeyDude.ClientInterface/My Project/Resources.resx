@@ -132,4 +132,7 @@
   <data name="PasswordsDontMatch" xml:space="preserve">
     <value>Las contraseñas no coinciden</value>
   </data>
+  <data name="UserIsAlreadyFriend" xml:space="preserve">
+    <value>El usuario especificado ya es tu amigo.</value>
+  </data>
 </root>
