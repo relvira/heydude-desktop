@@ -226,12 +226,6 @@
     <None Include="Resources\tick.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\14_Add-128.png" />
     <None Include="Resources\cancel.png" />
     <Content Include="Resources\close-button-large.png" />

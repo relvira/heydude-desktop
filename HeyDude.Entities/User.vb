@@ -79,4 +79,8 @@ Public Class User
                     .Single())
         Next
     End Sub
+
+    Public Sub CloseConnection()
+        ChatSocket.Dispose()
+    End Sub
 End Class
