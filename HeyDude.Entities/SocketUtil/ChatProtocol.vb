@@ -1,7 +1,10 @@
-﻿Namespace SocketUtil
+﻿Imports Newtonsoft.Json
+
+Namespace SocketUtil
     Public Class ChatProtocol
         Public Property Value As String
 
+        <JsonConstructor>
         Private Sub New(ByVal pValue As String)
             Value = pValue
         End Sub
