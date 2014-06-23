@@ -22,6 +22,12 @@ Public Class UserList
         _posY += userBox.Height
         _mUserBoxlist.Add(userBox)
     End Sub
+    Public Sub RemoveAllUserBox()
+        _posY = 51
+        For Each usrBox In _mUserBoxlist
+            Controls.Remove(usrBox)
+        Next
+    End Sub
 
     Private Sub UserBoxSelected(pUserBox As UserBox)
         RaiseEvent UserSelectedChanged(pUserBox)

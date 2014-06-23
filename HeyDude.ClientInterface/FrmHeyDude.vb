@@ -123,6 +123,15 @@ Public Class FrmHeyDude
             ModernToolBar.VisibleFilter = False
             ModernToolBar.EnableFail = False
             User.LoadFriends()
+            UserList.RemoveAllUserBox()
+            For Each frnd In User.Friends
+                UserList.AddUserBox(New UserBox With {
+                                    .Id = frnd.Id,
+                                    .UserName = frnd.Name,
+                                    .UserState = frnd.StateMessage,
+                                    .ImageUser = frnd.ImageSource
+                                })
+            Next
         Else
             ModernToolBar.EnableFail = True
         End If
