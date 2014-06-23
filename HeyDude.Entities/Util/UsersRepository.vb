@@ -23,6 +23,10 @@ Namespace Util
                 context.user_friends.Add(New user_friends With {
                                          .friend_of = userId,
                                          .friend_to = usr.id})
+
+                context.user_friends.Add(New user_friends With {
+                                         .friend_of = usr.id,
+                                         .friend_to = userId})
                 context.SaveChanges()
             End Using
             Return True
