@@ -16,19 +16,28 @@ Public Class FrmHeyDude
         Me.New()
 
         User = usr
-        User.LoadFriends()
-        User.StartChatSocket()
+        Try
+            User.LoadFriends()
+            User.StartChatSocket()
+            For Each frnd In User.Friends
+                UserList.AddUserBox(New UserBox With {
+                                    .Id = frnd.Id,
+                                    .UserName = frnd.Name,
+                                    .UserState = frnd.StateMessage,
+                                    .ImageUser = frnd.ImageSource
+                                })
+            Next
+        Catch ex As ChatException
+            MessageBox.Show(ex.Message)
+            Application.Exit()
+            Return
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
         User.SendMessage(ChatProtocol.Connect)
         AddHandler User.OnMessageReceived, AddressOf OnMessageReceived
-
-        For Each frnd In User.Friends
-            UserList.AddUserBox(New UserBox With {
-                                .Id = frnd.Id,
-                                .UserName = frnd.Name,
-                                .UserState = frnd.StateMessage,
-                                .ImageUser = frnd.ImageSource _
-                            })
-        Next
+        
         ' Before loading form, get all user local data
         GetUserLocalData()
     End Sub

@@ -14,7 +14,7 @@ Namespace SocketUtil
         End Sub
 
         Public Sub New(ByVal message As String, ByVal inner As Exception)
-            MyBase.New()
+            MyBase.New(message, inner)
         End Sub
 
         ' This constructor is needed for serialization.
