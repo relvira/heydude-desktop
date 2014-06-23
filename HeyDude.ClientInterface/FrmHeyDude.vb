@@ -51,6 +51,7 @@ Public Class FrmHeyDude
         MessageDb.Close()
         UploadFile("sqliteUpload.php?uid=" & _User.PersonalData.Id)
         Application.Exit()
+        User.CloseConnection()
     End Sub
 
     Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles ModernToolBar.OnCloseButtonClick
@@ -61,7 +62,7 @@ Public Class FrmHeyDude
         ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(213, 213, 213), ButtonBorderStyle.Solid)
     End Sub
 
-    Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHD.OnIntroPressed
+    Private Sub SendMessage(ByVal e As KeyPressEventArgs) Handles TextBoxHd.OnIntroPressed
         If TextBoxHD.Message.Length > 1 And TitleChatList.Id <> 0 Then
             ChatList.AddChatBox(TextBoxHD.Message, AlignedTo.Right)
             User.SendMessage(TextBoxHD.Message, TitleChatList.Id)

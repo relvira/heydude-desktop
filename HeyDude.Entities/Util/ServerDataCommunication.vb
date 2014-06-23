@@ -40,12 +40,12 @@ Namespace Util
             End Try
         End Sub
 
-        Private Function VerifyFileCorruption()
-            If New FileInfo(SqLitePath).Length < 62 Then
-                File.Delete(SqLitePath)
-                Return False
-            End If
-            Return True
-        End Function
+        'Private Function VerifyFileCorruption()
+        '    If New FileInfo(SqLitePath).Length < 62 Then
+        '        File.Delete(SqLitePath)
+        '        Return False
+        '    End If
+        '    Return True
+        'End Function
     End Module
 End Namespace

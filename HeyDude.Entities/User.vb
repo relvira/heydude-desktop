@@ -7,10 +7,7 @@ Public Class User
     Public Property Friends As List(Of PersonalData)
     Private Property ChatSocket As ChatSocket
 
-    Public Event OnConnect()
-    Public Event OnMessageSent(ByVal chatRequest As ChatRequest)
     Public Event OnMessageReceived(ByVal chatRequest As ChatRequest)
-    Public Event OnDisconnect()
 
     Public Sub New(ByVal id As String)
         PersonalData = RetrievePersonalData(id)
@@ -30,14 +27,8 @@ Public Class User
 
     Private Sub OnChatRequestReceived(ByVal chatRequest As ChatRequest)
         Select Case chatRequest.ChatProtocol
-            Case ChatProtocol.Connect
-                RaiseEvent OnConnect()
-            Case ChatProtocol.SendMessage
-                RaiseEvent OnMessageSent(chatRequest)
             Case ChatProtocol.ReceiveMessage
                 RaiseEvent OnMessageReceived(chatRequest)
-            Case ChatProtocol.Disconnect
-                RaiseEvent OnDisconnect()
         End Select
     End Sub
 
@@ -78,5 +69,9 @@ Public Class User
                             .StateMessage = frnd.user_status}) _
                     .Single())
         Next
+    End Sub
+
+    Public Sub CloseConnection()
+        ChatSocket.Dispose()
     End Sub
 End Class

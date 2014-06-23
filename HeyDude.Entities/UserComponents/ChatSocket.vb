@@ -107,5 +107,9 @@ Namespace UserComponents
                 RequestThread.Abort()
             End If
         End Sub
+
+        Public Sub Dispose()
+            Finalize()
+        End Sub
     End Class
 End Namespace

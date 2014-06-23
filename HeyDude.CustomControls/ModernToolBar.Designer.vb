@@ -41,7 +41,7 @@ Partial Class ModernToolBar
         '
         'BtnAdd
         '
-        Me.BtnAdd.BackgroundImage = Global.CustomControls.My.Resources.Resources.add
+        Me.BtnAdd.BackgroundImage = Global.CustomControls.My.Resources.Resources.icon_add
         Me.BtnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.BtnAdd.FlatAppearance.BorderSize = 0
         Me.BtnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
