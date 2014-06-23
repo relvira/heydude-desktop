@@ -1,5 +1,8 @@
-﻿Public Class Message
-    Public FromUser As Integer
-    Public ToUser As Integer
-    Public Message As String
-End Class
+﻿Namespace Managers
+    Public Class Message
+        Public Property FromUser As Integer
+        Public Property ToUser As Integer
+        Public Property Message As String
+        Public Property HourSent() As String
+    End Class
+End Namespace

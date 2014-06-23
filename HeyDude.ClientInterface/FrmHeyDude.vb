@@ -12,10 +12,12 @@ Public Class FrmHeyDude
 
     Private Delegate Sub RequestReceivedCallback(ByVal chatRequest As ChatRequest)
 
-    Public Sub New(ByVal personalData As PersonalData)
+    Public Sub New(ByVal usr As Entities.User)
         Me.New()
 
-        User = New Entities.User(personalData)
+        User = usr
+        User.LoadFriends()
+        User.StartChatSocket()
         User.SendMessage(ChatProtocol.Connect)
         AddHandler User.OnMessageReceived, AddressOf OnMessageReceived
 
@@ -70,13 +72,18 @@ Public Class FrmHeyDude
     End Sub
 
     Private Sub RefreshMessageHistory()
+        For Each msg In MessageDb.GetAll(User.PersonalData.Id, TitleChatList.Id)
+            If msg.FromUser = User.PersonalData.Id Then
+                ChatList.AddChatBox(msg.Message, AlignedTo.Left, msg.HourSent)
+            Else
+                ChatList.AddChatBox(msg.Message, AlignedTo.Right, msg.HourSent)
+            End If
+        Next
     End Sub
 
     Private Sub GetUserLocalData()
         ' Download Local User data
         LocalDataInitCheck(User.PersonalData.Id, User.PersonalData.Passwd)
-        ' After download create MySQL Instance
-        Common.SqliteManager = New SQLiteManager
     End Sub
 
     Private Sub OnMessageReceived(ByVal request As ChatRequest)
@@ -84,8 +91,11 @@ Public Class FrmHeyDude
             Dim callback As New RequestReceivedCallback(AddressOf OnMessageReceived)
             ChatList.Invoke(callback, New Object() {request})
         Else
-            SaveMessage(request.FromId, request.ToId, request.Message)
             ChatList.AddChatBox(request.Message, AlignedTo.Left)
+            MessageDb.SaveMessage(New Message With {
+                                  .FromUser = request.FromId,
+                                  .ToUser = request.ToId,
+                                  .Message = request.Message})
         End If
     End Sub
 
