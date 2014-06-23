@@ -164,4 +164,38 @@ Public Module Common
             Return False
         End Try
     End Function
+
+    Public Function UserExists(ByVal user As String)
+        Dim sqlManager As New MySQLManager
+        Dim queryResult = sqlManager.ExecuteQuery("SELECT id, uid, password, email, full_name, profile_img, user_status FROM user where uid='" & user & "'", "user")
+
+        If queryResult.Rows.Count > 0 Then
+            Return queryResult.Rows(0)("id")
+        Else
+            Return 0
+        End If
+        Return 0
+    End Function
+
+    Public Function AddUserToFriendList(ByVal userToAdd As String, ByVal RequesterUser As String)
+        Dim isUserInDB As Integer = UserExists(userToAdd)
+        Dim RequesterUserId As Integer = UserExists(RequesterUser)
+        If isUserInDB <> 0 Then
+            Try
+                ' Insert userdata in database 
+                Dim registerUser As New MySQLManager
+                Dim statementGenerated = "INSERT INTO user_friends(friend_of, friend_to) VALUES('" & RequesterUser & "','" & isUserInDB & "');"
+                Dim result = registerUser.ExecuteNoQuery(statementGenerated)
+
+                statementGenerated = "INSERT INTO user_friends(friend_of, friend_to) VALUES('" & isUserInDB & "','" & RequesterUser & "');"
+                result = registerUser.ExecuteNoQuery(statementGenerated)
+                Return True
+            Catch ex As Exception
+
+            End Try
+        Else
+            Return False
+        End If
+        Return False
+    End Function
 End Module

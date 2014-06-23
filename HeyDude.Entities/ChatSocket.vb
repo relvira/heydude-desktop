@@ -7,7 +7,8 @@ Imports Newtonsoft.Json
 Namespace User
     Public Class ChatSocket
         Private Const Port As Integer = 8000
-        Private Const IpAddress As String = "162.243.214.24"
+        'Private Const IpAddress As String = "162.243.214.24"
+        Private Const IpAddress As String = "localhost"
 
         Private ReadOnly _mClientSocket As TcpClient
         Private ReadOnly _mNetworkStream As NetworkStream
