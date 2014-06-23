@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "HeyDude.ClientInterface", "HeyDude.ClientInterface\HeyDude.ClientInterface.vbproj", "{31818FC3-898E-4B40-B663-DAB631664047}"

@@ -1,9 +1,6 @@
 ﻿Imports CustomControls
-Imports DataAccess
-Imports Entities.UserComponents
 Imports Entities.SocketUtil
 Imports Entities.Util
-Imports ChatClient.My.Resources
 Imports DataAccess.Managers
 
 Public Class FrmHeyDude
