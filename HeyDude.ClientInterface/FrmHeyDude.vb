@@ -50,12 +50,12 @@ Public Class FrmHeyDude
         User.SendMessage(ChatProtocol.Disconnect)
         MessageDb.Close()
         UploadFile("sqliteUpload.php?uid=" & _User.PersonalData.Id)
-        Application.Exit()
         User.CloseConnection()
     End Sub
 
     Private Sub ToolBar_OnCloseButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles ModernToolBar.OnCloseButtonClick
         Close()
+        Application.Exit()
     End Sub
 
     Private Sub FrmHeyDude_Paint(ByVal sender As Object, ByVal e As PaintEventArgs) Handles Me.Paint
