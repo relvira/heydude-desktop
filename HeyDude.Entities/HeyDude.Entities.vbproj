@@ -104,6 +104,7 @@
     <Compile Include="User.vb" />
     <Compile Include="Util\Encryption.vb" />
     <Compile Include="Util\ServerDataCommunication.vb" />
+    <Compile Include="Util\UsersRepository.vb" />
     <Compile Include="Util\Verification.vb" />
   </ItemGroup>
   <ItemGroup>

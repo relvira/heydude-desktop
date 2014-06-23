@@ -13,15 +13,15 @@ Public Class FrmLogin
     End Sub
 
     Private Function UserVerified() As Boolean
-        Try
-            _user = New User(TxtUser.Message)
-            If _user.PersonalData.Passwd <> GetSha1Hash(TxtPasswd.Message) Then Return False
-            If Not _user.PersonalData.IsLoggedIn Then Return False
-            Return True
-        Catch ex As InvalidOperationException
-            LblLoginError.Visible = True
-            Return False
-        End Try
+        'Try
+        _user = New User(TxtUser.Message)
+        If _user.PersonalData.Passwd <> GetSha1Hash(TxtPasswd.Message) Then Return False
+        If Not _user.PersonalData.IsLoggedIn Then Return False
+        Return True
+        'Catch ex As InvalidOperationException
+        '    LblLoginError.Visible = True
+        '    Return False
+        'End Try
     End Function
 
     '---------------- MOVER FORMULARIO ----------------
