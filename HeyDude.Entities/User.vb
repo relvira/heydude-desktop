@@ -12,11 +12,8 @@ Public Class User
     Public Event OnMessageReceived(ByVal chatRequest As ChatRequest)
     Public Event OnDisconnect()
 
-    Public Sub New(ByVal data As PersonalData)
-        PersonalData = data
-        Friends = RetrieveFriends()
-        ChatSocket = New ChatSocket()
-        AddHandler ChatSocket.OnRequestReceived, AddressOf OnChatRequestReceived
+    Public Sub New(ByVal id As String)
+        PersonalData = RetrievePersonalData(id)
     End Sub
 
     Public Sub SendMessage(ByVal msg As String, ByVal toId As Integer)
@@ -44,9 +41,29 @@ Public Class User
         End Select
     End Sub
 
-    Private Function RetrieveFriends() As List(Of PersonalData)
+    Private Shared Function RetrievePersonalData(ByVal id As String) As PersonalData
+        Return New ChatProjectEntities().users _
+                .Where(Function(data) data.uid = id) _
+                .Select(Function(data) New PersonalData With {
+                        .Id = data.id,
+                        .Passwd = data.password,
+                        .Name = data.uid,
+                        .Email = data.email,
+                        .FullName = data.full_name,
+                        .ImageSource = data.profile_img,
+                        .StateMessage = data.user_status,
+                        .IsLoggedIn = True}) _
+                .Single()
+    End Function
+
+    Public Sub StartChatSocket()
+        ChatSocket = New ChatSocket()
+        AddHandler ChatSocket.OnRequestReceived, AddressOf OnChatRequestReceived
+    End Sub
+
+    Public Sub LoadFriends()
         Dim context As New ChatProjectEntities()
-        Return context.user_friends _
+        Friends = (context.user_friends _
             .Where(Function(id) id.friend_of = PersonalData.Id) _
             .Select(Function(id) context.users _
                         .Where(Function(frnd) frnd.id = id.friend_to) _
@@ -56,6 +73,6 @@ Public Class User
                                     .FullName = frnd.full_name,
                                     .ImageSource = frnd.profile_img,
                                     .StateMessage = frnd.user_status})) _
-            .ToList().Cast(Of PersonalData)()
-    End Function
+            .ToList().Cast(Of PersonalData)())
+    End Sub
 End Class

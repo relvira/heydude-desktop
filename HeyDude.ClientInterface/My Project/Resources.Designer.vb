@@ -61,6 +61,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Busca una cadena traducida similar a Correo electronico invalido.
+        '''</summary>
+        Friend ReadOnly Property InvalidEmail() As String
+            Get
+                Return ResourceManager.GetString("InvalidEmail", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a Nombre y apellidos no validos.
+        '''</summary>
+        Friend ReadOnly Property InvalidNameAndSurname() As String
+            Get
+                Return ResourceManager.GetString("InvalidNameAndSurname", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a Nombre de usuario no valido.
+        '''</summary>
+        Friend ReadOnly Property InvalidUser() As String
+            Get
+                Return ResourceManager.GetString("InvalidUser", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca una cadena traducida similar a Las contraseñas no coinciden.
+        '''</summary>
+        Friend ReadOnly Property PasswordsDontMatch() As String
+            Get
+                Return ResourceManager.GetString("PasswordsDontMatch", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Busca una cadena traducida similar a Read exception: .
         '''</summary>
         Friend ReadOnly Property ReadException() As String

@@ -1,40 +1,27 @@
-﻿Imports DataAccess
-Imports Entities.UserComponents
-Imports Entities.Util
+﻿Imports Entities.Util
+Imports Entities
 
 Public Class FrmLogin
     Dim _formPosition As Point
     Dim _mouseAction As Boolean
+    Dim _user As User
+
     Private Sub BtnLogin_Click(ByVal sender As Object, ByVal e As EventArgs) Handles BtnLogin.MyClick
-        Dim result = CheckUserLogin(TxtUser.Message, TxtPasswd.Message)
-        If result.IsLoggedIn Then
-            Call New FrmHeyDude().Show(result)
+        If UserVerified() Then
+            Call New FrmHeyDude(_user).Show()
         End If
     End Sub
 
-    Private Function CheckUserLogin()
+    Private Function UserVerified() As Boolean
         Try
-            Dim userData = GetUserData()
-            If Not userData.Passwd = GetSha1Hash(TxtPasswd.Message) Then Throw New InvalidOperationException
+            _user = New User(TxtUser.Message)
+            If _user.PersonalData.Passwd <> GetSha1Hash(TxtPasswd.Message) Then Return False
+            If Not _user.PersonalData.IsLoggedIn Then Return False
+            Return True
         Catch ex As InvalidOperationException
             LblLoginError.Visible = True
-            Return New PersonalData() With {.IsLoggedIn = False}
+            Return False
         End Try
-    End Function
-
-    Private Function GetUserData()
-        Return New ChatProjectEntities().users _
-                .Where(Function(personalData) personalData.uid = TxtUser.Message) _
-                .Select(Function(personalData) New PersonalData With {
-                        .Id = personalData.id,
-                        .Passwd = personalData.password,
-                        .Name = personalData.uid,
-                        .Email = personalData.email,
-                        .FullName = personalData.full_name,
-                        .ImageSource = personalData.profile_img,
-                        .StateMessage = personalData.user_status,
-                        .IsLoggedIn = True}) _
-                .Single()
     End Function
 
     '---------------- MOVER FORMULARIO ----------------

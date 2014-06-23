@@ -1,7 +1,7 @@
 ﻿Imports System.Net
 Imports System.Configuration
-Imports DataAccess.Managers
-Imports Entities
+Imports Entities.Util
+Imports ChatClient.My.Resources
 
 Public Class FrmRegister
     Dim _formPosition As Point
@@ -31,14 +31,14 @@ Public Class FrmRegister
         _mouseAction = False
     End Sub
 
-    Private Sub BtnUploadImage_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnUploadImage.myClick
+    Private Sub BtnUploadImage_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnUploadImage.MyClick
         Dim fileDialog As New OpenFileDialog
         fileDialog.ShowDialog()
         _profileImagePath = fileDialog.FileName
         _uploadClicked = True
     End Sub
 
-    Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.myClick
+    Private Sub BtnRegister_myClick(ByVal sender As Object, ByVal e As EventArgs) Handles BtnRegister.MyClick
         Dim userFullName As String = TxtFullName.Message
         Dim userEmail As String = TxtEmail.Message
         Dim userPasswd1 As String = TxtPasswd1.Message
@@ -48,24 +48,24 @@ Public Class FrmRegister
         Dim valid As Boolean = True
 
         If userUid.Length < 3 Then
-            MessageBox.Show("Nombre de usuario no valido")
+            MessageBox.Show(InvalidUser)
             valid = False
         End If
 
-        If Not Common.IsEmail(userEmail) Then
-            MessageBox.Show("Correo electronico invalido")
+        If Not IsEmail(userEmail) Then
+            MessageBox.Show(InvalidEmail)
             valid = False
         End If
 
         If userFullName.Length < 5 Then
-            MessageBox.Show("Nombre y apellidos no validos")
+            MessageBox.Show(InvalidNameAndSurname)
             valid = False
         End If
 
         If userPasswd1 = userPasswd2 Then
-            userPasswdFinal = Common.GetSha1Hash(userPasswd1)
+            userPasswdFinal = GetSha1Hash(userPasswd1)
         Else
-            MessageBox.Show("Las contraseñas no coinciden")
+            MessageBox.Show(PasswordsDontMatch)
             valid = False
         End If
 
@@ -85,14 +85,10 @@ Public Class FrmRegister
                 profileImgGenerated = TxtUsername.Message & ".png"
             End If
 
-            ' Insert userdata in database 
-            Dim registerUser As New MySQLManager
-            Dim statementGenerated = "INSERT INTO user(uid, email, full_name, password, profile_img) VALUES('" & userUid & "','" & userEmail & "','" & userFullName & "','" & userPasswdFinal & "','" & profileImgGenerated & "');"
-            Dim result = registerUser.ExecuteNoQuery(statementGenerated)
+            Alta(userUid, userEmail, userFullName, userPasswdFinal, profileImgGenerated)
 
-            ' Close form
             FrmLogin.Show()
-            Me.Close()
+            Close()
         End If
     End Sub
 End Class

@@ -120,4 +120,16 @@
   <data name="ReadException" xml:space="preserve">
     <value>Read exception: </value>
   </data>
+  <data name="InvalidUser" xml:space="preserve">
+    <value>Nombre de usuario no valido</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Correo electronico invalido</value>
+  </data>
+  <data name="InvalidNameAndSurname" xml:space="preserve">
+    <value>Nombre y apellidos no validos</value>
+  </data>
+  <data name="PasswordsDontMatch" xml:space="preserve">
+    <value>Las contraseñas no coinciden</value>
+  </data>
 </root>
