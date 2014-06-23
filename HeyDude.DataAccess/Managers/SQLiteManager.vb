@@ -67,8 +67,8 @@ Namespace Managers
         End Function
 
         Public Sub Close()
-            _sqliteInstance.Cancel()
-            _sqliteInstance.Close()
+            _sqliteInstance.Dispose()
+            _sqliteInstance = Nothing
         End Sub
     End Class
 End Namespace

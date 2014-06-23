@@ -6,7 +6,7 @@ Imports System.IO
 Imports ChatClient.My.Resources
 
 Public Class FrmHeyDude
-    Private Property MessageDb() As SqLiteManager
+    Private Property MessageDb() As New SqLiteManager
     Private Property User As Entities.User
 
     Private Delegate Sub RequestReceivedCallback(ByVal chatRequest As ChatRequest)
@@ -39,7 +39,6 @@ Public Class FrmHeyDude
 
         ' Before loading form, get all user local data
         GetUserLocalData()
-        MessageDb = New SqLiteManager()
     End Sub
 
     Private Sub FrmHeyDude_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
@@ -49,6 +48,7 @@ Public Class FrmHeyDude
     Private Sub FrmHeyDude_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
         User.SendMessage(ChatProtocol.Disconnect)
         MessageDb.Close()
+        MessageDb = Nothing
         UploadFile("sqliteUpload.php?uid=" & _User.PersonalData.Id)
         Application.Exit()
     End Sub
