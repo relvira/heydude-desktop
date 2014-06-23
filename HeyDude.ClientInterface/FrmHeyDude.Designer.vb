@@ -30,11 +30,11 @@ Partial Class FrmHeyDude
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ModernToolBar = New ModernToolBar()
-        Me.TitleChatList = New TitleChatList()
-        Me.ChatList = New ChatList()
-        Me.TextBoxHD = New TextBoxHd()
-        Me.UserList = New UserList()
+        Me.ModernToolBar = New CustomControls.ModernToolBar()
+        Me.TitleChatList = New CustomControls.TitleChatList()
+        Me.ChatList = New CustomControls.ChatList()
+        Me.TextBoxHD = New CustomControls.TextBoxHd()
+        Me.UserList = New CustomControls.UserList()
         Me.SuspendLayout()
         '
         'ModernToolBar

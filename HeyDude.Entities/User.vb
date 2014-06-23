@@ -62,17 +62,32 @@ Public Class User
     End Sub
 
     Public Sub LoadFriends()
+        Friends = New List(Of PersonalData)()
         Dim context As New ChatProjectEntities()
-        Friends = (context.user_friends _
-            .Where(Function(id) id.friend_of = PersonalData.Id) _
-            .Select(Function(id) context.users _
-                        .Where(Function(frnd) frnd.id = id.friend_to) _
-                        .Select(Function(frnd) New PersonalData() With {
-                                    .Id = frnd.id,
-                                    .Name = frnd.uid,
-                                    .FullName = frnd.full_name,
-                                    .ImageSource = frnd.profile_img,
-                                    .StateMessage = frnd.user_status})) _
-            .ToList().Cast(Of PersonalData)())
+        Dim friendsId = From id In context.user_friends
+                        Where id.friend_of = PersonalData.Id
+
+        For Each id In friendsId
+            Friends.Add((From frnd In context.users
+                        Where frnd.id = id.friend_to
+                        Select New PersonalData() With {
+                            .Id = frnd.id,
+                            .Name = frnd.uid,
+                            .FullName = frnd.full_name,
+                            .ImageSource = frnd.profile_img,
+                            .StateMessage = frnd.user_status}).Single())
+        Next
+
+        'Friends = context.user_friends _
+        '                    .Where(Function(id) id.friend_of = PersonalData.Id) _
+        '                    .Select(Function(id) (context.users _
+        '                                .Where(Function(frnd) frnd.id = id.friend_to) _
+        '                                .Select(Function(frnd) New PersonalData() With {
+        '                                            .Id = frnd.id,
+        '                                            .Name = frnd.uid,
+        '                                            .FullName = frnd.full_name,
+        '                                            .ImageSource = frnd.profile_img,
+        '                                            .StateMessage = frnd.user_status})) _
+        '                                .Single())
     End Sub
 End Class
