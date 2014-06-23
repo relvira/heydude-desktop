@@ -10,12 +10,18 @@ Namespace Util
         Private ReadOnly WebClient As New WebClient
 
         Public Sub UploadFile(ByVal url As String)
-            WebClient.UploadFile(ServerUrl & url, SqLitePath)
+            Try
+                WebClient.UploadFile(ServerUrl & url, SqLitePath)
+            Catch ex As WebException
+                Console.WriteLine(ex.Message)
+            End Try
+
         End Sub
 
         Public Function DownloadFile(ByVal url As String, Optional ByVal params As NameValueCollection = Nothing)
             If params Is Nothing Then
-                WebClient.DownloadFile(ServerUrl & "?" & url, SqLitePath)
+                Dim path As String = ServerUrl & url
+                WebClient.DownloadFile(path, SqLitePath)
                 Return True
             Else
                 Return WebClient.UploadValues(ServerUrl & "?" & url, "POST", params)

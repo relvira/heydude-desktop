@@ -27,9 +27,7 @@ Namespace Managers
         End Sub
 
         Public Function GetAll(ByVal fromUser As Integer, ByVal toUser As Integer) As List(Of Message)
-            Dim queryResult = ExecuteQuery("SELECT * FROM messages " & _
-                    "WHERE from_id=" & fromUser & " OR to_id=" & toUser & " " & _
-                    "ORDER BY timestamp ASC;", "messages")
+            Dim queryResult = ExecuteQuery("SELECT * FROM messages WHERE (from_id=" & fromUser & " OR from_id=" & toUser & ") and ( to_id=" & fromUser & " or to_id=" & toUser & ") ORDER BY timestamp ASC;", "messages")
 
             If queryResult.Rows.Count = 0 Then Return New List(Of Message)
 
@@ -69,6 +67,7 @@ Namespace Managers
         End Function
 
         Public Sub Close()
+            _sqliteInstance.Cancel()
             _sqliteInstance.Close()
         End Sub
     End Class

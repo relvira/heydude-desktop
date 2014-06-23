@@ -84,9 +84,9 @@ Public Class FrmHeyDude
     Private Sub RefreshMessageHistory()
         For Each msg In MessageDb.GetAll(User.PersonalData.Id, TitleChatList.Id)
             If msg.FromUser = User.PersonalData.Id Then
-                ChatList.AddChatBox(msg.Message, AlignedTo.Left, msg.HourSent)
-            Else
                 ChatList.AddChatBox(msg.Message, AlignedTo.Right, msg.HourSent)
+            ElseIf msg.FromUser = TitleChatList.Id Then
+                ChatList.AddChatBox(msg.Message, AlignedTo.Left, msg.HourSent)
             End If
         Next
     End Sub
